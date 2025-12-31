@@ -17,146 +17,172 @@
 
         .menu-zone, .socials { opacity: 0; transition: opacity 0.8s ease; }
 
-        /* === МОБИЛЬНАЯ ВЕРСИЯ (Ref: Robert Wilson) === */
-        @media (max-width: 768px) {
-            body { 
-                overflow-y: auto !important; 
-                background: #000; 
-            }
+        /* ========================================
+   МОБИЛЬНАЯ ВЕРСИЯ (РЕФЕРЕНС: Robert Wilson)
+======================================== */
+@media (max-width: 768px) {
+    
+    body { 
+        overflow-y: auto !important;
+        background: #000;
+    }
 
-            /* ТВОЙ МАТОВЫЙ ОТСТУП СВЕРХУ */
-            .gallery-screen {
-                height: auto !important;
-                display: block !important;
-                padding-top: 80px !important; 
-                background-color: #0a0a0a !important; 
-                position: relative !important;
-            }
+    /* === 1. ВЕРХНИЙ МАТОВЫЙ ОТСТУП === */
+    .menu-zone {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 70px !important; /* ВЫСОТА верхнего отступа */
+        background-color: #0d0d0d !important; /* ЦВЕТ матового отступа */
+        z-index: 10000 !important;
+        display: flex !important;
+        align-items: center !important; /* Центрирует содержимое по вертикали */
+        justify-content: flex-end !important; /* Прижимает вправо */
+        padding-right: 25px !important; /* ОТСТУП бургера от правого края */
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
 
-            /* ФОТО В СТОЛБИК */
-            .gallery {
-                display: flex !important;
-                flex-direction: column !important;
-                transform: none !important; 
-                width: 100% !important;
-                height: auto !important;
-            }
+    /* === 2. БУРГЕР МЕНЮ (справа в топ-баре) === */
+    .icon-menu {
+        display: block !important;
+        font-size: 22px !important; /* РАЗМЕР иконки бургера */
+        color: #fff !important;
+        cursor: pointer;
+        opacity: 0.7 !important; /* ПРОЗРАЧНОСТЬ бургера в покое */
+        transition: opacity 0.3s ease;
+        position: relative !important;
+        z-index: 100001 !important;
+    }
 
-            /* СКЛЕИВАЕМ ФОТО */
-            .slide {
-                width: 100% !important;
-                height: auto !important;
-                margin-bottom: 0 !important; 
-                display: block !important;
-                line-height: 0 !important;   
-            }
+    .icon-menu:hover {
+        opacity: 1 !important;
+    }
 
-            /* Slide 3 прыгает наверх */
-            .slide:nth-child(1) { order: 2; }
-            .slide:nth-child(2) { order: 3; }
-            .slide:nth-child(3) { order: 1; }
+    /* Прячем бургер когда меню открыто */
+    .icon-menu.hidden {
+        display: none !important;
+    }
 
-            .slide img {
-                width: 100% !important;
-                height: auto !important;
-                display: block !important;   
-                object-fit: cover !important; 
-            }
+    /* === 3. ВЫПАДАЮЩЕЕ МЕНЮ (ABOUT + PROJECTS) === */
+    .text-menu {
+        display: none; /* Скрыто по умолчанию */
+    }
 
-            /* ПОЛЗУНКИ БУРГЕРА (ЖЕСТКАЯ ФИКСАЦИЯ) */
-            .menu-zone {
-                position: fixed !important; 
-                top: 0 !important; /* Прижали к самому верху экрана */
-                left: 0 !important;
-                width: 100% !important;
-                height: 60px !important; /* Сделали зону чуть уже, чтобы поднять иконку */
-                display: flex !important;
-                justify-content: flex-end !important; 
-                align-items: center !important; /* Центрирует иконку внутри этих 60px */
-                padding-right: 25px !important; 
-                z-index: 100000 !important; /* ЕЩЕ БОЛЬШЕ НУЛЕЙ, чтобы была поверх всего */
-                background: transparent !important;
-                opacity: 1 !important;
-                pointer-events: auto !important; /* Чтобы клик всегда работал */
-            }
+    /* Показываем меню при клике */
+    .text-menu.mobile-open {
+        display: flex !important;
+        flex-direction: row !important; /* Горизонтально, рядом друг с другом */
+        align-items: center !important;
+        position: absolute !important;
+        top: 70px !important; /* Сразу под верхним отступом */
+        right: 25px !important;
+        gap: 18px !important; /* РАССТОЯНИЕ между пунктами меню */
+        background: transparent !important;
+        padding: 20px 0 !important;
+        width: auto !important;
+        z-index: 10001 !important;
+    }
 
-            .icon-menu {
-                display: block !important;
-                font-size: 20px !important; /* Тот же размер, что был */
-                color: #fff !important;
-                cursor: pointer;
-                opacity: 0.75 !important; /* Вот этот "ползунок" яркости */
-                position: relative !important;
-                z-index: 100001 !important;
-            }
+    .menu-link {
+        font-size: 15px !important; /* РАЗМЕР шрифта меню */
+        letter-spacing: 1.5px !important; /* МЕЖБУКВЕННОЕ расстояние */
+        color: #fff !important;
+        text-decoration: none !important;
+        text-transform: uppercase;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
 
-            /* ВЫПАДАЮЩЕЕ МЕНЮ (ABOUT / PROJECTS) */
-            .text-menu {
-                display: none; 
-                flex-direction: column;
-                gap: 15px;
-                background: #0a0a0a !important; /* Тот же матовый цвет */
-                padding: 20px !important;
-                text-align: right;
-                position: absolute !important;
-                top: 80px !important; /* Сразу под матовой полосой */
-                right: 0 !important;
-                width: 180px !important;
-                z-index: 10001 !important;
-            }
+    .menu-link:hover {
+        opacity: 1;
+    }
 
-            /* Показать меню при клике */
-            .text-menu.mobile-open {
-                display: flex !important;
-            }
+    /* === 4. ГАЛЕРЕЯ (вертикальный столбик фото) === */
+    .gallery-screen {
+        height: auto !important;
+        display: block !important;
+        padding-top: 70px !important; /* ОТСТУП сверху = высота верхнего бара */
+        background-color: #000 !important;
+        position: relative !important;
+    }
 
-            /* ССЫЛКИ */
-            .menu-link {
-                font-size: 16px !important;
-                letter-spacing: 2px !important;
-                color: #fff !important;
-                text-decoration: none !important;
-                display: block !important;
-            }
+    .gallery {
+        display: flex !important;
+        flex-direction: column !important; /* СТОЛБИК */
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
+    }
 
-            /* ПРЯЧЕМ СТРЕЛКИ */
-            .nav-zone { display: none !important; }
+    /* === 5. ПОРЯДОК ФОТО: slide3 → slide1 → slide2 === */
+    .slide:nth-child(1) { order: 2; } /* slide1 на второе место */
+    .slide:nth-child(2) { order: 3; } /* slide2 на третье место */
+    .slide:nth-child(3) { order: 1; } /* slide3 на первое место */
 
-            /* НИЖНЯЯ ЗОНА */
-            .bottom-ui {
-                position: relative !important;
-                display: flex !important;
-                flex-direction: column !important;
-                padding: 80px 0 5px 0 !important; 
-                bottom: 0 !important;
-                width: 100% !important;
-                background: #000; /* Фон под соцсетями снова чисто черный */
-            }
+    .slide {
+        width: 100% !important;
+        height: auto !important;
+        margin-bottom: 0 !important; /* ЗАЗОР между фото = 0 (прижаты) */
+        display: block !important;
+        line-height: 0; /* Убираем лишние отступы */
+    }
 
-            /* КОНТЕЙНЕР ИКОНОК (SOCIALS) */
-        .socials {
-                display: flex !important;
-                margin: 0 auto !important; /* Ставим в центр */
-                
-                /* ДВИГАЕМ ВЛЕВО: */
-                /* -15px сдвинет чуть-чуть влево. */
-                /* Если надо сильнее влево — ставь -20px или -30px. */
-                /* Если надо вправо — убери минус, ставь просто 15px. */
-                transform: translateX(-50px) !important; 
+    .slide img {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        object-fit: cover !important;
+    }
 
-                gap: 0px !important; 
-                opacity: 1 !important;
-                padding-bottom: 20px !important; 
-            }
+    /* === 6. НИЖНИЙ ВЫСТУП С ИКОНКАМИ === */
+    .bottom-ui {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        padding-bottom: 25px !important; /* ОТСТУП иконок от нижнего края */
+        bottom: auto !important;
+        width: 100% !important;
+        height: 100px !important; /* ВЫСОТА нижнего выступа */
+        background: #0d0d0d !important; /* ЦВЕТ нижнего выступа */
+        justify-content: flex-end !important; /* Прижимает иконки к низу */
+        align-items: center !important; /* Центрирует иконки горизонтально */
+    }
 
-            /* РАЗМЕР ИКОНОК (ПОД БУРГЕР) */
-            .socials .social-link svg {
-                width: 15px !important;  
-                height: 15px !important;
-                stroke-width: 1.5px !important; /* Делаем линии изящнее */
-            }
-            
-        }
+    /* Контейнер соцсетей */
+    .socials {
+        display: flex !important;
+        gap: 20px !important; /* РАССТОЯНИЕ между иконками */
+        opacity: 1 !important;
+        margin: 0 !important;
+        padding-bottom: 0 !important;
+        position: static !important;
+    }
+
+    /* Размер иконок */
+    .socials .social-link svg {
+        width: 18px !important; /* ШИРИНА иконки */
+        height: 18px !important; /* ВЫСОТА иконки */
+        stroke-width: 1.8px !important; /* ТОЛЩИНА линий иконки */
+    }
+
+    .social-link {
+        opacity: 0.7 !important;
+    }
+
+    /* Прячем стрелки навигации на мобилках */
+    .nav-zone {
+        display: none !important;
+    }
+
+    #return-arrow {
+        display: none !important;
+    }
+}
     </style>
 </head>
 
@@ -268,7 +294,32 @@
                 if(menu) menu.style.opacity = '1';
                 if(socials) socials.style.opacity = '1';
             }
+
+
+            // Мобильное меню (бургер)
+const burgerIcon = document.querySelector('.icon-menu');
+const menuContent = document.querySelector('.text-menu');
+
+if (burgerIcon && menuContent) {
+    burgerIcon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuContent.classList.toggle('mobile-open');
+        burgerIcon.classList.toggle('hidden');
+    });
+
+    // Клик вне меню закрывает его
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.menu-trigger')) {
+            menuContent.classList.remove('mobile-open');
+            burgerIcon.classList.remove('hidden');
         }
+    });
+}
+
+
+        }
+
+        
     </script>
 </body>
 </html>
