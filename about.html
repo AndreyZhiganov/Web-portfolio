@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Andrey Zhiganov</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* ОСНОВНЫЕ НАСТРОЙКИ */
+        html {
+            scroll-behavior: smooth; 
+        }
+
+        body { 
+            background: #000; 
+            margin: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #fff;
+            overflow: hidden; /* Убираем стандартный скролл браузера */
+        }
+        
+        .layout {
+    display: block; /* Убираем грид */
+    position: relative;
+    height: 100vh;
+}
+
+        /* --- ЛЕВАЯ КОЛОНКА (Фиксированная) --- */
+        .sidebar {
+    position: fixed; /* Фиксируем поверх */
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    padding-left: 40px;
+    z-index: 1000;
+    pointer-events: none; /* Пропускает скролл */
+}
+
+/* Кнопки должны реагировать на мышь */
+.back-btn, .nav-links a {
+    pointer-events: auto;
+}
+
+        .back-btn {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            color: #fff;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+        .back-btn:hover { opacity: 1; }
+
+        .nav-links a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px; 
+            margin-bottom: 25px; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+            font-weight: 700; 
+            cursor: pointer;
+        }
+        
+        /* Класс active теперь управляется скриптом */
+        .nav-links a.active { opacity: 1; }
+        .nav-links a:hover { opacity: 1; }
+
+        /* --- ПРАВАЯ ЧАСТЬ (Скролл-контейнер) --- */
+        .scroll-container {
+            height: 100vh;
+            overflow-y: scroll; /* Разрешаем скролл внутри */
+            
+            /* МАГИЯ ANNE IMHOF (Scroll Snap) */
+            scroll-snap-type: y mandatory; /* Обязательная привязка по вертикали */
+            scroll-behavior: smooth; /* Плавность при клике на ссылки */
+        }
+
+        /* Скрываем полосу прокрутки для чистоты дизайна */
+        .scroll-container::-webkit-scrollbar { display: none; }
+        .scroll-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ОБЩИЙ СТИЛЬ ДЛЯ ВСЕХ СЕКЦИЙ */
+        section {
+            height: 100vh; /* Каждая секция занимает ровно 100% высоты экрана */
+            scroll-snap-align: start; /* Примагничивать начало секции к верху экрана */
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Вертикальное центрирование контента */
+            padding-right: 40px; /* Отступ справа */
+            padding-left: 60px; /* Отступ от меню */
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* КОНТЕНТ ВНУТРИ СЕКЦИЙ */
+        /* Сохраняем прижатие вправо, но даем больше ширины */
+.content-wrapper {
+    max-width: 1050px; /* Увеличили с 950, чтобы строке было куда тянуться */
+    width: 100%;
+    margin-left: auto; 
+    margin-right: 0;
+}
+
+        /* СТИЛИ ТЕКСТА (Наши утвержденные) */
+        .header-block {
+            text-align: right; 
+            margin-bottom: 20px; 
+            padding-bottom: 20px;
+        }
+        
+        .section-title {
+            display: block;
+            font-size: 37px; 
+            font-weight: 900; 
+            text-transform: uppercase;
+            letter-spacing: -1px; 
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            display: block;
+            font-size: 15px;
+            color: #888;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+
+        .text-block {
+    font-size: 20px; 
+    line-height: 1.65; 
+    font-weight: 400; 
+    color: #ccc; 
+    text-align: justify; 
+    /* ГЛАВНОЕ ИЗМЕНЕНИЕ ТУТ: */
+    hyphens: none;       /* Запрещаем резать слова — теперь они будут падать целиком */
+    word-break: normal; 
+    overflow-wrap: normal;
+}
+
+        /* CV и Portfolio (Фиксированы в углу, всегда видны) */
+        .bottom-links {
+            position: fixed;
+            bottom: 60px;
+            right: 60px;
+            display: flex;
+            gap: 30px;
+            z-index: 100;
+        }
+
+        .bottom-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 15px; 
+            font-weight: 700;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+        .bottom-links a:hover { opacity: 1; color: #fff; }
+
+        /* КОНТАКТЫ СЛЕВА ВНИЗУ */
+        .contact-links {
+            position: fixed;
+            bottom: 60px; /* Такая же высота как у CV/Portfolio */
+            left: 40px;
+            display: flex;
+            gap: 25px;
+            z-index: 1000;
+        }
+        .contact-links a {
+            color: #888; /* Серый цвет как у CV */
+            opacity: 0.6;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .contact-links a:hover { opacity: 1; color: #fff; transform: scale(1.1); }
+        .contact-links svg { width: 19px; height: 19px; }
+
+        /* ГАЛЕРЕЯ (МЕХАНИКА ПОЕЗДА) */
+        .gallery-wrapper { position: relative; width: 100%; }
+        
+        .cinematic-crop { 
+            width: 100%; 
+            aspect-ratio: 2.35 / 1; 
+            overflow: hidden; /* Скрываем все лишнее */
+            display: flex; 
+            background: #050505; 
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Это и есть наш "поезд", который будет ездить внутри cinematic-crop */
+        .slide-container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            will-change: transform;
+        }
+
+        .slide { 
+            display: flex; 
+            height: 100%; 
+            min-width: 100%; /* Каждый слайд строго на всю ширину */
+            flex-shrink: 0; 
+        }
+        
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .caption-title { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 5px; display: block; text-align: left; text-transform: uppercase; }
+        .caption-role { color: #777; font-size: 14px; font-weight: 700; margin-left: 10px; text-transform: none; }
+        .caption-meta { font-size: 14px; color: #777; line-height: 1.4; display: block; text-align: left; font-weight: 700; }
+        
+        .gallery-nav { 
+            position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 2.35 / 1; 
+            pointer-events: none; display: flex; justify-content: space-between; align-items: center; 
+            opacity: 0; transition: opacity 0.3s ease; 
+        }
+        .gallery-wrapper:hover .gallery-nav { opacity: 1; }
+        .nav-btn { background: none; border: none; color: #fff; cursor: pointer; padding: 0 20px; pointer-events: auto; opacity: 0.5; transition: 0.3s; }
+        .nav-btn:hover { opacity: 1; }
+
+        /* АДАПТИВ */
+       @media (max-width: 1000px) {
+    .layout { 
+        display: block; 
+    }
+    .sidebar { 
+        position: relative; /* На мобилках меню не должно висеть над текстом */
+        width: 100%;
+        height: auto;
+        padding: 40px 20px;
+        pointer-events: auto;
+    }
+    .scroll-container { 
+        height: auto; 
+        overflow-y: visible; 
+        scroll-snap-type: none; /* Отключаем магнитный скролл для удобства на тачскринах */
+    }
+    section { 
+        height: auto; 
+        padding: 20px; 
+    }
+    .text-block {
+        font-size: 18px; /* Чуть уменьшим шрифт для мобилки */
+        text-align: left;
+    }
+    .bottom-links, .contact-links {
+        position: relative; /* Складываем их в поток под контентом */
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        justify-content: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="layout">
+        <div class="sidebar">
+            <a href="index.html" class="back-btn" onclick="sessionStorage.setItem('fromAbout', 'true')">
+                <svg width="35" height="24" viewBox="0 0 35 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="33" y1="12" x2="2" y2="12"></line>
+                    <polyline points="10 20 2 12 10 4"></polyline>
+                </svg>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#about" id="link-about" class="active">ABOUT</a>
+                <a href="#projects" id="link-projects">KEY PROJECTS</a>
+               <!-- <a href="#press" id="link-press">PRESS</a>-->
+            </div>
+        </div>
+
+        <div class="scroll-container" id="scroller">
+            
+            <section id="about">
+                <div class="content-wrapper">
+    <div class="text-block">
+        <strong>Performance-based Interdisciplinary Artist.</strong> His practice was forged at the Stanislavsky Electrotheatre — a venue that became the epicenter of avant-garde music and performance art in Russia during the 2020s. 
+
+        He works not with music but with sound, not with image but with texture and form, prioritizing a physical rather than a conceptual impact on the viewer. His work is a pursuit of absolute sincerity: expressing peaks of emotion through abstract imagery, creating unique experiences that expand the viewer's sensibility.
+         <br><br>
+        This pursuit leads him to forms where human presence, music, visual imagery, and text exist equally, in open dialogue. By crystallizing fragments of reality on stage, interweaving art forms, and engaging contemporary philosophy and theory, he creates events capable of influencing not just audiences, but the entire world — genuinely believing that art can achieve this.
+
+        </div>
+</div>
+            </section>
+
+         <section id="projects">
+    <div class="content-wrapper">
+        <div class="gallery-wrapper">
+       <div class="cinematic-crop" id="gallery-scroll">
+    <div class="slide-container" id="slide-engine"> 
+        <div class="slide"><img src="img/1.webp" style="object-position: center 100%;"></div>
+        <div class="slide"><img src="img/2.webp" style="object-position: center 60%;"></div>
+        <div class="slide"><img src="img/4.webp" style="object-position: center 50%;"></div>
+        <div class="slide"><img src="img/5.webp" style="object-position: center 40%;"></div>
+        <div class="slide"><img src="img/7.webp" style="object-position: center 30%;"></div>
+        <div class="slide"><img src="img/8.webp" style="object-position: center 50%;"></div>
+        <div class="slide"><img src="img/9.webp" style="object-position: center 60%;"></div>
+        <div class="slide"><img src="img/11.webp" style="object-position: center 50%;"></div>
+        <div class="slide"><img src="img/10.webp" style="object-position: center 65%;"></div>
+    </div> </div>
+
+            <div class="gallery-nav">
+                <button class="nav-btn" onclick="scrollGallery(-1)"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                <button class="nav-btn" onclick="scrollGallery(1)"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            </div>
+
+            <div id="gallery-caption">
+               <div class="caption-title">
+                    The Best Place Ever <span class="caption-role">| concept, performance direction, sound</span>
+                </div>
+                <span class="caption-meta">Senokos Festival. Suzdal. 2024</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+           <!-- <section id="press">
+                <div class="content-wrapper">
+                    <div class="header-block">
+                        <span class="section-title">Press & Reviews</span>
+                        <span class="section-subtitle">Selected Publications</span>
+                    </div>
+                    <div class="text-block">
+                        "Zhiganov's work challenges the conventional perception of time and space in theater..." — <em>Spectator Magazine</em>
+                        <br><br>
+                        "A radical approach to sound design that becomes the main protagonist of the scene." — <em>Art Review</em>
+                    </div>
+                </div>
+            </section>-->
+
+        </div>
+    </div>
+
+    <div class="contact-links">
+        <a href="mailto:andrey.zhiganovv@gmail.com">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+        <a href="https://wa.me/79518913821" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 512.459" fill="currentColor"><path d="M435.689 74.468C387.754 26.471 324 .025 256.071 0 116.098 0 2.18 113.906 2.131 253.916c-.024 44.758 11.677 88.445 33.898 126.946L0 512.459l134.617-35.311c37.087 20.238 78.85 30.891 121.345 30.903h.109c139.949 0 253.88-113.917 253.928-253.928.024-67.855-26.361-131.645-74.31-179.643v-.012zm-179.618 390.7h-.085c-37.868-.011-75.016-10.192-107.428-29.417l-7.707-4.577-79.886 20.953 21.32-77.889-5.017-7.987c-21.125-33.605-32.29-72.447-32.266-112.322.049-116.366 94.729-211.046 211.155-211.046 56.373.025 109.364 22.003 149.214 61.903 39.853 39.888 61.781 92.927 61.757 149.313-.05 116.377-94.728 211.058-211.057 211.058v.011zm115.768-158.067c-6.344-3.178-37.537-18.52-43.358-20.639-5.82-2.119-10.044-3.177-14.27 3.178-4.225 6.357-16.388 20.651-20.09 24.875-3.702 4.238-7.403 4.762-13.747 1.583-6.343-3.178-26.787-9.874-51.029-31.487-18.86-16.827-31.597-37.598-35.297-43.955-3.702-6.355-.39-9.789 2.775-12.943 2.849-2.848 6.344-7.414 9.522-11.116s4.225-6.355 6.343-10.581c2.12-4.238 1.06-7.937-.522-11.117-1.584-3.177-14.271-34.409-19.568-47.108-5.151-12.37-10.385-10.69-14.269-10.897-3.703-.183-7.927-.219-12.164-.219s-11.105 1.582-16.925 7.939c-5.82 6.354-22.209 21.709-22.209 52.927 0 31.22 22.733 61.405 25.911 65.642 3.177 4.237 44.745 68.318 108.389 95.812 15.135 6.538 26.957 10.446 36.175 13.368 15.196 4.834 29.027 4.153 39.96 2.52 12.19-1.825 37.54-15.353 42.824-30.172 5.283-14.818 5.283-27.529 3.701-30.172-1.582-2.641-5.819-4.237-12.163-7.414l.011-.024z"/></svg>
+        </a>
+    </div>
+    
+   <div class="bottom-links">
+    <a href="https://docs.google.com/document/d/1EBpCACpMoqrkS_jH9UiAWl6xlHlr5axpIDBB55LrCW8/edit?usp=sharing" target="_blank">CV</a>
+    <a href="https://docs.google.com/presentation/d/1sJwcvn4T2BOXxGILo2sfAGNHl3cIqDbeKMxHkju2gdY/edit?usp=sharing" target="_blank">Portfolio</a>
+</div>
+
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+
+        // Плавное появление нижних элементов
+            const contactLinks = document.querySelector('.contact-links');
+            const bottomLinks = document.querySelector('.bottom-links');
+            
+            setTimeout(() => {
+                if(contactLinks) contactLinks.style.opacity = '1';
+                if(bottomLinks) bottomLinks.style.opacity = '1';
+            }, 250); // Появятся через полсекунды после загрузки страницы
+
+            const sections = document.querySelectorAll("section");
+            const navLinks = document.querySelectorAll(".nav-links a");
+            const scroller = document.getElementById("scroller");
+            const gallery = document.getElementById('gallery-scroll');
+            const caption = document.getElementById('gallery-caption');
+
+            // Навигация по разделам сайта
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove("active"));
+                        const id = entry.target.getAttribute("id");
+                        const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+                        if (activeLink) activeLink.classList.add("active");
+                    }
+                });
+            }, { root: scroller, threshold: 0.5 });
+
+            sections.forEach(section => observer.observe(section));
+
+            // Данные для подписей в галерее
+          const projectData = [
+                {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+                {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+                {title: "The Hills", role: "| concept, performance direction, sound", meta: "Spetsifik Festival. Nizhny Novgorod. 2024"},
+                {title: "Sunrise", role: "| concept, performance direction, sound, video", meta: "Stanislavsky Electrotheatre. Moscow. 2024"},
+                {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+                {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+                {title: "MIRRIM", role: "| concept contribution, video, text | In collaboration with Boris Yukhananov", meta: "Stanislavsky Electrotheatre. Moscow. 2022"},
+                {title: "Former, School", role: "| text | In collaboration with Dmitriy Volkostrelov", meta: "Creative Laboratory Corner. Kazan. 2018"},
+                {title: "Callings", role: "| co-concept, performance direction | In collaboration with Stefan Kaegi and Caroline Bernaud", meta: "Sviyazhsk Artel Festival. Sviyazhsk Island. 2018"}
+            ];
+
+            // Смена текста при горизонтальном скролле фото
+            gallery.addEventListener('scroll', function() {
+                const index = Math.round(this.scrollLeft / this.clientWidth);
+                if(projectData[index]) {
+                    caption.innerHTML = `
+                        <div class="caption-title">
+                            ${projectData[index].title} 
+                            <span class="caption-role">${projectData[index].role}</span>
+                        </div>
+                        <span class="caption-meta">${projectData[index].meta}</span>`;
+                }
+            });
+
+           // НОВАЯ ЛОГИКА ГАЛЕРЕИ С ОТСКОКОМ
+            const slideEngine = document.getElementById('slide-engine');
+            const totalSlides = document.querySelectorAll('#slide-engine .slide').length;
+            let currentGalleryIndex = 0;
+
+            window.scrollGallery = function(direction) {
+                const nextIndex = currentGalleryIndex + direction;
+
+                // ЭФФЕКТ ОТСКОКА
+                if (nextIndex < 0) {
+                    bounceGallery(30); // Прыжок вправо (число - сила отскока)
+                    return;
+                }
+                if (nextIndex >= totalSlides) {
+                    bounceGallery(-30); // Прыжок влево
+                    return;
+                }
+
+                // ОБЫЧНОЕ ПЕРЕКЛЮЧЕНИЕ
+                currentGalleryIndex = nextIndex;
+                updateGalleryPosition();
+            };
+
+            function updateGalleryPosition() {
+                const offset = -currentGalleryIndex * 100;
+                slideEngine.style.transform = `translateX(${offset}%)`;
+
+                // Обновляем текст подписи
+                if(projectData[currentGalleryIndex]) {
+                    caption.innerHTML = `
+                        <div class="caption-title">
+                            ${projectData[currentGalleryIndex].title} 
+                            <span class="caption-role">${projectData[currentGalleryIndex].role}</span>
+                        </div>
+                        <span class="caption-meta">${projectData[currentGalleryIndex].meta}</span>`;
+                }
+            }
+
+            function bounceGallery(pixels) {
+                const currentOffset = -currentGalleryIndex * 100;
+                slideEngine.style.transform = `translateX(calc(${currentOffset}% + ${pixels}px))`;
+                
+                setTimeout(() => {
+                    slideEngine.style.transform = `translateX(${currentOffset}%)`;
+                }, 150); // Время, через которое картинка вернется на место
+            }
+        });
+    </script>
+
+</body>
+</html>
