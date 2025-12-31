@@ -4,47 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Andrey Zhiganov</title>
-
-    
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* --- БАЗОВЫЕ СТИЛИ (НЕ ТРОГАЕМ ДЕКСТОП) --- */
+        #return-arrow {
+            position: absolute; top: 40px; right: 40px; z-index: 9999; 
+            color: white; opacity: 0; display: none; transition: opacity 0.3s ease; 
+            cursor: pointer; text-decoration: none;
+        }
+        #return-arrow:hover { opacity: 1 !important; }
+
+        .menu-zone, .socials { opacity: 0; transition: opacity 0.8s ease; }
+
+        /* === МОБИЛЬНАЯ ВЕРСИЯ (Ref: Robert Wilson) === */
+        @media (max-width: 768px) {
+            body { 
+                overflow-y: auto !important; /* Разрешаем скролл вниз */
+                background: #000; 
+            }
+
+            .gallery-screen {
+                height: auto !important;
+                display: block !important;
+                padding-top: 120px !important; /* Большой отступ сверху (Wilson style) */
+                padding-bottom: 60px !important;
+            }
+
+            .gallery {
+                display: flex !important;
+                flex-direction: column !important; /* Фото в столбик */
+                transform: none !important; 
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .slide {
+                width: 100% !important;
+                height: auto !important;
+                margin-bottom: 80px !important; /* Много воздуха между фото */
+                opacity: 1 !important;
+                display: block !important;
+            }
+
+            /* ПЕРЕСТАВЛЯЕМ ФОТО: Slide 3 идет ПЕРВЫМ */
+            .slide:nth-child(1) { order: 2; }
+            .slide:nth-child(2) { order: 3; }
+            .slide:nth-child(3) { order: 1; }
+
+            .slide img {
+                width: 100% !important;
+                height: auto !important;
+                object-fit: contain;
+            }
+
+            /* БУРГЕР МЕНЮ (Справа вверху) */
+            .menu-zone {
+                position: fixed !important;
+                top: 30px !important;
+                right: 30px !important;
+                z-index: 10000 !important;
+                opacity: 1 !important;
+                display: block !important;
+            }
+
+            .icon-menu {
+                display: block !important;
+                font-size: 22px !important; /* чуть меньше и аккуратнее */
+                cursor: pointer;
+                color: #fff;
+                text-align: right;
+            }
+
+            /* ВЫПАДАЮЩИЕ НАДПИСИ (ABOUT / PROJECTS) */
+            .text-menu {
+                display: none; /* Скрыто по умолчанию */
+                flex-direction: column;
+                gap: 15px;
+                background: rgba(0,0,0,0.9);
+                padding: 20px 0;
+                text-align: right;
+                transition: opacity 0.3s ease;
+            }
+
+            /* Когда открыто через JS */
+            .text-menu.mobile-open {
+                display: flex !important;
+                opacity: 1 !important;
+            }
+
+            .menu-link {
+                font-size: 16px;
+                letter-spacing: 2px;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            /* СКРЫВАЕМ СТРЕЛКИ И СТАТИЧНЫЕ СОЦСЕТИ */
+            .nav-zone { display: none !important; }
+            
+            /* СОЦСЕТИ В САМОМ НИЗУ СТРАНИЦЫ */
+            .bottom-ui {
+                position: relative !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                padding: 100px 0 50px 0 !important; /* Приличный отступ от последнего фото */
+                bottom: 0 !important;
+                width: 100% !important;
+            }
+
+            .socials {
+                display: flex !important;
+                justify-content: center !important;
+                gap: 40px !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
-
-    <body>
-    <!--<div class="main-logo">
-        <a href="index.html">ANDREY ZHIGANOV</a>
-    </div>-->
-
     <section class="gallery-screen">
-        
-       <div class="gallery">
-            <div class="slide active">
+        <div class="gallery">
+            <div class="slide">
                 <img src="img/slide1.jpg" alt="Photo 1">
             </div>
-
             <div class="slide">
                 <img src="img/slide2.jpg" alt="Photo 2">
             </div>
-
             <div class="slide">
                 <img src="img/slide3.jpg" alt="Photo 3">
             </div>
-            
-            </div>
+        </div>
 
         <div class="nav-zone left-zone">
             <div class="arrow arrow-left">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
             </div>
         </div>
-
         <div class="nav-zone right-zone">
             <div class="arrow arrow-right">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </div>
         </div>
 
@@ -55,248 +156,83 @@
                     <span class="text-menu">
                         <a href="about.html" class="menu-link">ABOUT</a>
                         <a href="about.html#projects" class="menu-link">PROJECTS</a>
-                       <!-- <a href="#footer" class="menu-link">PRESS</a>-->
                     </span>
                 </div>
             </div>
             
-         <div class="socials">
-    <a href="https://www.instagram.com/andrey_zhiganovv/" target="_blank" class="social-link instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-    </a>
-                
-    <a href="#" class="social-link x-twitter">
-        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8 -7.584 -6.638 7.584H0.474l8.6 -9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" fill="currentColor"></path>
-        </svg>
-    </a>
-</div>
+            <div class="socials">
+                <a href="https://www.instagram.com/andrey_zhiganovv/" target="_blank" class="social-link instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="#" class="social-link x-twitter">
+                    <svg role="img" width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8 -7.584 -6.638 7.584H0.474l8.6 -9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path></svg>
+                </a>
             </div>
-        
-        
+        </div>
     </section>
 
-<!--<section id="footer" class="info-section">
-    <div class="info-container">
-    <h1 class="info-name">Andrey Zhiganov</h1>
-    <p class="info-tagline">Performance-based Interdisciplinary Artist</p>-->
-    
-    <!--<div class="tagline-socials">
-    <a href="mailto:andrey.zhiganovv@gmail.com" class="social-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
+    <a href="about.html" id="return-arrow">
+        <svg width="35" height="24" viewBox="0 0 35 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="2" y1="12" x2="33" y2="12"></line>
+            <polyline points="25 4 33 12 25 20"></polyline>
         </svg>
     </a>
 
-    <a href="https://wa.me/79518913821" target="_blank" class="social-link">
-        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 510 512.459" fill="currentColor">
-            <path d="M435.689 74.468C387.754 26.471 324 .025 256.071 0 116.098 0 2.18 113.906 2.131 253.916c-.024 44.758 11.677 88.445 33.898 126.946L0 512.459l134.617-35.311c37.087 20.238 78.85 30.891 121.345 30.903h.109c139.949 0 253.88-113.917 253.928-253.928.024-67.855-26.361-131.645-74.31-179.643v-.012zm-179.618 390.7h-.085c-37.868-.011-75.016-10.192-107.428-29.417l-7.707-4.577-79.886 20.953 21.32-77.889-5.017-7.987c-21.125-33.605-32.29-72.447-32.266-112.322.049-116.366 94.729-211.046 211.155-211.046 56.373.025 109.364 22.003 149.214 61.903 39.853 39.888 61.781 92.927 61.757 149.313-.05 116.377-94.728 211.058-211.057 211.058v.011zm115.768-158.067c-6.344-3.178-37.537-18.52-43.358-20.639-5.82-2.119-10.044-3.177-14.27 3.178-4.225 6.357-16.388 20.651-20.09 24.875-3.702 4.238-7.403 4.762-13.747 1.583-6.343-3.178-26.787-9.874-51.029-31.487-18.86-16.827-31.597-37.598-35.297-43.955-3.702-6.355-.39-9.789 2.775-12.943 2.849-2.848 6.344-7.414 9.522-11.116s4.225-6.355 6.343-10.581c2.12-4.238 1.06-7.937-.522-11.117-1.584-3.177-14.271-34.409-19.568-47.108-5.151-12.37-10.385-10.69-14.269-10.897-3.703-.183-7.927-.219-12.164-.219s-11.105 1.582-16.925 7.939c-5.82 6.354-22.209 21.709-22.209 52.927 0 31.22 22.733 61.405 25.911 65.642 3.177 4.237 44.745 68.318 108.389 95.812 15.135 6.538 26.957 10.446 36.175 13.368 15.196 4.834 29.027 4.153 39.96 2.52 12.19-1.825 37.54-15.353 42.824-30.172 5.283-14.818 5.283-27.529 3.701-30.172-1.582-2.641-5.819-4.237-12.163-7.414l.011-.024z"/>
-        </svg>
-    </a>
+    <script>
+        const gallery = document.querySelector('.gallery');
+        const slides = document.querySelectorAll('.slide');
+        let currentIndex = 0;
 
-     <a href="https://www.instagram.com/andrey_zhiganovv" target="_blank" class="social-link"> 
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-    </a>
+        function showSlide(index) {
+            if (window.innerWidth <= 768) return; // Блокируем слайдер на мобилках
 
-    <a href="https://x.com/andrey_zhiganow" target="_blank" class="social-link"> 
-        <svg role="img" width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8 -7.584 -6.638 7.584H0.474l8.6 -9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path>
-        </svg>
-    </a>-->
-</div>
-</div>
-</section>
+            const totalSlides = slides.length;
+            if (index < 0) { bounce(40); return; } 
+            if (index >= totalSlides) { bounce(-40); return; }
 
-<script>
-    const gallery = document.querySelector('.gallery');
-    const slides = document.querySelectorAll('.slide');
-    let currentIndex = 0;
+            currentIndex = index;
+            const offset = -currentIndex * 100;
+            gallery.style.transform = `translateX(${offset}%)`;
+        }
 
-    function showSlide(index) {
-        // БЛОКИРОВКА ДЛЯ МОБИЛОК (чтобы не листалось вбок)
-        if (window.innerWidth <= 768) return;
+        function bounce(pixels) {
+            const currentOffset = -currentIndex * 100;
+            gallery.style.transform = `translateX(calc(${currentOffset}% + ${pixels}px))`;
+            setTimeout(() => { gallery.style.transform = `translateX(${currentOffset}%)`; }, 200);
+        }
 
-        const totalSlides = slides.length;
-        if (index < 0) { bounce(40); return; } 
-        if (index >= totalSlides) { bounce(-40); return; }
+        document.querySelector('.right-zone').addEventListener('click', () => showSlide(currentIndex + 1));
+        document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
 
-        currentIndex = index;
-        const offset = -currentIndex * 100;
-        gallery.style.transform = `translateX(${offset}%)`;
-    }
+        // Бургер меню
+        const burgerIcon = document.querySelector('.icon-menu');
+        const menuContent = document.querySelector('.text-menu');
+        if (burgerIcon) {
+            burgerIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuContent.classList.toggle('mobile-open');
+            });
+        }
 
-    function bounce(pixels) {
-        const currentOffset = -currentIndex * 100;
-        gallery.style.transform = `translateX(calc(${currentOffset}% + ${pixels}px))`;
-        setTimeout(() => {
-            gallery.style.transform = `translateX(${currentOffset}%)`;
-        }, 200);
-    }
+        // Логика появления элементов
+        window.onload = function() {
+            const arrow = document.getElementById('return-arrow');
+            const menu = document.querySelector('.menu-zone');
+            const socials = document.querySelector('.socials');
 
-    document.querySelector('.right-zone').addEventListener('click', () => showSlide(currentIndex + 1));
-    document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
-
-    // ЛОГИКА ПОЯВЛЕНИЯ ПРИ ЗАГРУЗКЕ
-    window.onload = function() {
-        const arrow = document.getElementById('return-arrow');
-        const menu = document.querySelector('.menu-zone');
-        const socials = document.querySelector('.socials');
-
-        if (sessionStorage.getItem('fromAbout') === 'true') {
-            arrow.style.display = 'block';
-            setTimeout(() => { arrow.style.opacity = '0.6'; }, 10);
-            setTimeout(() => {
+            if (sessionStorage.getItem('fromAbout') === 'true') {
+                arrow.style.display = 'block';
+                setTimeout(() => { arrow.style.opacity = '0.6'; }, 10);
+                setTimeout(() => {
+                    if(menu) menu.style.opacity = '1';
+                    if(socials) socials.style.opacity = '1';
+                }, 250);
+                sessionStorage.removeItem('fromAbout');
+            } else {
                 if(menu) menu.style.opacity = '1';
                 if(socials) socials.style.opacity = '1';
-            }, 250);
-            sessionStorage.removeItem('fromAbout');
-        } else {
-            if(menu) menu.style.opacity = '1';
-            if(socials) socials.style.opacity = '1';
+            }
         }
-    }
-</script>
-
-<style>
-    /* ОБЩИЕ СТИЛИ ДЛЯ СТРЕЛКИ ВОЗВРАТА */
-    #return-arrow {
-        position: absolute; top: 40px; right: 40px; z-index: 9999; 
-        color: white; opacity: 0; display: none; transition: opacity 0.3s ease; 
-        cursor: pointer; text-decoration: none;
-    }
-    #return-arrow:hover { opacity: 1 !important; }
-
-    /* ПЛАВНОСТЬ ДЛЯ МЕНЮ */
-    .menu-zone, .socials { opacity: 0; transition: opacity 0.8s ease; }
-
-    /* === МОБИЛЬНАЯ ВЕРСИЯ (Robert Wilson Style) === */
-    @media (max-width: 768px) {
-    body { 
-        overflow-y: auto !important; /* Скролл только на мобилке */
-        background: #000; 
-    }
-
-    .gallery-screen {
-        height: auto !important;
-        display: block !important;
-        padding-top: 100px !important; /* Отступ сверху как у Уилсона */
-    }
-
-    .gallery {
-        display: flex !important;
-        flex-direction: column !important;
-        transform: none !important; /* Убираем горизонтальный сдвиг */
-        width: 100% !important;
-    }
-
-    .slide {
-        width: 100% !important;
-        height: auto !important;
-        margin-bottom: 60px !important; /* Воздух между фото */
-        opacity: 1 !important;
-        display: block !important;
-    }
-
-    .slide img {
-        width: 100% !important;
-        height: auto !important;
-    }
-
-    /* БУРГЕР МЕНЮ */
-    .menu-zone {
-        position: fixed !important;
-        top: 30px !important;
-        right: 30px !important;
-        z-index: 10000 !important;
-        opacity: 1 !important;
-    }
-
-    .text-menu {
-        display: none; /* Прячем текст изначально */
-        flex-direction: column;
-        gap: 20px;
-        background: black;
-        padding: 20px;
-        text-align: right;
-    }
-
-    /* Класс, который JS будет добавлять при клике */
-    .text-menu.mobile-open {
-        display: flex !important;
-        position: absolute;
-        top: 40px;
-        right: 0;
-    }
-
-    .icon-menu {
-        display: block !important;
-        font-size: 24px !important;
-        cursor: pointer;
-    }
-
-    /* Скрываем всё лишнее для мобилки */
-    .nav-zone { display: none !important; }
-}
-</style>
-
-<a href="about.html" id="return-arrow">
-    <svg width="35" height="24" viewBox="0 0 35 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="2" y1="12" x2="33" y2="12"></line>
-        <polyline points="25 4 33 12 25 20"></polyline>
-    </svg>
-</a>
-
-<script>
-    window.onload = function() {
-        const arrow = document.getElementById('return-arrow');
-        const menu = document.querySelector('.menu-zone');
-        const socials = document.querySelector('.socials');
-
-        if (sessionStorage.getItem('fromAbout') === 'true') {
-            // ПОЯВЛЕНИЕ ПРИ ВОЗВРАТЕ С ABOUT
-            arrow.style.display = 'block';
-            
-            setTimeout(() => {
-                arrow.style.opacity = '0.6';
-            }, 10);
-            
-            // Плавно проявляем меню и иконки через 0.3 сек
-            setTimeout(() => {
-                if(menu) menu.style.opacity = '1';
-                if(socials) socials.style.opacity = '1';
-            }, 250);
-
-            sessionStorage.removeItem('fromAbout');
-            
-            setTimeout(() => {
-                arrow.style.opacity = '0.4';
-            }, 1000);
-        } else {
-            // ЕСЛИ ЗАШЛИ ПЕРВЫЙ РАЗ — просто сразу всё показываем
-            if(menu) menu.style.opacity = '1';
-            if(socials) socials.style.opacity = '1';
-        }
-    }
-
-    const burgerIcon = document.querySelector('.icon-menu');
-const menuContent = document.querySelector('.text-menu');
-
-if (burgerIcon) {
-    burgerIcon.addEventListener('click', function() {
-        // Добавляем или убираем класс mobile-open при клике
-        menuContent.classList.toggle('mobile-open');
-    });
-}
-
-</script>
+    </script>
 </body>
 </html>
