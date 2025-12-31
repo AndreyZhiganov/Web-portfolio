@@ -67,46 +67,56 @@
         display: none !important;
     }
 
-   /* === 3. ВЫПАДАЮЩЕЕ МЕНЮ (ABOUT + PROJECTS) === */
-.text-menu {
-    display: none;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 18px !important;
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    height: 70px !important;
-    background: #0d0d0d !important;
-    padding: 0 25px !important;
-    z-index: 10001 !important;
-    margin: 0 !important;
-    
-    /* АНИМАЦИЯ выезда справа налево */
-    transform: translateX(200px);
-    transition: transform 0.4s ease;
-}
+       /* === 3. ВЫПАДАЮЩЕЕ МЕНЮ (ABOUT + PROJECTS) === */
+    .menu-trigger {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+    }
 
-/* Показываем меню при клике - выезжает влево */
-.text-menu.mobile-open {
-    display: flex !important;
-    transform: translateX(0);
-}
+    .text-menu {
+        position: absolute !important;
+        top: 70px !important;
+        right: 0 !important;
+        height: auto !important;
+        background: #0d0d0d !important;
+        padding: 20px 25px !important;
+        z-index: 10001 !important;
+        margin: 0 !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 18px !important;
+        white-space: nowrap !important;
+        
+        /* АНИМАЦИЯ выезда справа налево */
+        transform: translateX(300px);
+        transition: transform 0.4s ease;
+        
+        /* По умолчанию скрыто */
+        pointer-events: none !important;
+        opacity: 0 !important;
+    }
 
-.menu-link {
-    font-size: 15px !important; /* РАЗМЕР шрифта меню */
-    letter-spacing: 1.5px !important;
-    color: #fff !important;
-    text-decoration: none !important;
-    text-transform: uppercase;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-    white-space: nowrap;
-}
+    /* Показываем меню при клике - выезжает влево */
+    .text-menu.mobile-open {
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+        opacity: 1 !important;
+    }
 
-.menu-link:hover {
-    opacity: 1;
-}
+    .menu-link {
+        font-size: 15px !important;
+        letter-spacing: 1.5px !important;
+        color: #fff !important;
+        text-decoration: none !important;
+        text-transform: uppercase;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+
+    .menu-link:hover {
+        opacity: 1 !important;
+    }
 
     /* === 4. ГАЛЕРЕЯ (вертикальный столбик фото) === */
     .gallery-screen {
@@ -274,36 +284,6 @@
         document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
 
         // Бургер меню
-        const burgerIcon = document.querySelector('.icon-menu');
-        const menuContent = document.querySelector('.text-menu');
-        if (burgerIcon) {
-            burgerIcon.addEventListener('click', function(e) {
-                e.stopPropagation();
-                menuContent.classList.toggle('mobile-open');
-            });
-        }
-
-        // Логика появления элементов
-        window.onload = function() {
-            const arrow = document.getElementById('return-arrow');
-            const menu = document.querySelector('.menu-zone');
-            const socials = document.querySelector('.socials');
-
-            if (sessionStorage.getItem('fromAbout') === 'true') {
-                arrow.style.display = 'block';
-                setTimeout(() => { arrow.style.opacity = '0.6'; }, 10);
-                setTimeout(() => {
-                    if(menu) menu.style.opacity = '1';
-                    if(socials) socials.style.opacity = '1';
-                }, 250);
-                sessionStorage.removeItem('fromAbout');
-            } else {
-                if(menu) menu.style.opacity = '1';
-                if(socials) socials.style.opacity = '1';
-            }
-
-
-            // Мобильное меню (бургер)
 const burgerIcon = document.querySelector('.icon-menu');
 const menuContent = document.querySelector('.text-menu');
 
@@ -311,24 +291,42 @@ if (burgerIcon && menuContent) {
     burgerIcon.addEventListener('click', function(e) {
         e.stopPropagation();
         menuContent.classList.toggle('mobile-open');
-        // НЕ прячем бургер - он остается видимым!
     });
 
-    // Клик на меню закрывает его
+    // Закрываем меню при клике на ссылку
     menuContent.addEventListener('click', function(e) {
         if (e.target.classList.contains('menu-link')) {
             menuContent.classList.remove('mobile-open');
         }
     });
 
-    // Клик вне меню закрывает его
+    // Закрываем меню при клике вне его
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.menu-trigger')) {
             menuContent.classList.remove('mobile-open');
         }
     });
 }
-        }
+
+// Логика появления элементов
+window.onload = function() {
+    const arrow = document.getElementById('return-arrow');
+    const menu = document.querySelector('.menu-zone');
+    const socials = document.querySelector('.socials');
+
+    if (sessionStorage.getItem('fromAbout') === 'true') {
+        arrow.style.display = 'block';
+        setTimeout(() => { arrow.style.opacity = '0.6'; }, 10);
+        setTimeout(() => {
+            if(menu) menu.style.opacity = '1';
+            if(socials) socials.style.opacity = '1';
+        }, 250);
+        sessionStorage.removeItem('fromAbout');
+    } else {
+        if(menu) menu.style.opacity = '1';
+        if(socials) socials.style.opacity = '1';
+    }
+}
 
     </script>
 </body>
