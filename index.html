@@ -122,17 +122,12 @@
     let currentIndex = 0;
 
     function showSlide(index) {
+        // БЛОКИРОВКА ДЛЯ МОБИЛОК (чтобы не листалось вбок)
+        if (window.innerWidth <= 768) return;
+
         const totalSlides = slides.length;
-        
-        if (index < 0) {
-            bounce(40); // Было 15, стало 40 для глубины
-            return;
-        } 
-        
-        if (index >= totalSlides) {
-            bounce(-40); // Было -15, стало -40 для глубины
-            return;
-        }
+        if (index < 0) { bounce(40); return; } 
+        if (index >= totalSlides) { bounce(-40); return; }
 
         currentIndex = index;
         const offset = -currentIndex * 100;
@@ -141,48 +136,79 @@
 
     function bounce(pixels) {
         const currentOffset = -currentIndex * 100;
-        // Применяем более глубокий сдвиг
         gallery.style.transform = `translateX(calc(${currentOffset}% + ${pixels}px))`;
-        
-        // Увеличили задержку до 400мс для мягкости
         setTimeout(() => {
             gallery.style.transform = `translateX(${currentOffset}%)`;
         }, 200);
     }
 
-    document.querySelector('.right-zone').addEventListener('click', () => {
-        showSlide(currentIndex + 1);
-    });
+    document.querySelector('.right-zone').addEventListener('click', () => showSlide(currentIndex + 1));
+    document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
 
-    document.querySelector('.left-zone').addEventListener('click', () => {
-        showSlide(currentIndex - 1);
-    });
+    // ЛОГИКА ПОЯВЛЕНИЯ ПРИ ЗАГРУЗКЕ
+    window.onload = function() {
+        const arrow = document.getElementById('return-arrow');
+        const menu = document.querySelector('.menu-zone');
+        const socials = document.querySelector('.socials');
+
+        if (sessionStorage.getItem('fromAbout') === 'true') {
+            arrow.style.display = 'block';
+            setTimeout(() => { arrow.style.opacity = '0.6'; }, 10);
+            setTimeout(() => {
+                if(menu) menu.style.opacity = '1';
+                if(socials) socials.style.opacity = '1';
+            }, 250);
+            sessionStorage.removeItem('fromAbout');
+        } else {
+            if(menu) menu.style.opacity = '1';
+            if(socials) socials.style.opacity = '1';
+        }
+    }
 </script>
 
-    <style>
+<style>
+    /* ОБЩИЕ СТИЛИ ДЛЯ СТРЕЛКИ ВОЗВРАТА */
     #return-arrow {
-        position: absolute; 
-        top: 40px; 
-        right: 40px; 
-        z-index: 9999; 
-        color: white; 
-        opacity: 0; 
-        display: none; /* ПО УМОЛЧАНИЮ ПОЛНОСТЬЮ СКРЫТА */
-        transition: opacity 0.3s ease; 
-        cursor: pointer; 
-        text-decoration: none;
+        position: absolute; top: 40px; right: 40px; z-index: 9999; 
+        color: white; opacity: 0; display: none; transition: opacity 0.3s ease; 
+        cursor: pointer; text-decoration: none;
     }
+    #return-arrow:hover { opacity: 1 !important; }
 
-    #return-arrow:hover {
-        opacity: 1 !important;
+    /* ПЛАВНОСТЬ ДЛЯ МЕНЮ */
+    .menu-zone, .socials { opacity: 0; transition: opacity 0.8s ease; }
+
+    /* === МОБИЛЬНАЯ ВЕРСИЯ (Robert Wilson Style) === */
+    @media (max-width: 768px) {
+        body { overflow-y: auto !important; background: #000; }
+
+        /* Фото выстраиваем в бесконечный столбик */
+        .gallery-screen { height: auto !important; display: block !important; padding: 0 !important; }
+        .gallery { 
+            display: flex !important; flex-direction: column !important; 
+            height: auto !important; transform: none !important; width: 100% !important; 
+        }
+        .slide { 
+            width: 100% !important; height: auto !important; 
+            margin-bottom: 5px !important; opacity: 1 !important; display: block !important; 
+        }
+        .slide img { width: 100% !important; height: auto !important; object-fit: contain !important; }
+
+        /* Убираем лишние элементы на мобилке */
+        .nav-zone { display: none !important; }
+        .text-menu { display: none !important; }
+
+        /* Бургер в правый верхний угол */
+        .menu-zone { 
+            position: fixed !important; top: 25px !important; right: 25px !important; 
+            z-index: 10000 !important; opacity: 1 !important; 
+        }
+        .icon-menu { display: block !important; font-size: 32px !important; color: #fff !important; }
+
+        /* Соцсети в самый низ с большим отступом */
+        .bottom-ui { position: relative !important; display: block !important; padding: 100px 0 60px 0 !important; }
+        .socials { display: flex !important; justify-content: center !important; gap: 40px !important; opacity: 1 !important; }
     }
-
-    /* Добавь это внутрь тега <style> */
-.menu-zone, .socials {
-    opacity: 0;
-    transition: opacity 0.8s ease;
-}
-
 </style>
 
 <a href="about.html" id="return-arrow">
