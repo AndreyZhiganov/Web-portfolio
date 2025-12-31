@@ -20,34 +20,38 @@
         /* === МОБИЛЬНАЯ ВЕРСИЯ (Ref: Robert Wilson) === */
         @media (max-width: 768px) {
             body { 
-                overflow-y: auto !important; /* Разрешаем скролл вниз */
+                overflow-y: auto !important; 
                 background: #000; 
             }
 
+            /* ТВОЙ МАТОВЫЙ ОТСТУП СВЕРХУ */
             .gallery-screen {
                 height: auto !important;
                 display: block !important;
-                padding-top: 120px !important; /* Большой отступ сверху (Wilson style) */
-                padding-bottom: 60px !important;
+                padding-top: 80px !important; 
+                background-color: #0a0a0a !important; 
+                position: relative !important;
             }
 
+            /* ФОТО В СТОЛБИК */
             .gallery {
                 display: flex !important;
-                flex-direction: column !important; /* Фото в столбик */
+                flex-direction: column !important;
                 transform: none !important; 
                 width: 100% !important;
                 height: auto !important;
             }
 
+            /* СКЛЕИВАЕМ ФОТО */
             .slide {
                 width: 100% !important;
                 height: auto !important;
-                margin-bottom: 80px !important; /* Много воздуха между фото */
-                opacity: 1 !important;
+                margin-bottom: 0 !important; 
                 display: block !important;
+                line-height: 0 !important;   
             }
 
-            /* ПЕРЕСТАВЛЯЕМ ФОТО: Slide 3 идет ПЕРВЫМ */
+            /* Slide 3 прыгает наверх */
             .slide:nth-child(1) { order: 2; }
             .slide:nth-child(2) { order: 3; }
             .slide:nth-child(3) { order: 1; }
@@ -55,71 +59,103 @@
             .slide img {
                 width: 100% !important;
                 height: auto !important;
-                object-fit: contain;
+                display: block !important;   
+                object-fit: cover !important; 
             }
 
-            /* БУРГЕР МЕНЮ (Справа вверху) */
+            /* ПОЛЗУНКИ БУРГЕРА (ЖЕСТКАЯ ФИКСАЦИЯ) */
             .menu-zone {
-                position: fixed !important;
-                top: 30px !important;
-                right: 30px !important;
-                z-index: 10000 !important;
+                position: fixed !important; 
+                top: 0 !important; /* Прижали к самому верху экрана */
+                left: 0 !important;
+                width: 100% !important;
+                height: 60px !important; /* Сделали зону чуть уже, чтобы поднять иконку */
+                display: flex !important;
+                justify-content: flex-end !important; 
+                align-items: center !important; /* Центрирует иконку внутри этих 60px */
+                padding-right: 25px !important; 
+                z-index: 100000 !important; /* ЕЩЕ БОЛЬШЕ НУЛЕЙ, чтобы была поверх всего */
+                background: transparent !important;
                 opacity: 1 !important;
-                display: block !important;
+                pointer-events: auto !important; /* Чтобы клик всегда работал */
             }
 
             .icon-menu {
                 display: block !important;
-                font-size: 22px !important; /* чуть меньше и аккуратнее */
+                font-size: 20px !important; /* Тот же размер, что был */
+                color: #fff !important;
                 cursor: pointer;
-                color: #fff;
-                text-align: right;
+                opacity: 0.75 !important; /* Вот этот "ползунок" яркости */
+                position: relative !important;
+                z-index: 100001 !important;
             }
 
-            /* ВЫПАДАЮЩИЕ НАДПИСИ (ABOUT / PROJECTS) */
+            /* ВЫПАДАЮЩЕЕ МЕНЮ (ABOUT / PROJECTS) */
             .text-menu {
-                display: none; /* Скрыто по умолчанию */
+                display: none; 
                 flex-direction: column;
                 gap: 15px;
-                background: rgba(0,0,0,0.9);
-                padding: 20px 0;
+                background: #0a0a0a !important; /* Тот же матовый цвет */
+                padding: 20px !important;
                 text-align: right;
-                transition: opacity 0.3s ease;
+                position: absolute !important;
+                top: 80px !important; /* Сразу под матовой полосой */
+                right: 0 !important;
+                width: 180px !important;
+                z-index: 10001 !important;
             }
 
-            /* Когда открыто через JS */
+            /* Показать меню при клике */
             .text-menu.mobile-open {
                 display: flex !important;
-                opacity: 1 !important;
             }
 
+            /* ССЫЛКИ */
             .menu-link {
-                font-size: 16px;
-                letter-spacing: 2px;
-                color: #fff;
-                text-decoration: none;
+                font-size: 16px !important;
+                letter-spacing: 2px !important;
+                color: #fff !important;
+                text-decoration: none !important;
+                display: block !important;
             }
 
-            /* СКРЫВАЕМ СТРЕЛКИ И СТАТИЧНЫЕ СОЦСЕТИ */
+            /* ПРЯЧЕМ СТРЕЛКИ */
             .nav-zone { display: none !important; }
-            
-            /* СОЦСЕТИ В САМОМ НИЗУ СТРАНИЦЫ */
+
+            /* НИЖНЯЯ ЗОНА */
             .bottom-ui {
                 position: relative !important;
                 display: flex !important;
                 flex-direction: column !important;
-                align-items: center !important;
-                padding: 100px 0 50px 0 !important; /* Приличный отступ от последнего фото */
+                padding: 80px 0 5px 0 !important; 
                 bottom: 0 !important;
                 width: 100% !important;
+                background: #000; /* Фон под соцсетями снова чисто черный */
             }
 
-            .socials {
+            /* КОНТЕЙНЕР ИКОНОК (SOCIALS) */
+        .socials {
                 display: flex !important;
-                justify-content: center !important;
-                gap: 40px !important;
+                margin: 0 auto !important; /* Ставим в центр */
+                
+                /* ДВИГАЕМ ВЛЕВО: */
+                /* -15px сдвинет чуть-чуть влево. */
+                /* Если надо сильнее влево — ставь -20px или -30px. */
+                /* Если надо вправо — убери минус, ставь просто 15px. */
+                transform: translateX(-50px) !important; 
+
+                gap: 0px !important; 
                 opacity: 1 !important;
+                padding-bottom: 20px !important; 
             }
+
+            /* РАЗМЕР ИКОНОК (ПОД БУРГЕР) */
+            .socials .social-link svg {
+                width: 15px !important;  
+                height: 15px !important;
+                stroke-width: 1.5px !important; /* Делаем линии изящнее */
+            }
+            
         }
     </style>
 </head>
