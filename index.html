@@ -67,39 +67,46 @@
         display: none !important;
     }
 
-    /* === 3. ВЫПАДАЮЩЕЕ МЕНЮ (ABOUT + PROJECTS) === */
-    .text-menu {
-        display: none; /* Скрыто по умолчанию */
-    }
+   /* === 3. ВЫПАДАЮЩЕЕ МЕНЮ (ABOUT + PROJECTS) === */
+.text-menu {
+    display: none;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 18px !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: 70px !important;
+    background: #0d0d0d !important;
+    padding: 0 25px !important;
+    z-index: 10001 !important;
+    margin: 0 !important;
+    
+    /* АНИМАЦИЯ выезда справа налево */
+    transform: translateX(200px);
+    transition: transform 0.4s ease;
+}
 
-    /* Показываем меню при клике */
-    .text-menu.mobile-open {
-        display: flex !important;
-        flex-direction: row !important; /* Горизонтально, рядом друг с другом */
-        align-items: center !important;
-        position: absolute !important;
-        top: 70px !important; /* Сразу под верхним отступом */
-        right: 25px !important;
-        gap: 18px !important; /* РАССТОЯНИЕ между пунктами меню */
-        background: transparent !important;
-        padding: 20px 0 !important;
-        width: auto !important;
-        z-index: 10001 !important;
-    }
+/* Показываем меню при клике - выезжает влево */
+.text-menu.mobile-open {
+    display: flex !important;
+    transform: translateX(0);
+}
 
-    .menu-link {
-        font-size: 15px !important; /* РАЗМЕР шрифта меню */
-        letter-spacing: 1.5px !important; /* МЕЖБУКВЕННОЕ расстояние */
-        color: #fff !important;
-        text-decoration: none !important;
-        text-transform: uppercase;
-        opacity: 0.7;
-        transition: opacity 0.3s ease;
-    }
+.menu-link {
+    font-size: 15px !important; /* РАЗМЕР шрифта меню */
+    letter-spacing: 1.5px !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
 
-    .menu-link:hover {
-        opacity: 1;
-    }
+.menu-link:hover {
+    opacity: 1;
+}
 
     /* === 4. ГАЛЕРЕЯ (вертикальный столбик фото) === */
     .gallery-screen {
@@ -304,22 +311,26 @@ if (burgerIcon && menuContent) {
     burgerIcon.addEventListener('click', function(e) {
         e.stopPropagation();
         menuContent.classList.toggle('mobile-open');
-        burgerIcon.classList.toggle('hidden');
+        // НЕ прячем бургер - он остается видимым!
+    });
+
+    // Клик на меню закрывает его
+    menuContent.addEventListener('click', function(e) {
+        if (e.target.classList.contains('menu-link')) {
+            menuContent.classList.remove('mobile-open');
+        }
     });
 
     // Клик вне меню закрывает его
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.menu-trigger')) {
             menuContent.classList.remove('mobile-open');
-            burgerIcon.classList.remove('hidden');
         }
     });
 }
 
-
         }
 
-        
     </script>
 </body>
 </html>
