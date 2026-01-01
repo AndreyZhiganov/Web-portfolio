@@ -287,6 +287,10 @@ body {
     padding-bottom: 80px;
 }
 
+.mobile-img {
+    display: none;
+}
+
 /* === МОБИЛЬНАЯ ВЕРСИЯ (ДОБАВИТЬ В КОНЕЦ ФАЙЛА) === */
 @media (max-width: 768px) {
     
@@ -358,17 +362,35 @@ body {
         display: none !important;
     }
 
-    /* Корректируем картинки, чтобы они были одинаковыми по поведению */
+    /* 2.2. Корректируем картинки: Одинаковая высота */
     .slide {
         line-height: 0 !important;
         width: 100% !important;
-        height: auto !important; /* Позволяем слайду подстраиваться под фото */
+        height: 650px !important; /* Синхронизируем высоту слайда с картинкой */
+        overflow: hidden;         /* На всякий случай прячем то, что вылезет */
     }
 
     .slide img {
         display: block !important;
-        width: 100% !important;   /* Растягиваем на всю ширину */
-        height: auto !important;    /* Высота высчитывается автоматически по ширине */
-        object-fit: contain !important; /* Гарантируем, что фото не обрежется и не сожмется странно */
+        width: 100% !important;
+        height: 100% !important;  /* Картинка просто заполняет весь слайд (650px) */
+        object-fit: cover !important; /* Центрирует и обрезает края */
     }
+
+    /* Прячем десктопное фото и показываем мобильное */
+    .desktop-img {
+        display: none !important;
+    }
+    .mobile-img {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important; /* Теперь оно само встанет ровно, так как размеры совпадают */
+    }
+
+    /* Убери все жесткие высоты (типа 500px или 650px) у .slide, если они остались */
+    .slide {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+    
 }
