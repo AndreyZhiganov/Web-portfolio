@@ -19,27 +19,26 @@ body {
     /* overflow: hidden; <--- УДАЛИ ЭТУ СТРОЧКУ ИЛИ ЗАКОММЕНТИРУЙ */
 }
 
-.gallery {
-    display: flex;
-    width: 100%;
-    height: 100svh;
-    z-index: 1;
-    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
-    will-change: transform;
-}
+/* --- GALLERY (ФОТО В СТОЛБИК) --- */
+    .gallery {
+        display: flex !important;
+        flex-direction: column !important; /* ВЫСТРАИВАЕМ В СТОЛБИК */
+        width: 100% !important;
+        transform: none !important;        /* ОТКЛЮЧАЕМ СДВИГ СЛАЙДЕРА */
+    }
 
-.slide {
-    position: relative; /* Не absolute! */
-    min-width: 100%;    /* Каждый слайд строго на всю ширину */
-    height: 100%;
-    opacity: 1;         /* Всегда видны внутри ленты */
-}
+    .slide { 
+        width: 100% !important; 
+        min-width: 100% !important;
+        line-height: 0 !important; 
+    }
 
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .slide img {
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        object-fit: contain !important; /* Чтобы фото не обрезалось */
+    }
 
 /* Убираем лишнее, что мы добавляли раньше */
 .slide.active, .slide.prev {
