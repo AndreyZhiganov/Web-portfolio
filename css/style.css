@@ -286,3 +286,75 @@ right: 20px;
 body {
     padding-bottom: 80px;
 }
+
+/* === МОБИЛЬНАЯ ВЕРСИЯ (ДОБАВИТЬ В КОНЕЦ ФАЙЛА) === */
+@media (max-width: 768px) {
+    
+    /* 1. Убираем лишние отступы у body */
+    body {
+        overflow-y: auto !important; /* Разрешаем скролл */
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 2. Фотографии: Начинаются СРАЗУ под серой плашкой */
+    .gallery-screen {
+        display: block !important;
+        height: auto !important;
+        min-height: 100vh;
+        padding-top: 70px !important; /* Высота верхней плашки */
+        background: #000;
+    }
+
+    /* 3. Верхняя плашка: Закреплена намертво, не едет при скролле */
+    .menu-zone {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 70px !important;
+        background: #0d0d0d !important; /* Тот самый серый цвет */
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        padding-right: 24px !important;
+        z-index: 10000 !important;
+        opacity: 1 !important;
+    }
+
+    /* 4. Иконки соцсетей: Центровка и отступ от фото */
+    .bottom-ui {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 40px 0 60px 0 !important; /* 40px - отступ от фото, 60px - отступ снизу */
+        background: #000 !important;
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    .socials {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 30px !important; /* Расстояние между иконками */
+        transform: none !important; /* Убираем все кривые сдвиги */
+        margin: 0 auto !important;
+    }
+
+    /* Прячем десктопные элементы */
+    .nav-zone, .main-logo, #return-arrow {
+        display: none !important;
+    }
+
+    /* Корректируем картинки, чтобы не было щелей */
+    .slide {
+        line-height: 0 !important;
+    }
+    .slide img {
+        display: block !important;
+        height: auto !important;
+    }
+}
