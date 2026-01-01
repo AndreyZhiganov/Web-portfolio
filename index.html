@@ -22,6 +22,11 @@
 ======================================== */
 @media (max-width: 768px) {
     
+    .gallery-screen {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
     .gallery,
 .gallery-screen {
     height: auto !important;
@@ -159,7 +164,9 @@
 
     /* === 6. НИЖНИЙ ВЫСТУП С ИКОНКАМИ === */
     .bottom-ui {
-        position: static !important;
+    position: relative !important;
+    margin-top: auto !important;
+
         display: flex !important;
         flex-direction: column !important;
         padding: 0 !important;
