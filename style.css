@@ -1,0 +1,288 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff; 
+    overflow: hidden; /* ЗАПРЕЩАЕМ СКРОЛЛ НА ДЕКСТОПЕ */
+}
+
+/* 1. Настройка Главного Экрана */
+.gallery-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* overflow: hidden; <--- УДАЛИ ЭТУ СТРОЧКУ ИЛИ ЗАКОММЕНТИРУЙ */
+}
+
+.gallery {
+    display: flex;
+    width: 100%;
+    height: 100svh;
+    z-index: 1;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+    will-change: transform;
+}
+
+.slide {
+    position: relative; /* Не absolute! */
+    min-width: 100%;    /* Каждый слайд строго на всю ширину */
+    height: 100%;
+    opacity: 1;         /* Всегда видны внутри ленты */
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Убираем лишнее, что мы добавляли раньше */
+.slide.active, .slide.prev {
+    transform: none !important;
+}
+
+/* 2. Зоны навигации (Механика John Pawson) */
+.nav-zone {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20%;
+    z-index: 10;
+    display: flex;
+    align-items: center; 
+    cursor: pointer;
+}
+
+/* СТИЛИ ДЛЯ ПРИЖАТИЯ СТРЕЛОК К КРАЯМ */
+.left-zone {
+    left: 0;
+    justify-content: flex-start; 
+    padding-left: 20px; 
+}
+
+.right-zone {
+    right: 0;
+    justify-content: flex-end; 
+    padding-right: 20px; 
+}
+
+/* 3. Стрелки */
+.arrow {
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* СТИЛИЗАЦИЯ SVG */
+.arrow svg {
+    width: 24px; 
+    height: 24px;
+    stroke: white; 
+}
+
+/* Сама магия: когда наводим на ЗОНУ, показываем СТРЕЛКУ внутри неё */
+.nav-zone:hover .arrow {
+    opacity: 1;
+    transform: scale(1.1); 
+}
+
+/* 4. Нижнее меню (UI) */
+.bottom-ui {
+    position: fixed;
+    bottom: 24px;
+left: 20px;
+right: 20px;
+
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-end; /* Важно: прижимает элементы к низу */
+    z-index: 20;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* НОВЫЙ БЛОК: ЗОНА НАВЕДЕНИЯ В ЛЕВОМ УГЛУ (РАСШИРЕННЫЙ ХИТБОКС) */
+.menu-zone {
+    width: 400px; 
+    height: 100px; 
+    z-index: 10; 
+    overflow: visible;
+    
+    /* === ДОБАВЛЕННЫЕ СВОЙСТВА ДЛЯ ВЫРАВНИВАНИЯ ЗНАЧКА ВНИЗ === */
+    display: flex; /* 1. Включаем гибкое выравнивание */
+    align-items: flex-end; /* 2. Прижимаем содержимое к НИЖНЕЙ границе */
+    justify-content: flex-start; /* 3. Прижимаем содержимое к ЛЕВОЙ границе */
+    /* ====================================================== */
+}
+
+/* МАГИЯ: При наведении на весь блок .menu-zone (работает только в CSS) */
+.menu-zone:hover .text-menu {
+    opacity: 1; /* Показываем текст */
+    transform: translateY(0); /* Возвращаем на место */
+}
+
+.menu-zone:hover .icon-menu {
+    opacity: 0; /* Скрываем иконку */
+}
+
+/* Блок, который отвечает за наведение (ТОЛЬКО ДЛЯ ПОЗИЦИОНИРОВАНИЯ ИКОНКИ) */
+.menu-trigger {
+    cursor: pointer;
+    position: relative;
+    padding: 5px 15px 5px 25px; 
+}
+
+/* Стилизация текста меню (скрыт по умолчанию) */
+.text-menu {
+    position: absolute;
+    bottom: 14px; /* Ваше значение для поднятия текста */
+    left: 100px;
+    
+    opacity: 0; 
+    transform: translateY(5px); 
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    
+    white-space: nowrap; 
+}
+
+/* Стилизация ссылок внутри текста */
+.menu-link {
+    color: white;
+    text-decoration: none; 
+    margin-right: 15px;
+    
+}
+
+/* Стилизация иконки */
+.icon-menu {
+    font-size: 28px;
+    transition: opacity 0.3s ease;
+    opacity: 0.75; /* Прозрачность 75% */
+}
+
+/* СЕКЦИЯ СОЦИАЛЬНЫХ СЕТЕЙ (ПРАВАЯ ЧАСТЬ) */
+.socials {
+    z-index: 20;
+    text-align: right; /* На всякий случай выравниваем текст справа */
+}
+
+/* Стили для ссылок соцсетей */
+.social-link {
+    color: white; 
+    text-decoration: none; 
+    margin-left: 25px; /* Отступ между иконками */
+    
+    /* Делаем их полупрозрачными, как иконку бургера */
+    opacity: 0.75; 
+    cursor: pointer;
+    
+    /* Добавляем плавный переход для наведения */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Стилизация иконок SVG внутри ссылок соцсетей */
+.social-link svg {
+    width: 19px; /* Размер, как у иконки бургера */
+    height: 19px;
+    stroke: currentColor; /* Цвет берется из .social-link (т.е. белый) */
+}
+
+/* Эффект при наведении: полная прозрачность (100%) и небольшое увеличение */
+.social-link:hover {
+    opacity: 1; /* Полностью белый */
+    transform: scale(1.1); /* Увеличиваем на 10% */
+}
+
+/* 5. Секция описания (Инфо под галереей) */
+.info-section {
+    height: 20vh; 
+    background-color: #000;
+    display: flex;
+    align-items: center; 
+    padding: 0 40px; 
+}
+
+.info-container {
+    text-align: left;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.info-name {
+    color: rgba(255, 255, 255, 0.95); /* Чуть ближе к чистому белому */
+    font-size: 19px; /* Увеличил на 1px для веса */
+    font-weight: 500; /* Medium — идеальный баланс: не жирный, но четкий */
+    margin: 0 0 6px 0; 
+    letter-spacing: 0.6px; 
+}
+
+.info-tagline {
+    color: #999;
+    font-size: 13.5px;
+    margin: 0; /* Возвращаем 0, чтобы убрать лишние дырки сверху и снизу */
+    letter-spacing: 0.4px;
+    font-weight: 400;
+    
+    /* Двигаем влево на 1 пиксель, не ломая вертикаль */
+    transform: translateX(-1px); 
+}
+
+.tagline-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px; /* Регулируй это число, если хочешь иконки ближе или дальше от текста */
+    transform: translateX(-1px); /* Тоже сдвигаем на 1px влево для симметрии */
+}
+
+.tagline-socials .social-link {
+    margin-left: 0;    /* Сброс старого отступа от правой части */
+    display: flex;
+    align-items: center;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.tagline-socials .social-link svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.tagline-socials .social-link:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.main-logo {
+    position: fixed;
+    top: 40px;  /* МЕНЯЙ ЭТО: больше число = ниже, меньше = выше */
+    left: 20px; /* РАСПОЛОЖЕНИЕ ЛОГО: больше число = правее, меньше = левее */
+    z-index: 1000;
+}
+
+.main-logo a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 13px; /* Маленький размер, как у Поусона */
+    font-weight: 400; /* Тонкий шрифт (Regular) */
+    letter-spacing: 3px; /* Большой отступ между буквами для воздуха */
+    text-transform: uppercase;
+    display: block;
+    transition: opacity 0.3s ease;
+    opacity: 0.8; /* Чуть приглушим по умолчанию */
+}
+
+.main-logo a:hover {
+    opacity: 1; /* Проявляется при наведении */
+}
+
+.gallery-screen {
+    min-height: 100svh;
+}
+
+body {
+    padding-bottom: 80px;
+}
