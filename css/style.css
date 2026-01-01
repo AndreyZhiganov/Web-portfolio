@@ -358,13 +358,17 @@ body {
         display: none !important;
     }
 
-    /* Корректируем картинки, чтобы не было щелей */
+    /* Корректируем картинки, чтобы они были одинаковыми по поведению */
     .slide {
         line-height: 0 !important;
-    }
-   .slide img {
         width: 100% !important;
-        height: 500px !important; /* Укажи любую фиксированную высоту, которая тебе нравится */
-        object-fit: cover !important; /* Обрежет края, но заполнит весь прямоугольник */
+        height: auto !important; /* Позволяем слайду подстраиваться под фото */
+    }
+
+    .slide img {
+        display: block !important;
+        width: 100% !important;   /* Растягиваем на всю ширину */
+        height: auto !important;    /* Высота высчитывается автоматически по ширине */
+        object-fit: contain !important; /* Гарантируем, что фото не обрежется и не сожмется странно */
     }
 }
