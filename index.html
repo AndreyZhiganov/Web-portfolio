@@ -22,6 +22,12 @@
 ======================================== */
 @media (max-width: 768px) {
     
+    .gallery,
+.gallery-screen {
+    height: auto !important;
+    min-height: 0 !important;
+}
+
     body { 
         overflow-y: auto !important;
         background: #000;
@@ -75,34 +81,30 @@
     }
 
     .text-menu {
-        position: absolute !important;
-        top: 70px !important;
-        right: 0 !important;
-        height: auto !important;
-        background: #0d0d0d !important;
-        padding: 20px 25px !important;
-        z-index: 10001 !important;
-        margin: 0 !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 18px !important;
-        white-space: nowrap !important;
-        
-        /* АНИМАЦИЯ выезда справа налево */
-        transform: translateX(300px);
-        transition: transform 0.4s ease;
-        
-        /* По умолчанию скрыто */
-        pointer-events: none !important;
-        opacity: 0 !important;
-    }
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    height: 70px !important;
+    background: #0d0d0d !important;
+    display: flex !important;
+    align-items: center !important;
+    padding-right: 25px !important;
+    padding-left: 20px !important;
+    gap: 18px !important;
+    box-sizing: border-box;
 
-    /* Показываем меню при клике - выезжает влево */
-    .text-menu.mobile-open {
-        transform: translateX(0) !important;
-        pointer-events: auto !important;
-        opacity: 1 !important;
-    }
+
+    transform: translateX(100%);
+    transition: transform 0.45s ease;
+
+    opacity: 1 !important;
+    pointer-events: none;
+    z-index: 99999 !important;
+}
+.text-menu.mobile-open {
+    transform: translateX(0);
+    pointer-events: auto;
+}
 
     .menu-link {
         font-size: 15px !important;
@@ -157,7 +159,7 @@
 
     /* === 6. НИЖНИЙ ВЫСТУП С ИКОНКАМИ === */
     .bottom-ui {
-        position: relative !important;
+        position: static !important;
         display: flex !important;
         flex-direction: column !important;
         padding: 0 !important;
@@ -199,6 +201,17 @@
     #return-arrow {
         display: none !important;
     }
+
+    .menu-zone:hover .text-menu {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+.menu-zone:hover .icon-menu {
+    opacity: 0.7 !important;
+}
+
+
 }
     </style>
 </head>
@@ -288,24 +301,29 @@ const burgerIcon = document.querySelector('.icon-menu');
 const menuContent = document.querySelector('.text-menu');
 
 if (burgerIcon && menuContent) {
-    burgerIcon.addEventListener('click', function(e) {
-        e.stopPropagation();
-        menuContent.classList.toggle('mobile-open');
-    });
+
+    burgerIcon.addEventListener('click', () => {
+    menuContent.classList.toggle('mobile-open');
+    burgerIcon.classList.toggle('hidden');
+});
+
 
     // Закрываем меню при клике на ссылку
-    menuContent.addEventListener('click', function(e) {
-        if (e.target.classList.contains('menu-link')) {
-            menuContent.classList.remove('mobile-open');
-        }
-    });
+   menuContent.addEventListener('click', function(e) {
+    if (e.target.classList.contains('menu-link')) {
+        menuContent.classList.remove('mobile-open');
+        burgerIcon.classList.remove('hidden');
+    }
+});
+
 
     // Закрываем меню при клике вне его
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.menu-trigger')) {
-            menuContent.classList.remove('mobile-open');
-        }
-    });
+   document.addEventListener('click', function(e) {
+    if (!e.target.closest('.menu-trigger')) {
+        menuContent.classList.remove('mobile-open');
+        burgerIcon.classList.remove('hidden');
+    }
+});
 }
 
 // Логика появления элементов
