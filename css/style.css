@@ -338,7 +338,7 @@ body {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 40px 0 60px 0 !important; /* 40px - отступ от фото, 60px - отступ снизу */
+        padding: 60px 0 5px 0 !important; /* 40px - отступ от фото, 60px - отступ снизу */
         background: #000 !important;
         width: 100% !important;
         left: 0 !important;
@@ -348,7 +348,7 @@ body {
     .socials {
         display: flex !important;
         justify-content: center !important;
-        gap: 30px !important; /* Расстояние между иконками */
+        gap: 0px !important; /* Расстояние между иконками */
         transform: none !important; /* Убираем все кривые сдвиги */
         margin: 0 auto !important;
     }
