@@ -33,7 +33,7 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        padding-top: 70px;
+        padding-top: 100px; /* --- вот тут ЩА поменял с 70 на 100 --- */
         background: #000;
     }
 
@@ -105,23 +105,24 @@
     /* --- BOTTOM BAR --- */
     .bottom-ui {
         margin-top: auto;
-        background: #0d0d0d;
-        height: 100px;
+        background: transparent; /* --- вот тут ЩА поменял с матового на черный --- */
+        height: 50px; /* --- вот тут ЩА поменял с 100 на 50 --- */
         display: flex;
         justify-content: center;
         align-items: flex-end;
         padding-bottom: 24px;
+        padding-top: 40px;
     }
 
     .socials {
         display: flex;
-        gap: 20px;
+        gap: 8px; /* --- вот тут ЩА поменял с 20 на 8 --- */
         opacity: 1;
     }
 
     .socials svg {
-        width: 18px;
-        height: 18px;
+        width: 16px; /* --- вот тут ЩА поменял с 18 на 16 --- */
+        height: 16px; /* --- вот тут ЩА поменял с 18 на 16 --- */ 
     }
 
     .nav-zone,
