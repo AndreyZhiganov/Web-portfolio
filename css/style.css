@@ -19,26 +19,27 @@ body {
     /* overflow: hidden; <--- УДАЛИ ЭТУ СТРОЧКУ ИЛИ ЗАКОММЕНТИРУЙ */
 }
 
-/* --- GALLERY (ФОТО В СТОЛБИК) --- */
-    .gallery {
-        display: flex !important;
-        flex-direction: column !important; /* ВЫСТРАИВАЕМ В СТОЛБИК */
-        width: 100% !important;
-        transform: none !important;        /* ОТКЛЮЧАЕМ СДВИГ СЛАЙДЕРА */
-    }
+.gallery {
+    display: flex;
+    width: 100%;
+    height: 100svh;
+    z-index: 1;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+    will-change: transform;
+}
 
-    .slide { 
-        width: 100% !important; 
-        min-width: 100% !important;
-        line-height: 0 !important; 
-    }
+.slide {
+    position: relative; /* Не absolute! */
+    min-width: 100%;    /* Каждый слайд строго на всю ширину */
+    height: 100%;
+    opacity: 1;         /* Всегда видны внутри ленты */
+}
 
-    .slide img {
-        width: 100% !important;
-        height: auto !important;
-        display: block !important;
-        object-fit: contain !important; /* Чтобы фото не обрезалось */
-    }
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 /* Убираем лишнее, что мы добавляли раньше */
 .slide.active, .slide.prev {
@@ -284,76 +285,4 @@ right: 20px;
 
 body {
     padding-bottom: 80px;
-}
-
-/* === МОБИЛЬНАЯ ВЕРСИЯ (ДОБАВИТЬ В КОНЕЦ ФАЙЛА) === */
-@media (max-width: 768px) {
-    
-    /* 1. Убираем лишние отступы у body */
-    body {
-        overflow-y: auto !important; /* Разрешаем скролл */
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-
-    /* 2. Фотографии: Начинаются СРАЗУ под серой плашкой */
-    .gallery-screen {
-        display: block !important;
-        height: auto !important;
-        min-height: 100vh;
-        padding-top: 70px !important; /* Высота верхней плашки */
-        background: #000;
-    }
-
-    /* 3. Верхняя плашка: Закреплена намертво, не едет при скролле */
-    .menu-zone {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 70px !important;
-        background: #0d0d0d !important; /* Тот самый серый цвет */
-        display: flex !important;
-        justify-content: flex-end !important;
-        align-items: center !important;
-        padding-right: 24px !important;
-        z-index: 10000 !important;
-        opacity: 1 !important;
-    }
-
-    /* 4. Иконки соцсетей: Центровка и отступ от фото */
-    .bottom-ui {
-        position: relative !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 40px 0 60px 0 !important; /* 40px - отступ от фото, 60px - отступ снизу */
-        background: #000 !important;
-        width: 100% !important;
-        left: 0 !important;
-        right: 0 !important;
-    }
-
-    .socials {
-        display: flex !important;
-        justify-content: center !important;
-        gap: 30px !important; /* Расстояние между иконками */
-        transform: none !important; /* Убираем все кривые сдвиги */
-        margin: 0 auto !important;
-    }
-
-    /* Прячем десктопные элементы */
-    .nav-zone, .main-logo, #return-arrow {
-        display: none !important;
-    }
-
-    /* Корректируем картинки, чтобы не было щелей */
-    .slide {
-        line-height: 0 !important;
-    }
-    .slide img {
-        display: block !important;
-        height: auto !important;
-    }
 }
