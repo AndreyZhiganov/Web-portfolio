@@ -333,7 +333,7 @@ body {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 90px 0 20px 0 !important; 
+        padding: 110px 0 20px 0 !important;
         background: #000 !important;
         width: 100% !important;
         left: 0 !important;
@@ -343,9 +343,15 @@ body {
     .socials {
         display: flex !important;
         justify-content: center !important;
-        gap: 20px !important; 
+        gap: 0px !important; 
         margin: 0 auto !important;
     }
+
+    .social-link svg {
+    width: 17px;
+    height: 17px;
+}
+
 
     /* Убираем десктопные фишки */
     .nav-zone, .main-logo, #return-arrow, .arrow {
