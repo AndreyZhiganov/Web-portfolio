@@ -345,8 +345,8 @@ body {
         justify-content: center !important;
         gap: 0px !important; 
         margin: 0 auto !important;
-        margin-top: 22px !important;
-        transform: translateX(-6px);
+        margin-top: 28px !important;
+        transform: translateX(-8px);
     }
 
     .social-link {
