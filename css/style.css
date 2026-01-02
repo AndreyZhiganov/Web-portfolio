@@ -288,6 +288,29 @@ body {
 /* === МОБИЛЬНАЯ ВЕРСИЯ (ПОЛНОСТЬЮ ОЧИЩЕННАЯ) === */
 @media (max-width: 768px) {
 
+ .gallery-screen {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.gallery {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+    will-change: transform;
+}
+
+     .slide {
+    height: auto !important;
+}
+
 .menu-zone .icon-menu {
     transition: opacity 0.3s ease;
 }
@@ -324,22 +347,6 @@ body {
         overflow-y: auto !important;
         padding: 0 !important;
         margin: 0 !important;
-    }
-
-    .gallery-screen {
-    display: block !important;
-    flex: 1 !important;
-    padding-top: 70px !important;
-    background: #000;
-    min-height: auto !important;
-}
-
-    .gallery {
-        display: flex !important;
-        flex-direction: column !important; 
-        width: 100% !important;
-        height: auto !important;
-        transform: none !important; 
     }
 
     .menu-zone {
@@ -387,13 +394,6 @@ body {
     /* Убираем десктопные фишки */
     .nav-zone, .main-logo, #return-arrow, .arrow {
         display: none !important;
-    }
-
-    /* Чистая настройка слайдов */
-    .slide {
-        line-height: 0 !important;
-        width: 100% !important;
-        height: auto !important;
     }
 
     .slide img {
