@@ -345,14 +345,18 @@ body {
         justify-content: center !important;
         gap: 0px !important; 
         margin: 0 auto !important;
+        margin-top: 12px !important;
+        transform: translateX(-6px);
     }
+
+    .social-link {
+    margin-left: -6px !important;
+}
 
     .social-link svg {
     width: 17px;
     height: 17px;
 }
-
-
     /* Убираем десктопные фишки */
     .nav-zone, .main-logo, #return-arrow, .arrow {
         display: none !important;
