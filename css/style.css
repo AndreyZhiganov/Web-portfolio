@@ -285,13 +285,33 @@ body {
     opacity: 1; /* Проявляется при наведении */
 }
 
-/* === МОБИЛЬНАЯ ВЕРСИЯ (ПОЛНОСТЬЮ ОЧИЩЕННАЯ) === */
+/* === МОБИЛЬНАЯ ВЕРСИЯ (ФИКС: единая лента с меню в потоке + no horiz scroll) === */
 @media (max-width: 768px) {
+
+    /* 1. ОСНОВА: body/html без horiz scroll, vertical flow */
+    html, body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important; /* Нет скролла вширь */
+        padding: 0 !important;
+        margin: 0 !important;
+        height: auto !important; /* Для ленты */
+    }
+
+    body {
+        display: flex !important;
+        flex-direction: column !important;
+        overflow-y: auto !important; /* Только vertical скролл */
+        min-height: 100vh !important;
+    }
+
+    /* 2. ГАЛЕРЕЯ: vertical stack, full-width images, как лента под меню */
     .gallery-screen {
         position: relative !important;
         height: auto !important;
-        min-height: 100vh !important;
         overflow: visible !important;
+        flex: 1 !important; /* Занимает пространство */
+        padding-top: 0 !important; /* УБРАЛИ отступ — меню "склеено" сверху */
     }
 
     .gallery {
@@ -303,146 +323,94 @@ body {
     }
 
     .slide {
-        min-width: 100% !important; /* Full-width для stack'а */
+        min-width: 100% !important;
         height: auto !important;
-    }
-
-    .menu-zone .icon-menu {
-        transition: opacity 0.3s ease;
-    }
-
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        overflow-y: auto !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-
-    .menu-zone {
-        position: absolute !important; 
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 70px !important;
-        background: #0d0d0d !important; 
-        display: flex !important;
-        justify-content: flex-end !important;
-        align-items: center !important;
-        padding-right: 24px !important;
-        z-index: 10000 !important;
-    }
-
-    .menu-zone .text-menu {
-        position: absolute !important;
-        right: 0 !important; /* Anchor к правому краю */
-        top: 70px !important; /* Ниже бара (как overlay на референсе) */
-        display: flex !important;
-        flex-direction: column !important; /* Vertical links, как на референсе */
-        gap: 20px !important; /* Spacing между links */
-        opacity: 0;
-        pointer-events: none;
-        transform: translateX(100%) !important; /* Start hidden справа */
-        transition: all 0.35s ease !important;
-        background: #0d0d0d !important; /* Overlay-like bg */
-        padding: 20px !important;
-        width: 200px !important; /* Fixed width для меню */
-        box-sizing: border-box !important;
-    }
-
-    .menu-zone.active .icon-menu {
-        opacity: 0.25; /* Dim icon when open */
-    }
-
-    .menu-zone.active .text-menu {
-        opacity: 1 !important;
-        transform: translateX(0) !important; /* Slide in слева от right (влево на экран) */
-        pointer-events: auto !important;
-    }
-
-    .menu-link {
-        margin-right: 0 !important; /* No horizontal margin для vertical */
-        margin-bottom: 10px !important;
-        text-align: left !important;
-    }
-
-    .bottom-ui {
-        margin-top: auto !important; /* Прижим к низу */
-        padding: 60px 0 20px 0 !important;
-        background: #000 !important;
-        position: relative !important; /* Fix разъезда */
-        width: 100% !important;
-    }
-
-    .socials {
-        display: flex !important;
-        justify-content: center !important;
-        gap: 16px !important; /* Even spacing */
-        margin: 0 auto !important;
-        margin-top: 28px !important;
-        transform: none !important; /* Убрал лишний shift, чтобы не разъезжались */
-    }
-
-    .social-link {
-        margin-left: 0 !important; /* Reset для center */
-    }
-
-    .social-link svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    /* Убираем десктопные фишки */
-    .nav-zone, .main-logo, #return-arrow, .arrow {
-        display: none !important;
     }
 
     .slide img {
         display: block !important;
         width: 100% !important;
         height: auto !important;
+        max-width: 100% !important; /* Нет вылезания вширь */
     }
 
-    /* Для about.html: fix stack без gaps */
-    .layout {
-        display: block !important;
+    /* 3. ПЛАШКА МЕНЮ: В ПОТОКЕ (НЕ fixed), склеена сверху галереи, скроллится с лентой */
+    .menu-zone {
+        position: relative !important; /* В потоке — скроллится вместе с фото */
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important; /* Full-width */
+        height: 70px !important;
+        background: #0d0d0d !important; /* Твой серый */
+        z-index: 10000 !important; /* Поверх, но в потоке */
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important; /* Padding внутри width */
     }
 
-    .sidebar {
+    /* Текст меню: твой текущий стиль (right:65px top:24px), но относительно плашки */
+    .menu-zone .text-menu {
+        position: absolute !important;
+        right: 65px !important; /* Твоя позиция от правого края */
+        top: 24px !important; /* Твоя высота от верха плашки */
+        display: flex !important;
+        gap: 14px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: translateX(10px) !important; /* Твой сдвиг */
+        transition: all 0.35s ease !important;
+    }
+
+    /* АКТИВ: твой стиль (работает с JS toggle .active на .menu-zone) */
+    .menu-zone.active .icon-menu {
+        opacity: 0.25 !important;
+    }
+
+    .menu-zone.active .text-menu {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+        pointer-events: auto !important;
+    }
+
+    /* 4. BOTTOM-UI: внизу ленты, после галереи */
+    .bottom-ui {
         position: relative !important;
         width: 100% !important;
-        height: auto !important;
-        padding: 40px 20px !important;
-        pointer-events: auto !important;
-        display: block !important; /* Stack vertical */
+        padding: 60px 0 20px 0 !important;
+        background: #000 !important;
+        display: block !important; /* Простой flow */
+        margin-top: auto !important; /* Прижим к низу flex body */
     }
 
-    .scroll-container {
-        height: auto !important;
-        overflow-y: visible !important;
-        scroll-snap-type: none !important;
-    }
-
-    section {
-        height: auto !important;
-        padding: 20px !important;
-        display: block !important; /* Flow vertical без justify */
-    }
-
-    .content-wrapper {
-        max-width: 100% !important;
-        margin: 0 auto !important;
-    }
-
-    .bottom-links, .contact-links {
-        position: relative !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        padding: 20px !important;
-        justify-content: center !important;
+    /* SOCIALS: center, без сдвигов */
+    .socials {
         display: flex !important;
-        gap: 20px !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        margin: 28px auto 0 !important;
+        transform: none !important; /* УБРАЛ твой -8px */
+        padding: 0 20px !important; /* Не вылезает по краям */
     }
+
+    .social-link {
+        margin-left: 16px !important;
+    }
+
+    .social-link svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    /* 5. СКРЫВАЕМ ДЕСКТОП */
+    .nav-zone, .main-logo, #return-arrow, .arrow {
+        display: none !important;
+    }
+
+    /* Icon-menu transition */
+    .menu-zone .icon-menu {
+        transition: opacity 0.3s ease !important;
+    }
+
 }
