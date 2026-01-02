@@ -345,17 +345,17 @@ body {
         justify-content: center !important;
         gap: 0px !important; 
         margin: 0 auto !important;
-        margin-top: 12px !important;
+        margin-top: 16px !important;
         transform: translateX(-6px);
     }
 
     .social-link {
-    margin-left: 8px !important;
+    margin-left: 12px !important;
 }
 
     .social-link svg {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
 }
     /* Убираем десктопные фишки */
     .nav-zone, .main-logo, #return-arrow, .arrow {
