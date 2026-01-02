@@ -75,80 +75,76 @@
     </a>
 
     <script>
-        const gallery = document.querySelector('.gallery');
-        const slides = document.querySelectorAll('.slide');
-        let currentIndex = 0;
+    const gallery = document.querySelector('.gallery');
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
 
-        function showSlide(index) {
-            if (window.innerWidth <= 768) return; // Блокируем слайдер на мобилках
+    function showSlide(index) {
+        if (window.innerWidth <= 768) return; // Блокируем слайдер на мобилках
 
-            const totalSlides = slides.length;
-            if (index < 0) { bounce(40); return; } 
-            if (index >= totalSlides) { bounce(-40); return; }
+        const totalSlides = slides.length;
+        if (index < 0) { bounce(40); return; } 
+        if (index >= totalSlides) { bounce(-40); return; }
 
-            currentIndex = index;
-            const offset = -currentIndex * 100;
-            gallery.style.transform = `translateX(${offset}%)`;
-        }
-
-        function bounce(pixels) {
-            const currentOffset = -currentIndex * 100;
-            gallery.style.transform = `translateX(calc(${currentOffset}% + ${pixels}px))`;
-            setTimeout(() => { gallery.style.transform = `translateX(${currentOffset}%)`; }, 200);
-        }
-
-        document.querySelector('.right-zone').addEventListener('click', () => showSlide(currentIndex + 1));
-        document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
-
-        // Бургер меню
-const burgerIcon = document.querySelector('.icon-menu');
-const menuContent = document.querySelector('.text-menu');
-
-if (burgerIcon && menuContent) {
-
-    burgerIcon.addEventListener('click', () => {
-    menuContent.classList.toggle('mobile-open');
-    burgerIcon.classList.toggle('hidden');
-});
-
-
-    // Закрываем меню при клике на ссылку
-   menuContent.addEventListener('click', function(e) {
-    if (e.target.classList.contains('menu-link')) {
-        menuContent.classList.remove('mobile-open');
-        burgerIcon.classList.remove('hidden');
+        currentIndex = index;
+        const offset = -currentIndex * 100;
+        gallery.style.transform = `translateX(${offset}%)`;
     }
-});
 
-    // Закрываем меню при клике вне его
-   document.addEventListener('click', function(e) {
-    if (!e.target.closest('.menu-trigger')) {
-        menuContent.classList.remove('mobile-open');
-        burgerIcon.classList.remove('hidden');
+    function bounce(pixels) {
+        const currentOffset = -currentIndex * 100;
+        gallery.style.transform = `translateX(calc(${currentOffset}% + ${pixels}px))`;
+        setTimeout(() => { gallery.style.transform = `translateX(${currentOffset}%)`; }, 200);
     }
-});
-}
 
-// Логика появления элементов
-window.onload = function() {
-    const arrow = document.getElementById('return-arrow');
-    const menu = document.querySelector('.menu-zone');
-    const socials = document.querySelector('.socials');
+    document.querySelector('.right-zone').addEventListener('click', () => showSlide(currentIndex + 1));
+    document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
 
-    if (sessionStorage.getItem('fromAbout') === 'true') {
-        arrow.style.display = 'block';
-        setTimeout(() => { arrow.style.opacity = '0.6'; }, 10);
-        setTimeout(() => {
+    // Бургер меню (обновлено для mobile slide-in)
+    const menuZone = document.querySelector('.menu-zone');
+    const burgerIcon = document.querySelector('.icon-menu');
+    const menuContent = document.querySelector('.text-menu');
+
+    if (burgerIcon && menuContent && menuZone) {
+        burgerIcon.addEventListener('click', () => {
+            menuZone.classList.toggle('active');
+        });
+
+        // Закрываем меню при клике на ссылку
+        document.querySelectorAll('.menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menuZone.classList.remove('active');
+            });
+        });
+
+        // Закрываем меню при клике вне его
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.menu-trigger') && !e.target.closest('.text-menu')) {
+                menuZone.classList.remove('active');
+            }
+        });
+    }
+
+    // Логика появления элементов
+    window.onload = function() {
+        const arrow = document.getElementById('return-arrow');
+        const menu = document.querySelector('.menu-zone');
+        const socials = document.querySelector('.socials');
+
+        if (sessionStorage.getItem('fromAbout') === 'true') {
+            arrow.style.display = 'block';
+            setTimeout(() => { arrow.style.opacity = '0.6'; }, 10);
+            setTimeout(() => {
+                if(menu) menu.style.opacity = '1';
+                if(socials) socials.style.opacity = '1';
+            }, 250);
+            sessionStorage.removeItem('fromAbout');
+        } else {
             if(menu) menu.style.opacity = '1';
             if(socials) socials.style.opacity = '1';
-        }, 250);
-        sessionStorage.removeItem('fromAbout');
-    } else {
-        if(menu) menu.style.opacity = '1';
-        if(socials) socials.style.opacity = '1';
+        }
     }
-}
+</script>
 
-    </script>
 </body>
 </html>
