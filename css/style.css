@@ -285,17 +285,17 @@ body {
     opacity: 1; /* Проявляется при наведении */
 }
 
-/* === МОБИЛЬНАЯ ВЕРСИЯ (МИНИМАЛЬНЫЙ ФИКС: fixed top bar + no horiz scroll) === */
+/* === МОБИЛЬНАЯ ВЕРСИЯ (ФИКС: единая лента с меню в потоке + no horiz scroll) === */
 @media (max-width: 768px) {
 
     /* 1. ОСНОВА: body/html без horiz scroll, vertical flow */
     html, body {
         width: 100% !important;
         max-width: 100% !important;
-        overflow-x: hidden !important; /* ГЛАВНЫЙ ФИКС: нет скролла вширь */
+        overflow-x: hidden !important; /* Нет скролла вширь */
         padding: 0 !important;
         margin: 0 !important;
-        height: 100vh; /* Для контроля */
+        height: auto !important; /* Для ленты */
     }
 
     body {
@@ -305,14 +305,13 @@ body {
         min-height: 100vh !important;
     }
 
-    /* 2. ГАЛЕРЕЯ: vertical stack, full-width images, под плашкой */
+    /* 2. ГАЛЕРЕЯ: vertical stack, full-width images, как лента под меню */
     .gallery-screen {
         position: relative !important;
         height: auto !important;
-        min-height: 100vh !important;
         overflow: visible !important;
-        flex: 1 !important; /* Занимает пространство под fixed top */
-        padding-top: 70px !important; /* Отступ под fixed плашку (height меню) — изображения не перекрыты */
+        flex: 1 !important; /* Занимает пространство */
+        padding-top: 0 !important; /* УБРАЛИ отступ — меню "склеено" сверху */
     }
 
     .gallery {
@@ -335,15 +334,15 @@ body {
         max-width: 100% !important; /* Нет вылезания вширь */
     }
 
-    /* 3. ПЛАШКА МЕНЮ: FIXED ТОП, поверх всего, серый bg, не двигается */
+    /* 3. ПЛАШКА МЕНЮ: В ПОТОКЕ (НЕ fixed), склеена сверху галереи, скроллится с лентой */
     .menu-zone {
-        position: fixed !important; /* FIXED — строго сверху, не скроллится */
+        position: relative !important; /* В потоке — скроллится вместе с фото */
         top: 0 !important;
         left: 0 !important;
         width: 100% !important; /* Full-width */
         height: 70px !important;
         background: #0d0d0d !important; /* Твой серый */
-        z-index: 10000 !important; /* Поверх галереи */
+        z-index: 10000 !important; /* Поверх, но в потоке */
         display: flex !important;
         justify-content: flex-end !important;
         align-items: center !important;
@@ -351,7 +350,7 @@ body {
         box-sizing: border-box !important; /* Padding внутри width */
     }
 
-    /* Текст меню: твой текущий стиль (right:65px top:24px), но fixed относительно плашки */
+    /* Текст меню: твой текущий стиль (right:65px top:24px), но относительно плашки */
     .menu-zone .text-menu {
         position: absolute !important;
         right: 65px !important; /* Твоя позиция от правого края */
@@ -375,13 +374,13 @@ body {
         pointer-events: auto !important;
     }
 
-    /* 4. BOTTOM-UI: внизу экрана, после галереи */
+    /* 4. BOTTOM-UI: внизу ленты, после галереи */
     .bottom-ui {
         position: relative !important;
         width: 100% !important;
         padding: 60px 0 20px 0 !important;
         background: #000 !important;
-        display: block !important; /* Не flex — простой flow */
+        display: block !important; /* Простой flow */
         margin-top: auto !important; /* Прижим к низу flex body */
     }
 
@@ -391,7 +390,7 @@ body {
         justify-content: center !important;
         gap: 0 !important;
         margin: 28px auto 0 !important;
-        transform: none !important; /* УБРАЛ твой -8px — причина разъезда */
+        transform: none !important; /* УБРАЛ твой -8px */
         padding: 0 20px !important; /* Не вылезает по краям */
     }
 
