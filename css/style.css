@@ -287,46 +287,38 @@ body {
     padding-bottom: 80px;
 }
 
-.mobile-img {
-    display: none;
-}
-
-/* === МОБИЛЬНАЯ ВЕРСИЯ (ДОБАВИТЬ В КОНЕЦ ФАЙЛА) === */
+/* === МОБИЛЬНАЯ ВЕРСИЯ (ПОЛНОСТЬЮ ОЧИЩЕННАЯ) === */
 @media (max-width: 768px) {
     
-    /* 1. Убираем лишние отступы у body */
     body {
-        overflow-y: auto !important; /* Разрешаем скролл */
+        overflow-y: auto !important;
         padding: 0 !important;
         margin: 0 !important;
     }
 
-    /* 2. Фотографии: Начинаются СРАЗУ под серой плашкой */
     .gallery-screen {
         display: block !important;
         height: auto !important;
         min-height: 100vh;
-        padding-top: 70px !important; /* Высота верхней плашки */
+        padding-top: 70px !important; 
         background: #000;
     }
 
-    /* 2.1. Галерея: переключаем в вертикальный режим */
     .gallery {
         display: flex !important;
-        flex-direction: column !important; /* Фото пойдут друг под друга */
+        flex-direction: column !important; 
         width: 100% !important;
         height: auto !important;
-        transform: none !important; /* Отключаем горизонтальный сдвиг слайдера */
+        transform: none !important; 
     }
 
-    /* 3. Верхняя плашка: Закреплена намертво, не едет при скролле */
     .menu-zone {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
         width: 100% !important;
         height: 70px !important;
-        background: #0d0d0d !important; /* Тот самый серый цвет */
+        background: #0d0d0d !important; 
         display: flex !important;
         justify-content: flex-end !important;
         align-items: center !important;
@@ -335,14 +327,13 @@ body {
         opacity: 1 !important;
     }
 
-    /* 4. Иконки соцсетей: Центровка и отступ от фото */
     .bottom-ui {
         position: relative !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 90px 0 5px 0 !important; /* 40px - отступ от фото, 60px - отступ снизу */
+        padding: 90px 0 20px 0 !important; 
         background: #000 !important;
         width: 100% !important;
         left: 0 !important;
@@ -352,45 +343,25 @@ body {
     .socials {
         display: flex !important;
         justify-content: center !important;
-        gap: 0px !important; /* Расстояние между иконками */
-        transform: none !important; /* Убираем все кривые сдвиги */
+        gap: 20px !important; 
         margin: 0 auto !important;
     }
 
-    /* Прячем десктопные элементы */
-    .nav-zone, .main-logo, #return-arrow {
+    /* Убираем десктопные фишки */
+    .nav-zone, .main-logo, #return-arrow, .arrow {
         display: none !important;
     }
 
-    /* 2.2. Корректируем картинки: Одинаковая высота */
+    /* Чистая настройка слайдов */
     .slide {
         line-height: 0 !important;
         width: 100% !important;
-        height: 650px !important; /* Синхронизируем высоту слайда с картинкой */
-        overflow: hidden;         /* На всякий случай прячем то, что вылезет */
+        height: auto !important;
     }
 
     .slide img {
         display: block !important;
-        width: 100% !important;
-        height: 100% !important;  /* Картинка просто заполняет весь слайд (650px) */
-        object-fit: cover !important; /* Центрирует и обрезает края */
+        width: 100% !important; /* Растягиваем на ширину экрана */
+        height: auto !important; /* Высота подстроится сама под твое новое фото */
     }
-
-    /* Прячем десктопное фото и показываем мобильное */
-    .desktop-img {
-        display: none !important;
-    }
-    .mobile-img {
-        display: block !important;
-        width: 100% !important;
-        height: auto !important; /* Теперь оно само встанет ровно, так как размеры совпадают */
-    }
-
-    /* Убери все жесткие высоты (типа 500px или 650px) у .slide, если они остались */
-    .slide {
-        height: auto !important;
-        min-height: 0 !important;
-    }
-    
 }
