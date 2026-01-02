@@ -345,12 +345,12 @@ body {
         justify-content: center !important;
         gap: 0px !important; 
         margin: 0 auto !important;
-        margin-top: 16px !important;
+        margin-top: 22px !important;
         transform: translateX(-6px);
     }
 
     .social-link {
-    margin-left: 12px !important;
+    margin-left: 16px !important;
 }
 
     .social-link svg {
