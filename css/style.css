@@ -8,7 +8,7 @@ body {
     background-color: #000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff; 
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /* 1. Настройка Главного Экрана */
@@ -26,7 +26,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100svh;
     z-index: 1;
 
     /* НОВАЯ ПЛАВНОСТЬ: 0.9s делает движение длинным, 
@@ -287,75 +287,45 @@ body {
 
 /* === МОБИЛЬНАЯ ВЕРСИЯ (ПОЛНОСТЬЮ ОЧИЩЕННАЯ) === */
 @media (max-width: 768px) {
+    .gallery-screen {
+        position: relative !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        overflow: visible !important;
+    }
 
- .gallery-screen {
-    position: relative !important;
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow: visible !important;
-}
+    .gallery {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+    }
 
-.gallery {
-    position: static !important;
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    height: auto !important;
-}
+    .slide {
+        min-width: 100% !important; /* Full-width для stack'а */
+        height: auto !important;
+    }
 
-     .slide {
-    height: auto !important;
-}
-
-.menu-zone .icon-menu {
-    transition: opacity 0.3s ease;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.menu-zone .text-menu {
-    position: absolute !important;
-    right: 65px; /* Отступ от правого края */
-    top: 24px;   /* Фиксированная высота от верха плашки */
-    display: flex;
-    gap: 14px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(10px); 
-    transition: all 0.35s ease;
-}
-
-.menu-zone.active .icon-menu {
-    opacity: 0.25; /* 75% прозрачности */
-}
-
-.menu-zone.active .text-menu {
-    opacity: 1;
-    transform: translateX(0); /* Текст просто плавно приедет на свое место */
-    pointer-events: auto;
-}
+    .menu-zone .icon-menu {
+        transition: opacity 0.3s ease;
+    }
 
     body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
         overflow-y: auto !important;
         padding: 0 !important;
         margin: 0 !important;
     }
 
     .menu-zone {
-        /* 1. Делаем её абсолютной относительно верха галереи */
         position: absolute !important; 
         top: 0 !important;
         left: 0 !important;
-        
-        /* 2. Растягиваем на всю ширину */
         width: 100% !important;
         height: 70px !important;
-        
-        /* 3. Оформление */
         background: #0d0d0d !important; 
         display: flex !important;
         justify-content: flex-end !important;
@@ -364,29 +334,65 @@ body {
         z-index: 10000 !important;
     }
 
+    .menu-zone .text-menu {
+        position: absolute !important;
+        right: 0 !important; /* Anchor к правому краю */
+        top: 70px !important; /* Ниже бара (как overlay на референсе) */
+        display: flex !important;
+        flex-direction: column !important; /* Vertical links, как на референсе */
+        gap: 20px !important; /* Spacing между links */
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(100%) !important; /* Start hidden справа */
+        transition: all 0.35s ease !important;
+        background: #0d0d0d !important; /* Overlay-like bg */
+        padding: 20px !important;
+        width: 200px !important; /* Fixed width для меню */
+        box-sizing: border-box !important;
+    }
+
+    .menu-zone.active .icon-menu {
+        opacity: 0.25; /* Dim icon when open */
+    }
+
+    .menu-zone.active .text-menu {
+        opacity: 1 !important;
+        transform: translateX(0) !important; /* Slide in слева от right (влево на экран) */
+        pointer-events: auto !important;
+    }
+
+    .menu-link {
+        margin-right: 0 !important; /* No horizontal margin для vertical */
+        margin-bottom: 10px !important;
+        text-align: left !important;
+    }
+
     .bottom-ui {
-    margin-top: auto !important;
-    padding: 60px 0 20px 0 !important;
-    background: #000 !important;
-}
+        margin-top: auto !important; /* Прижим к низу */
+        padding: 60px 0 20px 0 !important;
+        background: #000 !important;
+        position: relative !important; /* Fix разъезда */
+        width: 100% !important;
+    }
 
     .socials {
         display: flex !important;
         justify-content: center !important;
-        gap: 0px !important; 
+        gap: 16px !important; /* Even spacing */
         margin: 0 auto !important;
         margin-top: 28px !important;
-        transform: translateX(-8px);
+        transform: none !important; /* Убрал лишний shift, чтобы не разъезжались */
     }
 
     .social-link {
-    margin-left: 16px !important;
-}
+        margin-left: 0 !important; /* Reset для center */
+    }
 
     .social-link svg {
-    width: 16px;
-    height: 16px;
-}
+        width: 16px;
+        height: 16px;
+    }
+
     /* Убираем десктопные фишки */
     .nav-zone, .main-logo, #return-arrow, .arrow {
         display: none !important;
@@ -394,18 +400,49 @@ body {
 
     .slide img {
         display: block !important;
-        width: 100% !important; /* Растягиваем на ширину экрана */
-        height: auto !important; /* Высота подстроится сама под твое новое фото */
+        width: 100% !important;
+        height: auto !important;
     }
 
-.mobile-menu {
-    transform: translateX(100%);
-    transition: transform 0.35s ease;
-    right: 70px;
-}
+    /* Для about.html: fix stack без gaps */
+    .layout {
+        display: block !important;
+    }
 
-.mobile-menu.active {
-    transform: translateX(0);
-}
+    .sidebar {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 40px 20px !important;
+        pointer-events: auto !important;
+        display: block !important; /* Stack vertical */
+    }
 
+    .scroll-container {
+        height: auto !important;
+        overflow-y: visible !important;
+        scroll-snap-type: none !important;
+    }
+
+    section {
+        height: auto !important;
+        padding: 20px !important;
+        display: block !important; /* Flow vertical без justify */
+    }
+
+    .content-wrapper {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .bottom-links, .contact-links {
+        position: relative !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        padding: 20px !important;
+        justify-content: center !important;
+        display: flex !important;
+        gap: 20px !important;
+    }
 }
