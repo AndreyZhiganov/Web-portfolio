@@ -289,7 +289,33 @@ body {
 
 /* === МОБИЛЬНАЯ ВЕРСИЯ (ПОЛНОСТЬЮ ОЧИЩЕННАЯ) === */
 @media (max-width: 768px) {
-    
+
+.menu-zone .icon-menu {
+    transition: opacity 0.3s ease;
+}
+
+.menu-zone .text-menu {
+    position: absolute !important;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%) translateX(12px);
+    display: flex;
+    gap: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s ease;
+}
+
+.menu-zone.active .icon-menu {
+    opacity: 0.25; /* 75% прозрачности */
+}
+
+.menu-zone.active .text-menu {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
+}
+
     body {
         overflow-y: auto !important;
         padding: 0 !important;
@@ -333,8 +359,8 @@ body {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 110px 0 20px 0 !important;
-        background: #000 !important;
+        padding: 90px 0 20px 0 !important;
+        background: #0e0e0e !important;
         width: 100% !important;
         left: 0 !important;
         right: 0 !important;
@@ -375,3 +401,5 @@ body {
         height: auto !important; /* Высота подстроится сама под твое новое фото */
     }
 }
+
+
