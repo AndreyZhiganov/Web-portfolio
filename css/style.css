@@ -292,6 +292,12 @@ body {
     transition: opacity 0.3s ease;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .menu-zone .text-menu {
     position: absolute !important;
     right: 65px; /* Отступ от правого края */
@@ -321,13 +327,11 @@ body {
     }
 
     .gallery-screen {
-        display: block !important;
-        height: auto !important;
-        min-height: 100vh;
-        padding-top: 70px !important; 
-        background: #000;
-        position: relative !important;
-    }
+    display: block !important;
+    flex: 1 !important;
+    padding-top: 70px !important;
+    background: #000;
+}
 
     .gallery {
         display: flex !important;
@@ -357,17 +361,10 @@ body {
     }
 
     .bottom-ui {
-        position: relative !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 90px 0 20px 0 !important;
-        background: #000 !important;
-        width: 100% !important;
-        left: 0 !important;
-        right: 0 !important;
-    }
+    margin-top: auto !important;
+    padding: 90px 0 20px 0 !important;
+    background: #000 !important;
+}
 
     .socials {
         display: flex !important;
