@@ -299,7 +299,7 @@ body {
     flex: 1 !important;
     position: relative !important;
     padding-top: 70px !important; /* Добавляем отступ сверху для фиксированного меню */
-    padding-bottom: 150px !important; /* Добавляем отступ снизу для черного пространства с иконками */
+    padding-bottom: 10px !important; /* Добавляем отступ снизу для черного пространства с иконками */
   }
 
   .gallery {
