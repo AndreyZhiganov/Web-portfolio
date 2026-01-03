@@ -100,30 +100,33 @@
     document.querySelector('.right-zone').addEventListener('click', () => showSlide(currentIndex + 1));
     document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
 
-    // Бургер меню (обновлено для mobile slide-in)
+    // Бургер меню (работает только на мобильке, фикс 4)
+if (window.innerWidth <= 768) {
     const menuZone = document.querySelector('.menu-zone');
     const burgerIcon = document.querySelector('.icon-menu');
     const menuContent = document.querySelector('.text-menu');
 
     if (burgerIcon && menuContent && menuZone) {
-        burgerIcon.addEventListener('click', () => {
+        burgerIcon.addEventListener('click', (e) => {
+            e.stopPropagation(); // Чтобы не закрывалось сразу
             menuZone.classList.toggle('active');
         });
 
-        // Закрываем меню при клике на ссылку
+        // Закрываем при клике на ссылку
         document.querySelectorAll('.menu-link').forEach(link => {
             link.addEventListener('click', () => {
                 menuZone.classList.remove('active');
             });
         });
 
-        // Закрываем меню при клике вне его
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.menu-trigger') && !e.target.closest('.text-menu')) {
+        // Закрываем при клике вне
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.menu-zone')) {
                 menuZone.classList.remove('active');
             }
         });
     }
+}
 
     // Логика появления элементов
     window.onload = function() {
