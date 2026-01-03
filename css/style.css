@@ -313,7 +313,6 @@ body {
 
   /* Меню теперь фиксированное сверху и не скроллится */
   .menu-zone {
-    position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
