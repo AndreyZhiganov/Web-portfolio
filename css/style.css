@@ -369,8 +369,8 @@ body {
     width: 100% !important;
     display: flex !important;
     justify-content: center !important;
-    gap: 25px !important;
-    padding: 40px 0 !important;
+    gap: 0px !important;
+    padding: 120px 0 !important;
     background: #000 !important; /* Черный фон для отступа */
     pointer-events: auto !important;
     position: static !important; /* Статичное положение, не двигается */
@@ -382,8 +382,8 @@ body {
   }
 
   .social-link svg {
-    width: 19px !important;
-    height: 19px !important;
+    width: 17px !important;
+    height: 17px !important;
   }
 
   /* Скрываем десктопные элементы */
