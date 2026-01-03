@@ -9,6 +9,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #fff;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 /* 1. Настройка Главного Экрана */
@@ -300,6 +301,8 @@ body {
     position: relative !important;
     padding-top: 70px !important; /* Добавляем отступ сверху для фиксированного меню */
     padding-bottom: 10px !important; /* Добавляем отступ снизу для черного пространства с иконками */
+    will-change: transform;
+    transform: translateZ(0)
   }
 
   .gallery {
@@ -399,4 +402,8 @@ body {
   body.scrolling .menu-zone {
     position: absolute !important;
   }
+}
+
+html, body {
+  overscroll-behavior-y: contain;
 }
