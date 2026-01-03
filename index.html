@@ -100,15 +100,14 @@
     document.querySelector('.right-zone').addEventListener('click', () => showSlide(currentIndex + 1));
     document.querySelector('.left-zone').addEventListener('click', () => showSlide(currentIndex - 1));
 
-    // Бургер меню (работает только на мобильке, фикс 4)
+    // Бургер меню (фикс: не исчезает сразу, работает только на мобильке)
 if (window.innerWidth <= 768) {
     const menuZone = document.querySelector('.menu-zone');
     const burgerIcon = document.querySelector('.icon-menu');
-    const menuContent = document.querySelector('.text-menu');
 
-    if (burgerIcon && menuContent && menuZone) {
+    if (burgerIcon && menuZone) {
         burgerIcon.addEventListener('click', (e) => {
-            e.stopPropagation(); // Чтобы не закрывалось сразу
+            e.stopPropagation(); // Останавливаем bubble, чтобы не закрывалось сразу
             menuZone.classList.toggle('active');
         });
 
@@ -119,7 +118,7 @@ if (window.innerWidth <= 768) {
             });
         });
 
-        // Закрываем при клике вне
+        // Закрываем при клике вне (closest без .text-menu, чтобы не мешал)
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.menu-zone')) {
                 menuZone.classList.remove('active');
