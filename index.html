@@ -148,5 +148,20 @@ if (window.innerWidth <= 768) {
     }
 </script>
 
+<script>
+let lastScroll = 0;
+
+window.addEventListener("scroll", () => {
+  const current = window.scrollY;
+
+  if (current > 10) {
+    document.body.classList.add("scrolling");
+  } else {
+    document.body.classList.remove("scrolling");
+  }
+});
+</script>
+
+
 </body>
 </html>
