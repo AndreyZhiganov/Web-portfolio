@@ -299,7 +299,7 @@ body {
     flex: 1 !important;
     position: relative !important;
     padding-top: 70px !important; /* Добавляем отступ сверху для фиксированного меню */
-    padding-bottom: 150px !important; /* Добавляем отступ снизу для черного пространства с иконками */
+    padding-bottom: 150px !important; /* <-- ЭТО контролирует размер черного отступа */
   }
 
   .gallery {
@@ -357,7 +357,7 @@ body {
 
   /* Соцсети теперь статичные внизу, а не fixed overlay */
   .bottom-ui {
-    position: static !important; /* Больше не fixed */
+    position: static !important;
     width: 100% !important;
     height: auto !important;
     display: block !important;
@@ -365,18 +365,19 @@ body {
     margin: 0 !important;
   }
 
+  /* Делаем иконки абсолютно позиционированными, чтобы они не влияли на высоту */
   .socials {
-  margin-top: 300px !important;  
-  width: 100% !important;
-  display: flex !important;
-  justify-content: center !important;
-  gap: 25px !important;
-  padding-top: 60px !important;
-  padding-bottom: 20px !important;
-  background: #000 !important;
-  pointer-events: auto !important;
-  position: static !important;
-}
+    position: absolute !important; /* Абсолютное позиционирование */
+    bottom: 40px !important; /* <-- ЭТО контролирует расстояние от низа черного отступа */
+    left: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 25px !important;
+    padding: 0 !important; /* Убираем padding */
+    background: transparent !important; /* Прозрачный фон, черный идет от gallery-screen */
+    pointer-events: auto !important;
+  }
 
   .social-link {
     margin-left: 0 !important;
@@ -384,8 +385,8 @@ body {
   }
 
   .social-link svg {
-    width: 17px !important;
-    height: 17px !important;
+    width: 19px !important;
+    height: 19px !important;
   }
 
   /* Скрываем десктопные элементы */
