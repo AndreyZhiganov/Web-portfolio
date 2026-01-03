@@ -293,110 +293,87 @@ body {
     }
 
     .gallery-screen {
-        height: auto !important;
-        overflow: visible !important;
+        height: 100vh !important; /* Фиксируем высоту экрана */
+        overflow: hidden !important; /* Фото скроллятся внутри */
     }
 
     .gallery {
-        position: static !important;
         display: flex !important;
         flex-direction: column !important;
-        width: 100% !important;
         height: auto !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
     }
 
     .slide {
-        min-width: 100% !important;
+        min-height: 100vh !important; /* Каждое фото на полный экран */
         height: auto !important;
     }
 
     .slide img {
-        display: block !important;
         width: 100% !important;
-        height: auto !important;
-        max-width: 100% !important;
+        height: 100vh !important;
+        object-fit: cover !important;
     }
 
-    /* Bottom-ui внизу страницы (после всех фото) */
+    /* Bottom-ui приклеен к низу экрана поверх фото */
     .bottom-ui {
-        position: relative !important;
-        width: 100% !important;
-        padding: 60px 40px 40px !important; /* Отступы по краям экрана */
-        background: #000 !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: auto !important;
+        padding: 40px !important;
+        background: rgba(0,0,0,0.8) !important; /* Полупрозрачный, чтобы фото видно */
         display: flex !important;
-        flex-direction: column !important; /* Меню сверху, соцсети снизу внутри блока */
-        align-items: center !important; /* Всё по центру */
-        gap: 40px !important; /* Расстояние между меню и соцсетями */
-        box-sizing: border-box !important; /* Отступы внутри ширины */
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+        align-items: flex-start !important;
+        gap: 30px !important;
     }
 
-    /* Плашка меню — вверху блока bottom-ui (фикс: не внизу страницы) */
     .menu-zone {
         width: 100% !important;
-        max-width: 400px !important; /* Как на десктопе */
-        height: 100px !important;
-        background: #0d0d0d !important; /* Тёмная плашка */
         display: flex !important;
         align-items: flex-end !important;
         justify-content: flex-start !important;
-        padding: 0 0 20px 20px !important; /* Отступ слева как на десктопе */
-        order: -1 !important; /* Поднимаем меню ВВЕРХ внутри bottom-ui */
     }
 
-    /* Меню выезд ВЛЕВО (translateX(-10px) вместо +10px) */
+    /* Текст меню выезд влево */
     .menu-zone .text-menu {
         position: absolute !important;
-        bottom: 14px !important; /* Твоя позиция снизу */
-        left: 100px !important; /* Выезд слева */
-        right: auto !important; /* Отменяем правую позицию */
-        display: flex !important;
-        gap: 14px !important;
+        bottom: 14px !important;
+        left: 100px !important;
         opacity: 0 !important;
-        pointer-events: none !important;
-        transform: translateX(-10px) !important; /* ← ВЫЕЗД ВЛЕВО */
+        transform: translateX(-10px) !important;
         transition: all 0.35s ease !important;
-        white-space: nowrap !important;
     }
 
     .menu-zone.active .text-menu {
         opacity: 1 !important;
         transform: translateX(0) !important;
-        pointer-events: auto !important;
     }
 
     .menu-zone.active .icon-menu {
         opacity: 0.25 !important;
     }
 
-    /* Соцсети строго по центру (фикс: не выезжают за экран) */
+    /* Соцсети по центру */
     .socials {
+        width: 100% !important;
         display: flex !important;
         justify-content: center !important;
-        align-items: center !important;
         gap: 25px !important;
-        margin: 0 !important;
-        padding: 0 20px !important; /* Не даём вылезти за края */
-        width: 100% !important;
-        max-width: 400px !important; /* Ограничиваем ширину */
-    }
-
-    .social-link {
-        margin-left: 0 !important; /* Убираем сдвиг вправо */
-        flex-shrink: 0 !important; /* Не сжимаются */
     }
 
     .social-link svg {
-        width: 18px !important; /* Минус 1px как просил */
+        width: 18px !important;
         height: 18px !important;
     }
 
-    /* Скрываем десктоп */
-    .nav-zone, .arrow, .main-logo, #return-arrow {
+    .nav-zone, .arrow {
         display: none !important;
-    }
-
-    .icon-menu {
-        opacity: 0.75 !important;
-        transition: opacity 0.3s ease !important;
     }
 }
