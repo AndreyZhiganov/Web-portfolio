@@ -285,7 +285,7 @@ body {
     opacity: 1; /* Проявляется при наведении */
 }
 
-/* === МОБИЛЬНАЯ ВЕРСИЯ (ФИКС: отступ сверху для галереи, плашка фиксирована сверху, соцсети центр, меню работает) === */
+/* === МОБИЛЬНАЯ ВЕРСИЯ (ФИКС: плашка fixed сверху, меню как у тебя было, соцсети строго центр низ, оригинальные размеры) === */
 @media (max-width: 768px) {
 
     html, body {
@@ -304,13 +304,13 @@ body {
         min-height: 100vh !important;
     }
 
-    /* ГАЛЕРЕЯ: отступ сверху под фиксированную плашку (фикс 1 и 2) */
+    /* ГАЛЕРЕЯ: отступ сверху под плашку (чтобы первая картинка не касалась верха, фикс 1) */
     .gallery-screen {
         position: relative !important;
         height: auto !important;
         overflow: visible !important;
         flex: 1 !important;
-        padding-top: 70px !important; /* Отступ для картинок — первая не касается верха */
+        padding-top: 70px !important; /* Плашка 70px — картинки ниже */
     }
 
     .gallery {
@@ -333,7 +333,7 @@ body {
         max-width: 100% !important;
     }
 
-    /* ПЛАШКА МЕНЮ: fixed строго сверху (фикс 2) */
+    /* ПЛАШКА МЕНЮ: fixed строго сверху (фикс 1 — не едет вниз) */
     .menu-zone {
         position: fixed !important;
         top: 0 !important;
@@ -349,7 +349,7 @@ body {
         box-sizing: border-box !important;
     }
 
-    /* Текст меню: горизонтальный, выезд слева-направо (как у тебя было, фикс 4 — работает с JS) */
+    /* ТВОЙ ОРИГИНАЛЬНЫЙ СТИЛЬ ТЕКСТА МЕНЮ (горизонтальный выезд слева-направо, фикс 2) */
     .menu-zone .text-menu {
         position: absolute !important;
         right: 65px !important;
@@ -372,12 +372,13 @@ body {
         opacity: 0.25 !important;
     }
 
-    /* BOTTOM-UI и СОЦСЕТИ: строгий центр (фикс 3) */
+    /* BOTTOM-UI: прижимаем к низу экрана, соцсети строго центр (фикс 4 — центр экрана + у нижней границы) */
     .bottom-ui {
         position: relative !important;
         width: 100% !important;
-        padding: 60px 20px 40px !important;
+        padding: 20px 0 40px !important; /* Отступ снизу для "у нижней границы" */
         background: #000 !important;
+        margin-top: auto !important; /* Прижим к низу flex body */
         text-align: center !important;
     }
 
@@ -385,18 +386,20 @@ body {
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 30px !important;
-        margin: 0 auto !important;
-        width: 100% !important;
+        gap: 25px !important; /* Твой оригинальный отступ */
+        margin: 28px auto 0 !important;
+        transform: none !important;
     }
 
     .social-link {
-        margin-left: 0 !important;
+        margin-left: 25px !important; /* Твой оригинал */
+        opacity: 0.75 !important;
     }
 
+    /* ОРИГИНАЛЬНЫЕ РАЗМЕРЫ ИКОНОК (фикс 3 — не менял, возвращаю как было) */
     .social-link svg {
-        width: 20px !important;
-        height: 20px !important;
+        width: 19px !important;
+        height: 19px !important;
     }
 
     /* СКРЫВАЕМ ДЕСКТОП */
@@ -406,6 +409,6 @@ body {
 
     .icon-menu {
         transition: opacity 0.3s ease !important;
-        font-size: 28px !important;
+        opacity: 0.75 !important;
     }
 }
