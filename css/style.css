@@ -370,7 +370,8 @@ body {
     display: flex !important;
     justify-content: center !important;
     gap: 16px !important;
-    padding: 220px 0 !important;
+    padding-top: 60px !important;    /* отступ сверху (от фото) */
+padding-bottom: 20px !important; /* отступ снизу (после иконок) */
     background: #000 !important; /* Черный фон для отступа */
     pointer-events: auto !important;
     position: static !important; /* Статичное положение, не двигается */
