@@ -369,8 +369,8 @@ body {
     width: 100% !important;
     display: flex !important;
     justify-content: center !important;
-    gap: 10px !important;
-    padding: 200px 0 !important;
+    gap: 16px !important;
+    padding: 220px 0 !important;
     background: #000 !important; /* Черный фон для отступа */
     pointer-events: auto !important;
     position: static !important; /* Статичное положение, не двигается */
