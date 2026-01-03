@@ -298,7 +298,6 @@ body {
   opacity: 0.75 !important;
 }
 
-
   body {
     overflow-y: auto !important;
     min-height: 100vh !important;
@@ -421,4 +420,11 @@ html, body {
   overflow-x: hidden;
   max-width: 100%;
 }
+
+@media (max-width: 768px) {
+  .menu-zone {
+    opacity: 1 !important;
+  }
+}
+
 
