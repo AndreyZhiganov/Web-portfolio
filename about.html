@@ -41,12 +41,12 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px; /* Фиксированная высота как на главной */
+    height: 70px;
     background: #0d0d0d;
     z-index: 10000;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 24px; /* Точный отступ справа как на главной */
+    padding-right: 20px; /* БЫЛО 24px, СТАЛО 20px — это сдвинет иконку чуть правее */
     box-sizing: border-box;
 }
 
@@ -61,17 +61,16 @@
     line-height: 1; /* Убирает лишнее пространство сверху/снизу внутри шрифта */
 }
 
-       .mobile-menu-items {
+     .mobile-menu-items {
     display: flex;
     gap: 15px;
-    margin-right: 20px;
+    margin-right: 15px; /* Уменьшили с 20px до 15px, чтобы сохранить баланс */
     opacity: 0;
     transform: translateX(10px);
     transition: all 0.3s ease;
     pointer-events: none;
-    /* Добавляем это для выравнивания текста по центру иконки */
     align-items: center; 
-    padding-top: 2px; /* Микро-смещение вниз для идеальной визуальной оси */
+    padding-top: 2px;
 }
 
         .mobile-menu-items a {
