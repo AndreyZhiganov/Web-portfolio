@@ -319,7 +319,7 @@ body {
   .slide img {
     height: auto !important;
   }
-  
+
   .menu-zone {
     position: fixed !important;
     top: 0 !important;
@@ -348,7 +348,7 @@ body {
 
   opacity: 0 !important;
   pointer-events: none !important;
-  transform: translateX(12px) !important;
+  transform: translateX(-12px) !important;
   transition: all 0.35s ease !important;
 }
 
