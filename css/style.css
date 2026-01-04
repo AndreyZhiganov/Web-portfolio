@@ -345,9 +345,9 @@ body {
   left: auto !important;
   right: 0 !important;
   top: 50% !important;
-  transform: translate(100%, -50%) !important;
+  transform: translate(100%, -50%) !important;  /* Initial: 100% скрывает за правой границей, -50% для базовой центровки по Y — не меняй это, чтобы не торчало сразу */
   opacity: 0 !important;
-  pointer-events: none !important; /* Чтобы initial не кликалось */
+  pointer-events: none !important;
   z-index: 20000 !important;
   padding: 6px 10px !important;
   font-size: 12px !important; 
@@ -355,7 +355,7 @@ body {
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-  transform: translate(-50, -50%) !important;
+  transform: translate(-10px, -60%) !important;  /* -60% по Y поднимает текст выше (тестируй -70% если нужно ещё выше); -10px по X остаётся для горизонтального отступа от иконки */
   pointer-events: auto !important;
 }
 
@@ -418,12 +418,6 @@ html, body {
 }
 
 @media (max-width: 768px) {
-
-  .menu-zone.active .text-menu {
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-    pointer-events: auto !important;
-  }
 
   .menu-zone.active .icon-menu {
     opacity: 0.25 !important;
