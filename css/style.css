@@ -333,6 +333,7 @@ body {
     padding-right: 24px !important;
     pointer-events: auto !important;
     z-index: 10000 !important;
+    overflow: visible !important;
   }
 
   .menu-zone .icon-menu {
@@ -440,4 +441,20 @@ html, body {
   }
 
 }
+
+@media (max-width: 768px) {
+
+  .menu-zone {
+    overflow: visible !important;
+  }
+
+  .menu-zone .menu-trigger {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+}
+
 
