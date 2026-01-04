@@ -326,7 +326,7 @@ body {
     left: 0 !important;
     width: 100% !important;
     height: 70px !important;
-    background: #0d0d0d !important;  /* --- ЕСЛИ ЗАХОЧУ УБРАТЬ СЕРУЮ ПЛАШКУ СВЕРХУ ПРОСТО ЗАКОМЕНТИРУЮ ЭТО СТРОЧКУ --- */
+    /* --- background: #0d0d0d !important;  /* --- ЕСЛИ ЗАХОЧУ УБРАТЬ СЕРУЮ ПЛАШКУ СВЕРХУ ПРОСТО ЗАКОМЕНТИРУЮ ЭТО СТРОЧКУ --- */
     display: flex !important;
     justify-content: flex-end !important;
     align-items: center !important;
