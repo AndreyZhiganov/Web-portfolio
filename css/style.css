@@ -420,7 +420,7 @@ html, body {
 @media (max-width: 768px) {
   .menu-zone:hover .text-menu {
     opacity: 0 !important;
-    transform: translateX(-12px) !important;
+    transform: translateX(1px) !important;
   }
 
   .menu-zone:hover .icon-menu {
