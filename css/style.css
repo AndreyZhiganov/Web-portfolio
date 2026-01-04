@@ -418,17 +418,6 @@ html, body {
 }
 
 @media (max-width: 768px) {
-  .menu-zone:hover .text-menu {
-    opacity: 0 !important;
-    transform: translateX(1px) !important;
-  }
-
-  .menu-zone:hover .icon-menu {
-    opacity: 0.75 !important;
-  }
-}
-
-@media (max-width: 768px) {
 
   .menu-zone.active .text-menu {
     opacity: 1 !important;
