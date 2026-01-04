@@ -319,8 +319,7 @@ body {
   .slide img {
     height: auto !important;
   }
-
-  /* Меню теперь фиксированное сверху и не скроллится */
+  
   .menu-zone {
     position: fixed !important;
     top: 0 !important;
@@ -336,33 +335,28 @@ body {
     z-index: 10000 !important;
   }
 
-  /* Иконка меню теперь не исчезает при нажатии */
   .menu-zone .icon-menu {
-    opacity: 0.75 !important;
-    transition: none !important; /* Убираем переход прозрачности */
-  }
+  opacity: 0.75 !important;
+}
 
-  .menu-zone.active .icon-menu {
-    opacity: 0.75 !important; /* Остается на той же прозрачности */
-  }
+.menu-zone .text-menu {
+  position: absolute !important;
+  right: 60px !important;
+  top: 24px !important;
+  display: flex !important;
+  gap: 14px !important;
 
-  .menu-zone .text-menu {
-    position: absolute !important;
-    right: 65px !important;
-    top: 24px !important;
-    display: flex !important;
-    gap: 14px !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    transform: translateX(10px) !important;
-    transition: all 0.35s ease !important;
-  }
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateX(12px) !important;
+  transition: all 0.35s ease !important;
+}
 
-  .menu-zone.active .text-menu {
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-    pointer-events: auto !important;
-  }
+.menu-zone.active .text-menu {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+  pointer-events: auto !important;
+}
 
   /* Соцсети теперь статичные внизу, а не fixed overlay */
   .bottom-ui {
