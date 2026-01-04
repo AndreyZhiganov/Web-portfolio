@@ -334,35 +334,30 @@ body {
     pointer-events: auto !important;
     z-index: 10000 !important;
     overflow: visible !important;
-    opacity: 1 !important;
   }
 
   .menu-zone .icon-menu {
-    opacity: 0.75 !important;
-  }
+  opacity: 0.75 !important;
+}
 
-  .menu-zone .text-menu {
-    position: absolute !important;
-    left: auto !important; /* Сбрасываем left */
-    right: 0 !important; /* Прижимаем правый край меню к правому краю .menu-trigger (иконке) */
-    top: 50% !important;
-    transform: translate(10px, -50%) !important; /* Initial: сдвиг вправо на 10px для скрытия за границей (аналог твоего, но в новом направлении) */
-    opacity: 1 !important; /* Оставляем 1, как у тебя, но если хочешь анимировать opacity, можно добавить transition и initial 0 */
-    pointer-events: auto !important;
-    z-index: 20000 !important;
-    background: red !important; /* Для теста, убери потом */
-    padding: 6px 10px !important;
-    white-space: nowrap !important; /* Чтобы ссылки в ряд */
-  }
+.menu-zone .text-menu {
+  position: absolute !important;
+  left: auto !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translate(100%, -50%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important; /* Чтобы initial не кликалось */
+  z-index: 20000 !important;
+  background: red !important; /* Для теста, убери потом */
+  padding: 6px 10px !important;
+}
 
-  .menu-zone.active .text-menu {
-    transform: translate(0, -50%) !important; /* Active: сдвиг на 0 по X, сохраняем Y для центровки по вертикали */
-    opacity: 1 !important;
-  }
-
-  .menu-zone.active .icon-menu {
-    opacity: 0.25 !important;
-  }
+.menu-zone.active .text-menu {
+  opacity: 1 !important;
+  transform: translate(0, -50%) !important;
+  pointer-events: auto !important;
+}
 
   /* Соцсети теперь статичные внизу, а не fixed overlay */
   .bottom-ui {
@@ -375,17 +370,17 @@ body {
   }
 
   .socials {
-    margin-top: 150px !important;  
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 25px !important;
-    padding-top: 60px !important;
-    padding-bottom: 20px !important;
-    background: #000 !important;
-    pointer-events: auto !important;
-    position: static !important;
-  }
+  margin-top: 150px !important;  
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 25px !important;
+  padding-top: 60px !important;
+  padding-bottom: 20px !important;
+  background: #000 !important;
+  pointer-events: auto !important;
+  position: static !important;
+}
 
   .social-link {
     margin-left: 0 !important;
@@ -402,6 +397,41 @@ body {
   .arrow {
     display: none !important;
   }
+}
+
+@media (max-width: 768px) {
+  body.scrolling .menu-zone {
+    position: absolute !important;
+  }
+}
+
+html, body {
+  overscroll-behavior-y: contain;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .menu-zone {
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .menu-zone.active .text-menu {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+  }
+
+  .menu-zone.active .icon-menu {
+    opacity: 0.25 !important;
+  }
+
+}
+
+@media (max-width: 768px) {
 
   .menu-zone {
     overflow: visible !important;
@@ -414,10 +444,4 @@ body {
     position: relative;
   }
 
-}
-
-@media (max-width: 768px) {
-  body.scrolling .menu-zone {
-    position: absolute !important;
-  }
 }
