@@ -427,3 +427,17 @@ html, body {
   }
 }
 
+@media (max-width: 768px) {
+
+  .menu-zone.active .text-menu {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+  }
+
+  .menu-zone.active .icon-menu {
+    opacity: 0.25 !important;
+  }
+
+}
+
