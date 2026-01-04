@@ -355,7 +355,7 @@ body {
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-  transform: translate(-10px, -60%) !important;  /* -60% по Y поднимает текст выше (тестируй -70% если нужно ещё выше); -10px по X остаётся для горизонтального отступа от иконки */
+  transform: translate(-10px, calc(-50% + 2px)) !important;  /* calc(-50% + 2px) по Y опустит текст вниз на 2px (увеличь +2px если нужно больше вниз); -10px по X остаётся для горизонтального отступа */
   pointer-events: auto !important;
 }
 
