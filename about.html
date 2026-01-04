@@ -76,10 +76,18 @@
         }
 
         .mobile-nav-container.open .mobile-menu-items {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
-        }
+    opacity: 1;
+    /* calc(-50% + 2px) — это та самая магия из style.css для идеальной центровки */
+    transform: translateX(0) translateY(2px); 
+    pointer-events: auto;
+}
+
+/* Увеличим отступ сверху для всего контента, чтобы текст не лип к меню */
+@media (max-width: 1000px) {
+    .mobile-only { 
+        padding-top: 100px !important; /* Было 80, ставим 100, чтобы текст съехал ниже */
+    }
+}
 
         /* Контент мобильной страницы */
         .mobile-content {
@@ -96,13 +104,13 @@
         }
 
         .mobile-text {
-            font-size: 16px;
-            line-height: 1.5;
-            color: #ccc;
-            margin-bottom: 40px;
-            margin-top: 4px;
-            text-align: justify;
-        }
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ccc;
+    margin-bottom: 40px;
+    margin-top: 0; /* Обнуляем, чтобы не двоило отступы */
+    text-align: justify;
+}
 
         /* --- СТАРЫЕ СТИЛИ (Оставляем как есть для десктопа) --- */
         html { scroll-behavior: smooth; }
