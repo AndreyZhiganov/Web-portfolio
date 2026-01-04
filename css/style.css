@@ -12,6 +12,11 @@ body {
   overflow-y: auto;
 }
 
+/* Глобально скрываем мобильное меню (чтобы не лезло на десктоп) */
+.mobile-nav-container {
+    display: none; 
+}
+
 /* 1. Настройка Главного Экрана */
 .gallery-screen {
   position: relative;
@@ -287,16 +292,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
-    /* ОТКЛЮЧАЕМ hover-логику на мобильных */
-.menu-zone:hover .text-menu {
-  opacity: 0 !important;
-  transform: translateX(10px) !important;
-}
-
-.menu-zone:hover .icon-menu {
-  opacity: 0.75 !important;
-}
 
   body {
     overflow-y: auto !important;
