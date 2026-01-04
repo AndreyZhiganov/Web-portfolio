@@ -349,13 +349,13 @@ body {
   opacity: 0 !important;
   pointer-events: none !important; /* Чтобы initial не кликалось */
   z-index: 20000 !important;
-  background: red !important; /* Для теста, убери потом */
   padding: 6px 10px !important;
+  font-size: 12px !important; 
 }
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-  transform: translate(0, -50%) !important;
+  transform: translate(-10, -50%) !important;
   pointer-events: auto !important;
 }
 
