@@ -439,3 +439,20 @@ html, body {
   }
 
 }
+
+@media (max-width: 768px) {
+  .menu-zone .text-menu {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-zone .icon-menu {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .menu-zone.active .icon-menu {
+    transform: scale(0.92);
+  }
+}
+
