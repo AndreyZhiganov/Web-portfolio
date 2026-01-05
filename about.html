@@ -90,9 +90,15 @@
 
 /* Увеличим отступ сверху для всего контента, чтобы текст не лип к меню */
 @media (max-width: 1000px) {
-    .mobile-only { 
-        padding-top: 100px !important; /* Было 80, ставим 100, чтобы текст съехал ниже */
-    }
+    mobile-only { 
+                display: block !important; 
+                width: 100%;
+                min-height: 100vh;
+                background: #000;
+                padding-top: 100px; 
+                padding-bottom: 0; /* УБРАЛИ ЛИШНИЙ ОТСТУП СНИЗУ */
+                box-sizing: border-box;
+            }
 }
 
         /* Контент мобильной страницы */
@@ -110,13 +116,14 @@
         }
 
         .mobile-text {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #ccc;
-    margin-bottom: 40px;
-    margin-top: 0; /* Обнуляем, чтобы не двоило отступы */
-    text-align: left;
-}
+                font-size: 16px;
+                line-height: 1.5;
+                color: #ccc;
+                /* Оставляем отступ снизу ТОЛЬКО чтобы текст не наехал на иконки, если он длинный */
+                margin-bottom: 60px; 
+                margin-top: 0; 
+                text-align: left;
+            }
 
         /* --- СТАРЫЕ СТИЛИ (Оставляем как есть для десктопа) --- */
         html { scroll-behavior: smooth; }
