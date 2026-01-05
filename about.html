@@ -103,13 +103,14 @@
     }
 
     .mobile-section {
-        height: 100vh;
-        width: 100%;
-        scroll-snap-align: start;
+        height: auto;              /* Теперь секция занимает только нужную высоту */
+        min-height: 100vh;         /* Но не меньше экрана, чтобы фон заполнял */
+        scroll-snap-align: start;  /* Оставляем привязку к верху при снап-скролле */
         scroll-snap-stop: always;
-        /* УБРАЛИ flex и center — теперь текст ляжет как раньше */
+        display: block;            /* Убираем flex, он больше не нужен */
+        padding-top: 80px;         /* Отступ под фиксированное меню */
+        padding-bottom: 100px;     /* Отступ снизу, чтобы текст не прилипал к нижним ссылкам */
         box-sizing: border-box;
-        position: relative;
     }
 
     .mobile-content-text {
@@ -119,9 +120,10 @@
 
         /* Контент мобильной страницы */
         .mobile-content {
-            padding: 0 20px;
-            color: #fff;
-        }
+        padding: 0 20px;           /* Отступы слева/справа */
+        max-width: 100%;
+        box-sizing: border-box;
+    }
 
         .mobile-title {
             font-size: 28px;
@@ -133,12 +135,11 @@
 
         .mobile-text {
         font-size: 16px;
-        line-height: 1.5;
+        line-height: 1.6;
         color: #ccc;
         text-align: left;
-        margin-top: 0;
-        /* Этот отступ нужен, чтобы текст не наехал на иконки, но не создавал лишнюю прокрутку */
-        margin-bottom: 80px; 
+        margin: 0;
+        padding-bottom: 40px;      /* Немного воздуха снизу перед следующей секцией */
     }
 
         /* --- СТАРЫЕ СТИЛИ (Оставляем как есть для десктопа) --- */
