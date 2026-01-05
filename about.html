@@ -100,10 +100,9 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .mobile-burger-btn:active {
-            opacity: 0.4 !important; /* Нажали - потускнел */
-            transition: none !important; /* МГНОВЕННО! */
-        }
+       .mobile-burger-btn.active {
+    opacity: 0.4;
+}
 
         .mobile-menu-items {
             display: flex;
@@ -452,13 +451,16 @@
 
             if (mobileBurger && mobileContainer) {
                 mobileBurger.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    mobileContainer.classList.toggle('open');
-                });
+    e.stopPropagation();
+    mobileContainer.classList.toggle('open');
+    mobileBurger.classList.toggle('active');
+});
+
 
                 document.addEventListener('click', (e) => {
                     if (!mobileContainer.contains(e.target)) {
                         mobileContainer.classList.remove('open');
+                        mobileBurger.classList.remove('active');
                     }
                 });
             }
