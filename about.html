@@ -57,20 +57,43 @@
             background: #0d0d0d;
             z-index: 10000;
             align-items: center;
-            justify-content: flex-end;
-            padding-right: 16px;
+            justify-content: flex-end; /* Бургер прижат вправо */
+            padding: 0 16px;
             box-sizing: border-box;
+        }
+
+        .mobile-home-btn {
+            position: absolute;
+            left: 16px;
+            color: white;
+            text-decoration: none;
+            opacity: 0.4; /* Полупрозрачная в покое */
+            transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        /* Эффект нажатия для стрелки */
+        .mobile-home-btn:active {
+            opacity: 1 !important;
         }
 
         .mobile-burger-btn {
             font-size: 28px;
             cursor: pointer;
-            opacity: 0.75;
+            opacity: 0.4; /* Сделали 0.4 для симметрии со стрелкой */
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        .mobile-burger-btn:active {
+            opacity: 1 !important;
         }
 
         .mobile-menu-items {
@@ -255,11 +278,19 @@
     <div class="mobile-only">
         
         <div class="mobile-nav-container">
-            <div class="mobile-menu-items">
-                <a href="index.html">home</a> <a href="#projects">PROJECTS</a>
-            </div>
-            <div class="mobile-burger-btn">☰</div>
-        </div>
+    <a href="index.html" class="mobile-home-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
+
+    <div class="mobile-menu-items">
+        <a href="index.html">about</a> 
+        <a href="#projects">PROJECTS</a>
+    </div>
+
+    <div class="mobile-burger-btn">☰</div>
+</div>
 
         <div class="mobile-section">
             <div class="mobile-content">
