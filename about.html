@@ -205,12 +205,13 @@
             .mobile-bottom-right a:hover { opacity: 1; color: #fff; }
         }
 
-        /* Добавляем этот кусок, чтобы нажатие было мгновенным и четким */
+        /* Теперь иконки будут принудительно возвращаться в тусклое состояние сразу после нажатия */
 .mobile-bottom-left a:active, 
-.mobile-bottom-right a:active {
+.mobile-bottom-right a:active,
+.mobile-bottom-left a:focus { /* <--- ДОБАВИЛИ ЭТУ СТРОКУ */
     opacity: 1 !important;
     color: #fff !important;
-    transition: none !important; /* ЭТО ГЛАВНОЕ: убирает плавность при нажатии */
+    transition: none !important;
 }
 
     </style>
