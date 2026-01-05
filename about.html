@@ -103,14 +103,14 @@
     }
 
     .mobile-section {
-        height: auto;              /* Теперь секция занимает только нужную высоту */
-        min-height: 100vh;         /* Но не меньше экрана, чтобы фон заполнял */
-        scroll-snap-align: start;  /* Оставляем привязку к верху при снап-скролле */
+        min-height: 100vh;         /* Секция занимает весь экран */
+        width: 100%;
+        scroll-snap-align: start;  /* Магнит работает */
         scroll-snap-stop: always;
-        display: block;            /* Убираем flex, он больше не нужен */
-        padding-top: 80px;         /* Отступ под фиксированное меню */
-        padding-bottom: 100px;     /* Отступ снизу, чтобы текст не прилипал к нижним ссылкам */
+        display: block;            /* УБРАЛИ flex, теперь текст идет стандартно сверху вниз */
+        padding-top: 80px;         /* Отступ, чтобы текст не был под меню */
         box-sizing: border-box;
+        position: relative;
     }
 
     .mobile-content-text {
