@@ -446,11 +446,24 @@
 
     </script>
 
-<div id="custom-confirm" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:20000; justify-content:center; align-items:center; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);">
-    <div style="background:#000; border: 1px solid #333; padding: 30px 20px; width: 80%; max-width: 320px; text-align: center; box-sizing: border-box;">
+<div id="custom-confirm" style="
+    display:none; 
+    position:fixed; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100%; 
+    background: rgba(0, 0, 0, 0.7); /* ТЕМНЫЙ ПОЛУПРОЗРАЧНЫЙ ФОН (0.7 - это 70% темноты) */
+    z-index:20000; 
+    justify-content:center; 
+    align-items:center; 
+    backdrop-filter: blur(8px); /* ЭФФЕКТ РАЗМЫТИЯ САМОГО САЙТА ПОЗАДИ */
+    -webkit-backdrop-filter: blur(8px); /* ПОДДЕРЖКА ДЛЯ SAFARI (iPHONE) */
+">
+    <div style="background:#000; border: 1px solid #333; padding: 30px 20px; width: 85%; max-width: 320px; text-align: center; box-sizing: border-box; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
         <p id="confirm-text" style="color:#fff; margin:0 0 30px 0; font-size:13px; letter-spacing:1px; line-height:1.5; text-transform:uppercase; font-family: 'Helvetica Neue', Arial, sans-serif;"></p>
         <div style="display:flex; justify-content: space-between; gap: 15px;">
-            <button id="confirm-cancel" style="flex:1; background:none; border:1px solid #333; color:#666; padding:12px 0; cursor:pointer; text-transform:uppercase; font-size:11px; letter-spacing:1px;">Cancel</button>
+            <button id="confirm-cancel" style="flex:1; background:none; border:1px solid #333; color:#888; padding:12px 0; cursor:pointer; text-transform:uppercase; font-size:11px; letter-spacing:1px;">Cancel</button>
             <a id="confirm-ok" href="" target="_blank" style="flex:1; background:#fff; color:#000; padding:12px 0; text-decoration:none; text-transform:uppercase; font-size:11px; font-weight:bold; letter-spacing:1px; display:block;">Open</a>
         </div>
     </div>
