@@ -105,12 +105,16 @@
     .mobile-section {
         height: 100vh;
         width: 100%;
-        scroll-snap-align: start; /* Секция "прилипает" к верху экрана */
+        scroll-snap-align: start;
         scroll-snap-stop: always;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /* ИЗМЕНЕНИЯ ТУТ: */
+        justify-content: flex-start; /* Прижимаем контент к верху */
+        padding-top: 100px;         /* Оставляем место для верхней плашки меню */
+        padding-bottom: 100px;      /* Запас снизу, чтобы текст не упирался в иконки */
         box-sizing: border-box;
+        overflow-y: auto;           /* Если текста ОЧЕНЬ много, он будет скроллиться внутри секции */
     }
 
     .mobile-content-text {
