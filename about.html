@@ -158,6 +158,61 @@
         .gallery-wrapper:hover .gallery-nav { opacity: 1; }
         .nav-btn { background: none; border: none; color: #fff; cursor: pointer; padding: 0 20px; pointer-events: auto; opacity: 0.5; transition: 0.3s; }
         .nav-btn:hover { opacity: 1; }
+
+        @media (max-width: 1000px) {
+
+    .mobile-bottom-left {
+        position: fixed;
+        bottom: 22px;
+        left: 18px;
+        display: flex;
+        gap: 20px;
+        z-index: 1000;
+    }
+
+    .mobile-bottom-left a {
+        color: #888;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-bottom-left a:hover {
+        opacity: 1;
+        color: #fff;
+        transform: scale(1.1);
+    }
+
+    .mobile-bottom-left svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .mobile-bottom-right {
+        position: fixed;
+        bottom: 22px;
+        right: 18px;
+        display: flex;
+        gap: 18px;
+        z-index: 1000;
+    }
+
+    .mobile-bottom-right a {
+        color: #888;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        opacity: 0.6;
+        transition: 0.3s;
+    }
+
+    .mobile-bottom-right a:hover {
+        opacity: 1;
+        color: #fff;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -261,8 +316,28 @@
 
             </div>
 
-    </div>
+            <div class="mobile-bottom-left">
+    <a href="mailto:andrey.zhiganovv@gmail.com">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+        </svg>
+    </a>
 
+    <a href="https://wa.me/79518913821" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 512.459" fill="currentColor">
+            <path d="M435.689 74.468C387.754 26.471 324 .025 256.071 0 ..."/>
+        </svg>
+    </a>
+</div>
+
+<div class="mobile-bottom-right">
+    <a href="https://docs.google.com/document/d/1EBpCACpMoqrkS_jH9UiAWl6xlHlr5axpIDBB55LrCW8/edit?usp=sharing" target="_blank">CV</a>
+    <a href="https://docs.google.com/presentation/d/1sJwcvn4T2BOXxGILo2sfAGNHl3cIqDbeKMxHkju2gdY/edit?usp=sharing" target="_blank">Portfolio</a>
+</div>
+
+    </div>
 
     <script>
        document.addEventListener("DOMContentLoaded", function() {
