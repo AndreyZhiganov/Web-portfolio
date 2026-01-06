@@ -495,27 +495,6 @@ if (mobileBurger && mobileContainer) {
         }
     });
 
-    //* Клик по пунктам меню */
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection && mobileScroll) {
-                mobileScroll.scrollTo({
-                    top: targetSection.offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-
-            // ЗАКРЫВАЕМ МЕНЮ ДЛЯ ВСЕХ ПУНКТОВ
-            mobileContainer.classList.remove('open');
-            mobileBurger.classList.remove('active');
-        });
-    });
-
     /* Закрытие кликом вне */
     document.addEventListener('click', (e) => {
         if (!mobileContainer.contains(e.target)) {
