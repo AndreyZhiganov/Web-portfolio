@@ -174,29 +174,31 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         width: 100%;
-        /* Убираем фиксированное соотношение сторон */
-        height: auto; 
+        
+        /* РАСТЯГИВАЕМ НА ВЕСЬ ЭКРАН */
+        /* Вычитаем примерно 70px (высоту шапки) и 100px (на заголовки/подписи) */
+        height: calc(100vh - 250px); 
+        
         background: #000;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         scrollbar-width: none;
     }
+
     .mobile-gallery-track::-webkit-scrollbar { display: none; }
 
     .mobile-slide {
         min-width: 100%;
-        /* Позволяем слайду подстраиваться под высоту контента */
-        height: auto; 
+        height: 100%; /* Занимает всю высоту трека */
         scroll-snap-align: center;
         flex-shrink: 0;
     }
 
     .mobile-slide img {
         width: 100%;
-        /* Картинка занимает всю ширину и сама считает свою высоту */
-        height: auto; 
+        height: 100%;
+        /* Возвращаем cover, чтобы заполнить экран без полей */
+        object-fit: cover; 
         display: block;
-        /* Убираем любые фиты, просто выводим как есть */
-        object-fit: normal; 
     }
 
     /* Стили подписи (чуть адаптированные под моб) */
