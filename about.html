@@ -507,11 +507,11 @@ if (mobileBurger && mobileContainer) {
             const targetSection = document.querySelector(targetId);
 
             if (targetSection && mobileScroll) {
-                mobileScroll.scrollTo({
-                    top: targetSection.offsetTop - mobileScroll.offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+    mobileScroll.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: 'smooth'
+    });
+}
 
         if (targetId === '#projects') {
     mobileContainer.classList.remove('open');
