@@ -467,14 +467,20 @@ mobileLinks.forEach(link => {
         e.preventDefault();
 
         const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
 
-        if (!targetSection) return;
+        if (targetId === '#about') {
+            mobileScroll.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
-        mobileScroll.scrollTo({
-            top: targetSection.getBoundingClientRect().top + mobileScroll.scrollTop
-            behavior: 'smooth'
-        });
+        if (targetId === '#projects') {
+            mobileScroll.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
