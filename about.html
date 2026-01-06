@@ -211,6 +211,95 @@
             .mobile-bottom-right a { color: #888; font-size: 13px; font-weight: 700; text-decoration: none; opacity: 0.6; transition: 0.3s; }
         }
 
+        /* === MOBILE GALLERY (NEW, INDEPENDENT) === */
+@media (max-width: 1000px) {
+
+  .m-gallery { width: 100%; }
+
+  /* рамка по центру, картинка чуть увеличена и обрезана */
+  .m-frame{
+    position: relative;
+    width: 100%;
+    height: 52vh;              /* высота кадра на мобилке */
+    overflow: hidden;
+    background: #050505;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .m-track{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+  }
+
+  .m-slide{
+    min-width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+  }
+
+  .m-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);    /* легкий зум, чтобы обрезало края */
+    transform-origin: center center;
+  }
+
+  /* стрелки поверх кадра */
+  .m-nav{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    padding: 0 6px;
+  }
+
+  .m-nav-btn{
+    pointer-events: auto;
+    background: none;
+    border: none;
+    color: #fff;
+    opacity: 0.5;
+    padding: 14px;
+  }
+
+  .m-caption{
+    margin-top: 14px;
+    margin-bottom: 90px; /* чтобы не упиралось в нижние элементы */
+  }
+
+  .m-caption-title{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .m-caption-role{
+    color: #777;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: none;
+    margin-left: 8px;
+  }
+
+  .m-caption-meta{
+    color: #777;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+}
+
     </style>
 </head>
 <body>
@@ -320,13 +409,48 @@
         </div>
 
         <div class="mobile-section" id="projects">
-            <div class="mobile-content">
-                <h2 class="mobile-title">key projects</h2>
-                <div class="mobile-text">
-                    Next content starts here...
-                </div>
-            </div>
+  <div class="mobile-content">
+    <h2 class="mobile-title">key projects</h2>
+
+    <div class="m-gallery">
+      <div class="m-frame">
+        <div class="m-track" id="m-track">
+          <div class="m-slide"><img src="img/1.webp" alt=""></div>
+          <div class="m-slide"><img src="img/2.webp" alt=""></div>
+          <div class="m-slide"><img src="img/4.webp" alt=""></div>
+          <div class="m-slide"><img src="img/5.webp" alt=""></div>
+          <div class="m-slide"><img src="img/7.webp" alt=""></div>
+          <div class="m-slide"><img src="img/8.webp" alt=""></div>
+          <div class="m-slide"><img src="img/9.webp" alt=""></div>
+          <div class="m-slide"><img src="img/11.webp" alt=""></div>
+          <div class="m-slide"><img src="img/10.webp" alt=""></div>
         </div>
+
+        <div class="m-nav">
+          <button class="m-nav-btn" type="button" id="m-prev">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <button class="m-nav-btn" type="button" id="m-next">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="m-caption" id="m-caption">
+        <div class="m-caption-title">
+          The Best Place Ever <span class="m-caption-role">| concept, performance direction, sound</span>
+        </div>
+        <div class="m-caption-meta">Senokos Festival. Suzdal. 2024</div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
        <div class="mobile-bottom-left">
     <a href="mailto:andrey.zhiganovv@gmail.com">
@@ -514,6 +638,91 @@ if (mobileBurger && mobileContainer) {
             mobileBurger.classList.remove('active');
         }
     });
+}
+
+// --- 3. MOBILE GALLERY (NEW, INDEPENDENT) ---
+if (window.innerWidth <= 1000) {
+    const mTrack = document.getElementById('m-track');
+    const mCaption = document.getElementById('m-caption');
+    const mPrev = document.getElementById('m-prev');
+    const mNext = document.getElementById('m-next');
+
+    if (mTrack && mCaption && mPrev && mNext) {
+        const mData = [
+            {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+            {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+            {title: "The Hills", role: "| concept, performance direction, sound", meta: "Spetsifik Festival. Nizhny Novgorod. 2024"},
+            {title: "Sunrise", role: "| concept, performance direction, sound, video", meta: "Stanislavsky Electrotheatre. Moscow. 2024"},
+            {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+            {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+            {title: "MIRRIM", role: "| concept contribution, video, text | In collaboration with Boris Yukhananov", meta: "Stanislavsky Electrotheatre. Moscow. 2022"},
+            {title: "Former, School", role: "| text | In collaboration with Dmitriy Volkostrelov", meta: "Creative Laboratory Corner. Kazan. 2018"},
+            {title: "Callings", role: "| co-concept, performance direction | In collaboration with Stefan Kaegi and Caroline Bernaud", meta: "Sviyazhsk Artel Festival. Sviyazhsk Island. 2018"}
+        ];
+
+        const total = mTrack.querySelectorAll('.m-slide').length;
+        let mIndex = 0;
+
+        function renderCaption(i) {
+            const item = mData[i];
+            if (!item) return;
+            mCaption.innerHTML = `
+                <div class="m-caption-title">
+                    ${item.title} <span class="m-caption-role">${item.role}</span>
+                </div>
+                <div class="m-caption-meta">${item.meta}</div>
+            `;
+        }
+
+        function setPos(i) {
+            mTrack.style.transform = `translateX(${-i * 100}%)`;
+            renderCaption(i);
+        }
+
+        function bounce(px) {
+            const base = -mIndex * 100;
+            mTrack.style.transform = `translateX(calc(${base}% + ${px}px))`;
+            setTimeout(() => {
+                mTrack.style.transform = `translateX(${base}%)`;
+            }, 150);
+        }
+
+        function go(dir) {
+            const next = mIndex + dir;
+            if (next < 0) return bounce(22);
+            if (next >= total) return bounce(-22);
+            mIndex = next;
+            setPos(mIndex);
+        }
+
+        mPrev.addEventListener('click', () => go(-1));
+        mNext.addEventListener('click', () => go(1));
+
+        // свайп пальцем
+        let startX = 0;
+        let moved = false;
+
+        mTrack.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            moved = false;
+        }, {passive: true});
+
+        mTrack.addEventListener('touchmove', () => {
+            moved = true;
+        }, {passive: true});
+
+        mTrack.addEventListener('touchend', (e) => {
+            if (!moved) return;
+            const endX = e.changedTouches[0].clientX;
+            const dx = endX - startX;
+
+            if (Math.abs(dx) < 40) return;
+            if (dx < 0) go(1);
+            else go(-1);
+        });
+
+        setPos(0);
+    }
 }
 
         });
