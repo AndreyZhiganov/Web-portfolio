@@ -36,14 +36,14 @@
 
             /* ОБОЛОЧКА ДЛЯ СЕКЦИИ (Чтобы магнит знал, где тормозить) */
             .mobile-section {
-    height: 100vh;         /* вместо min-height */
-    width: 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-    padding-top: 100px;    /* оставляем твой отступ */
-    box-sizing: border-box;
-}
+                min-height: 100vh;
+                width: 100%;
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+                position: relative;
+                padding-top: 100px; /* Твой оригинальный отступ */
+                box-sizing: border-box;
+            }
         }
 
         /* === СТИЛИ МОБИЛЬНОЙ ВЕРСИИ (ТВОИ БЕЗ ИЗМЕНЕНИЙ) === */
@@ -81,6 +81,11 @@
             opacity: 0.2 !important; /* Нажали - потускнела */
             transition: none !important; /* МГНОВЕННО! */
         }
+
+        /* Эффект нажатия для стрелки */
+       .mobile-home-btn:active {
+    opacity: 0.4 !important; 
+}
 
     .mobile-burger-btn {
             font-size: 28px;
@@ -299,7 +304,7 @@
 
     <div class="mobile-menu-items">
         <a href="index.html">about</a> 
-        <a href="#m-projects">PROJECTS</a>
+        <a href="#projects">PROJECTS</a>
     </div>
 
     <div class="mobile-burger-btn">☰</div>
@@ -317,7 +322,7 @@
             </div>
         </div>
 
-        <div class="mobile-section" id="m-projects">
+        <div class="mobile-section" id="projects">
             <div class="mobile-content">
                 <h2 class="mobile-title">key projects</h2>
                 <div class="mobile-text">
@@ -393,35 +398,6 @@
                     {title: "Former, School", role: "| text | In collaboration with Dmitriy Volkostrelov", meta: "Creative Laboratory Corner. Kazan. 2018"},
                     {title: "Callings", role: "| co-concept, performance direction | In collaboration with Stefan Kaegi and Caroline Bernaud", meta: "Sviyazhsk Artel Festival. Sviyazhsk Island. 2018"}
                 ];
-
-                // --- 3. МОБИЛЬНЫЕ ЯКОРЯ: скроллим контейнер .mobile-only, а не окно ---
-if (window.innerWidth <= 1000) {
-    const mobileScroller = document.querySelector('.mobile-only');
-    const mobileBurger = document.querySelector('.mobile-burger-btn');
-    const mobileContainer = document.querySelector('.mobile-nav-container');
-
-    document.querySelectorAll('.mobile-only a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            const id = href.slice(1);
-            const target = document.getElementById(id);
-            if (!target || !mobileScroller) return;
-
-            e.preventDefault();
-
-            // offsetTop корректен, т.к. target внутри scroll-контейнера
-            mobileScroller.scrollTo({
-                top: target.offsetTop,
-                behavior: 'smooth'
-            });
-
-            // Закрываем меню после выбора пункта
-            if (mobileContainer) mobileContainer.classList.remove('open');
-            if (mobileBurger) mobileBurger.classList.remove('active');
-        });
-    });
-}
-
 
                 if(gallery) {
                     gallery.addEventListener('scroll', function() {
