@@ -162,6 +162,54 @@
             margin-bottom: 80px; 
         }
 
+        /* === МОБИЛЬНАЯ ГАЛЕРЕЯ === */
+    .mobile-gallery-wrapper {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .mobile-gallery-track {
+        display: flex;
+        overflow-x: scroll; /* Горизонтальный скролл */
+        scroll-snap-type: x mandatory; /* Магнит по горизонтали */
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        aspect-ratio: 2.35 / 1; /* Кино-формат */
+        background: #050505;
+        margin-bottom: 20px;
+        /* Скрываем скроллбар */
+        scrollbar-width: none; 
+    }
+    .mobile-gallery-track::-webkit-scrollbar { display: none; }
+
+    .mobile-slide {
+        min-width: 100%; /* Картинка на всю ширину */
+        height: 100%;
+        scroll-snap-align: center; /* Центрируем при остановке */
+        flex-shrink: 0;
+    }
+
+    .mobile-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Стили подписи (чуть адаптированные под моб) */
+    #mobile-gallery-caption .caption-title {
+        font-size: 18px; /* Чуть меньше чем на десктопе */
+        line-height: 1.2;
+    }
+    #mobile-gallery-caption .caption-role {
+        font-size: 13px;
+        display: inline-block; /* Чтобы переносилось нормально */
+    }
+    #mobile-gallery-caption .caption-meta {
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
         /* === ДЕСКТОП СТИЛИ (ТВОИ БЕЗ ИЗМЕНЕНИЙ) === */
         html { scroll-behavior: smooth; }
         body { background: #000; margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #fff; overflow: hidden; }
@@ -321,9 +369,47 @@
 
         <div class="mobile-section" id="projects">
             <div class="mobile-content">
-                <h2 class="mobile-title">key projects</h2>
-                <div class="mobile-text">
-                    Next content starts here...
+                <h2 class="mobile-title">KEY PROJECTS</h2>
+                
+                <div class="mobile-gallery-wrapper">
+                    
+                    <div class="mobile-gallery-track">
+                        <div class="mobile-slide" data-index="0">
+                            <img src="img/1.webp" style="object-position: center 100%;">
+                        </div>
+                        <div class="mobile-slide" data-index="1">
+                            <img src="img/2.webp" style="object-position: center 60%;">
+                        </div>
+                        <div class="mobile-slide" data-index="2">
+                            <img src="img/4.webp" style="object-position: center 50%;">
+                        </div>
+                        <div class="mobile-slide" data-index="3">
+                            <img src="img/5.webp" style="object-position: center 40%;">
+                        </div>
+                        <div class="mobile-slide" data-index="4">
+                            <img src="img/7.webp" style="object-position: center 30%;">
+                        </div>
+                        <div class="mobile-slide" data-index="5">
+                            <img src="img/8.webp" style="object-position: center 50%;">
+                        </div>
+                        <div class="mobile-slide" data-index="6">
+                            <img src="img/9.webp" style="object-position: center 60%;">
+                        </div>
+                        <div class="mobile-slide" data-index="7">
+                            <img src="img/11.webp" style="object-position: center 50%;">
+                        </div>
+                        <div class="mobile-slide" data-index="8">
+                            <img src="img/10.webp" style="object-position: center 65%;">
+                        </div>
+                    </div>
+
+                    <div id="mobile-gallery-caption">
+                        <div class="caption-title">
+                            The Best Place Ever <span class="caption-role">| concept, performance direction, sound</span>
+                        </div>
+                        <span class="caption-meta">Senokos Festival. Suzdal. 2024</span>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -545,6 +631,51 @@ if (mobileBurger && mobileContainer) {
         if(e.target === modal) modal.style.display = 'none';
     };
 });
+
+// --- 3. ЛОГИКА МОБИЛЬНОЙ ГАЛЕРЕИ ---
+    const mobileTrack = document.querySelector('.mobile-gallery-track');
+    const mobileCaption = document.getElementById('mobile-gallery-caption');
+    const mobileSlides = document.querySelectorAll('.mobile-slide');
+
+    // Данные проектов (копия с десктопа)
+    const mobileProjectData = [
+        {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+        {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+        {title: "The Hills", role: "| concept, performance direction, sound", meta: "Spetsifik Festival. Nizhny Novgorod. 2024"},
+        {title: "Sunrise", role: "| concept, performance direction, sound, video", meta: "Stanislavsky Electrotheatre. Moscow. 2024"},
+        {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+        {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+        {title: "MIRRIM", role: "| concept contribution, video, text | In collaboration with Boris Yukhananov", meta: "Stanislavsky Electrotheatre. Moscow. 2022"},
+        {title: "Former, School", role: "| text | In collaboration with Dmitriy Volkostrelov", meta: "Creative Laboratory Corner. Kazan. 2018"},
+        {title: "Callings", role: "| co-concept, performance direction | In collaboration with Stefan Kaegi and Caroline Bernaud", meta: "Sviyazhsk Artel Festival. Sviyazhsk Island. 2018"}
+    ];
+
+    // Наблюдатель: следит, какой слайд сейчас на экране
+    if (mobileTrack && mobileCaption) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = entry.target.getAttribute('data-index');
+                    const data = mobileProjectData[index];
+                    
+                    if (data) {
+                        mobileCaption.innerHTML = `
+                            <div class="caption-title">
+                                ${data.title} 
+                                <span class="caption-role">${data.role}</span>
+                            </div>
+                            <span class="caption-meta">${data.meta}</span>
+                        `;
+                    }
+                }
+            });
+        }, { 
+            root: mobileTrack, // Следим внутри ленты
+            threshold: 0.6     // Срабатываем, когда видно 60% слайда
+        });
+
+        mobileSlides.forEach(slide => observer.observe(slide));
+    }
 
     </script>
 
