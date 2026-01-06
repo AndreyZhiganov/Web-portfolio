@@ -471,10 +471,11 @@ mobileLinks.forEach(link => {
 
         if (!targetSection) return;
 
-        mobileScroll.scrollTo({
-            top: targetSection.offsetTop,
-            behavior: 'smooth'
-        });
+        targetSection.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+});
+
     });
 });
 
