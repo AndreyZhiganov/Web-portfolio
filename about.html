@@ -311,7 +311,7 @@
     </a>
 
     <div class="mobile-menu-items">
-        <a href="index.html">about</a> 
+        <a href="#about">about</a> 
         <a href="#projects">PROJECTS</a>
     </div>
 
@@ -519,13 +519,6 @@ mobileSections.forEach(section => mobileObserver.observe(section));
         if(e.target === modal) modal.style.display = 'none';
     };
 });
-
-const firstLink = document.querySelector('.mobile-menu-items a[href="#about"]');
-if (firstLink) {
-    requestAnimationFrame(() => {
-        firstLink.classList.add('active');
-    });
-}
 
     </script>
 
