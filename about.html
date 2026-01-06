@@ -514,7 +514,7 @@ if (mobileBurger && mobileContainer) {
         // При открытии меню — ABOUT активен
         if (mobileContainer.classList.contains('open')) {
             mobileLinks.forEach(l => l.classList.remove('active'));
-            if (mobileLinks[0]) mobileLinks[0].classList.add('active');
+            if (mobileLinks[ mobileScroll.scrollTop < window.innerHeight * 0.5 ? 0 : 1 ]) mobileLinks[ mobileScroll.scrollTop < window.innerHeight * 0.5 ? 0 : 1 ].classList.add('active');
         }
     });
 
