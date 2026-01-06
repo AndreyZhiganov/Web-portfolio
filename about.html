@@ -117,12 +117,19 @@
         }
 
         .mobile-menu-items a {
-            text-decoration: none;
-            color: white;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.4;
+    transition: opacity 0.25s ease;
+}
+
+.mobile-menu-items a.active {
+    opacity: 1;
+}
+
 
         .mobile-nav-container.open .mobile-menu-items {
             opacity: 1;
@@ -310,7 +317,7 @@
     <div class="mobile-burger-btn">☰</div>
 </div>
 
-        <div class="mobile-section">
+        <div class="mobile-section" id="about">
             <div class="mobile-content">
                 <div class="mobile-text">
                     <strong>Performance-based Interdisciplinary Artist.</strong><br>
@@ -449,6 +456,22 @@
             // --- 2. ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ ---
             const mobileBurger = document.querySelector('.mobile-burger-btn');
             const mobileContainer = document.querySelector('.mobile-nav-container');
+            const mobileSections = document.querySelectorAll('.mobile-section');
+const mobileLinks = document.querySelectorAll('.mobile-menu-items a');
+
+const mobileObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            mobileLinks.forEach(link => link.classList.remove('active'));
+            const id = entry.target.getAttribute('id');
+            const activeLink = document.querySelector(`.mobile-menu-items a[href="#${id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
+    });
+}, { threshold: 0.6 });
+
+mobileSections.forEach(section => mobileObserver.observe(section));
+
 
             if (mobileBurger && mobileContainer) {
                 mobileBurger.addEventListener('click', (e) => {
