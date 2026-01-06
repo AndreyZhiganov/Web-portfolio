@@ -200,18 +200,35 @@
     display: block;
 }
 
-    /* Стили подписи (чуть адаптированные под моб) */
-    #mobile-gallery-caption .caption-title {
-        font-size: 18px; /* Чуть меньше чем на десктопе */
-        line-height: 1.2;
+    /* ОБНОВЛЕННЫЕ СТИЛИ ПОДПИСИ МОБИЛКИ */
+    #mobile-gallery-caption {
+        width: 100%;
+        padding: 0 20px;         /* Ровно под KEY PROJECTS */
+        box-sizing: border-box;
+        text-align: left;
+        margin-top: 15px;
     }
-    #mobile-gallery-caption .caption-role {
-        font-size: 13px;
-        display: inline-block; /* Чтобы переносилось нормально */
+
+    .mobile-caption-title {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 2px;
     }
-    #mobile-gallery-caption .caption-meta {
+
+    .mobile-caption-role {
         font-size: 13px;
-        margin-top: 5px;
+        color: #777;
+        font-weight: 700;
+        margin-bottom: 12px;     /* Тот самый отступ перед инфой */
+    }
+
+    .mobile-caption-meta {
+        font-size: 13px;
+        color: #777;
+        line-height: 1.4;
+        font-weight: 700;
     }
 
         /* === ДЕСКТОП СТИЛИ (ТВОИ БЕЗ ИЗМЕНЕНИЙ) === */
@@ -641,17 +658,17 @@ if (mobileBurger && mobileContainer) {
     const mobileCaption = document.getElementById('mobile-gallery-caption');
     const mobileSlides = document.querySelectorAll('.mobile-slide');
 
-    // Данные проектов (копия с десктопа)
+   // ДАННЫЕ ДЛЯ МОБИЛКИ 
     const mobileProjectData = [
-        {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
-        {title: "The Best Place Ever", role: "| concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
-        {title: "The Hills", role: "| concept, performance direction, sound", meta: "Spetsifik Festival. Nizhny Novgorod. 2024"},
-        {title: "Sunrise", role: "| concept, performance direction, sound, video", meta: "Stanislavsky Electrotheatre. Moscow. 2024"},
-        {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
-        {title: "Sorry, It’s All Me", role: "| concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
-        {title: "MIRRIM", role: "| concept contribution, video, text | In collaboration with Boris Yukhananov", meta: "Stanislavsky Electrotheatre. Moscow. 2022"},
-        {title: "Former, School", role: "| text | In collaboration with Dmitriy Volkostrelov", meta: "Creative Laboratory Corner. Kazan. 2018"},
-        {title: "Callings", role: "| co-concept, performance direction | In collaboration with Stefan Kaegi and Caroline Bernaud", meta: "Sviyazhsk Artel Festival. Sviyazhsk Island. 2018"}
+        {title: "The Best Place Ever", role: "concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+        {title: "The Best Place Ever", role: "concept, performance direction, sound", meta: "Senokos Festival. Suzdal. 2024"},
+        {title: "The Hills", role: "concept, performance direction, sound", meta: "Spetsifik Festival. Nizhny Novgorod. 2024"},
+        {title: "Sunrise", role: "concept, performance direction, sound, video", meta: "Stanislavsky Electrotheatre. Moscow. 2024"},
+        {title: "Sorry, It’s All Me", role: "concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+        {title: "Sorry, It’s All Me", role: "concept, performance direction, video", meta: "Voznesensky Center. Moscow. 2022"},
+        {title: "MIRRIM", role: "concept contribution, video, text", meta: "Stanislavsky Electrotheatre. Moscow. 2022<br>In collaboration with Boris Yukhananov"},
+        {title: "Former, School", role: "text", meta: "Creative Laboratory Corner. Kazan. 2018<br>In collaboration with Dmitriy Volkostrelov"},
+        {title: "Callings", role: "co-concept, performance direction", meta: "Sviyazhsk Artel Festival. Sviyazhsk Island. 2018<br>In collaboration with Stefan Kaegi and Caroline Bernaud"}
     ];
 
     // Наблюдатель: следит, какой слайд сейчас на экране
