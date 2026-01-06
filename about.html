@@ -164,9 +164,11 @@
 
         /* === МОБИЛЬНАЯ ГАЛЕРЕЯ === */
     .mobile-gallery-wrapper {
-        width: 100%;
-        margin-top: 20px;
-    }
+    width: calc(100% + 40px); /* Ширина 100% + компенсируем отступы родителя (20+20) */
+    margin-left: -20px;       /* Выталкиваем влево на 20px */
+    margin-right: -20px;      /* Выталкиваем вправо на 20px */
+    margin-top: 20px;
+}
 
     .mobile-gallery-track {
         display: flex;
