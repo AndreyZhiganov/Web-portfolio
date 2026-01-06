@@ -399,6 +399,35 @@
                     {title: "Callings", role: "| co-concept, performance direction | In collaboration with Stefan Kaegi and Caroline Bernaud", meta: "Sviyazhsk Artel Festival. Sviyazhsk Island. 2018"}
                 ];
 
+                // --- 3. МОБИЛЬНЫЕ ЯКОРЯ: скроллим контейнер .mobile-only, а не окно ---
+if (window.innerWidth <= 1000) {
+    const mobileScroller = document.querySelector('.mobile-only');
+    const mobileBurger = document.querySelector('.mobile-burger-btn');
+    const mobileContainer = document.querySelector('.mobile-nav-container');
+
+    document.querySelectorAll('.mobile-only a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            const id = href.slice(1);
+            const target = document.getElementById(id);
+            if (!target || !mobileScroller) return;
+
+            e.preventDefault();
+
+            // offsetTop корректен, т.к. target внутри scroll-контейнера
+            mobileScroller.scrollTo({
+                top: target.offsetTop,
+                behavior: 'smooth'
+            });
+
+            // Закрываем меню после выбора пункта
+            if (mobileContainer) mobileContainer.classList.remove('open');
+            if (mobileBurger) mobileBurger.classList.remove('active');
+        });
+    });
+}
+
+
                 if(gallery) {
                     gallery.addEventListener('scroll', function() {
                         const index = Math.round(this.scrollLeft / this.clientWidth);
