@@ -461,6 +461,27 @@ const mobileScroll = document.querySelector('.mobile-only');
 const mobileSections = document.querySelectorAll('.mobile-section');
 const mobileLinks = document.querySelectorAll('.mobile-menu-items a');
 
+// СКРОЛЛ ПО КЛИКУ НА ПУНКТ МЕНЮ
+mobileLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        if (!targetSection) return;
+
+        mobileScroll.scrollTo({
+            top: targetSection.offsetTop,
+            behavior: 'smooth'
+        });
+
+        // закрываем меню
+        mobileContainer.classList.remove('open');
+        mobileBurger.classList.remove('active');
+    });
+});
+
 /* Подсветка пунктов при скролле */
 const mobileObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
