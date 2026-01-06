@@ -495,28 +495,24 @@ if (mobileBurger && mobileContainer) {
         }
     });
 
-    /* Клик по пунктам меню */
+    //* Клик по пунктам меню */
     mobileLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-
-            mobileLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-
+            
             const targetId = link.getAttribute('href');
             const targetSection = document.querySelector(targetId);
 
-         if (targetSection && mobileScroll) {
-    mobileScroll.scrollTo({
-        top: targetSection.offsetTop,
-        behavior: 'smooth'
-    });
-}
+            if (targetSection && mobileScroll) {
+                mobileScroll.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
 
-        if (targetId === '#projects') {
-    mobileContainer.classList.remove('open');
-    mobileBurger.classList.remove('active');
-}  
+            // ЗАКРЫВАЕМ МЕНЮ ДЛЯ ВСЕХ ПУНКТОВ
+            mobileContainer.classList.remove('open');
+            mobileBurger.classList.remove('active');
         });
     });
 
