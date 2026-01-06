@@ -206,21 +206,10 @@
         @media (max-width: 1000px) {
             .mobile-bottom-left { position: fixed; bottom: 22px; left: 18px; display: flex; gap: 20px; z-index: 9999; }
             .mobile-bottom-left a { color: #888; opacity: 0.6; transition: 0.3s; display: flex; align-items: center; }
-            .mobile-bottom-left a:hover { opacity: 1; color: #fff; transform: scale(1.1); }
             .mobile-bottom-left svg { width: 18px; height: 18px; }
             .mobile-bottom-right { position: fixed; bottom: 22px; right: 18px; display: flex; gap: 18px; z-index: 9999; }
             .mobile-bottom-right a { color: #888; font-size: 13px; font-weight: 700; text-decoration: none; opacity: 0.6; transition: 0.3s; }
-            .mobile-bottom-right a:hover { opacity: 1; color: #fff; }
         }
-
-        /* Теперь иконки будут принудительно возвращаться в тусклое состояние сразу после нажатия */
-.mobile-bottom-left a:active, 
-.mobile-bottom-right a:active,
-.mobile-bottom-left a:focus { /* <--- ДОБАВИЛИ ЭТУ СТРОКУ */
-    opacity: 1 !important;
-    color: #fff !important;
-    transition: none !important;
-}
 
     </style>
 </head>
