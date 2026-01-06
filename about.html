@@ -453,19 +453,25 @@
                 }
             }
 
+// --- 2. ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ ---
+const mobileBurger = document.querySelector('.mobile-burger-btn');
+const mobileContainer = document.querySelector('.mobile-nav-container');
+const mobileScroll = document.querySelector('.mobile-only');
 
-            // --- 2. ЛОГИКА ДЛЯ МОБИЛЬНОГО МЕНЮ ---
-            const mobileBurger = document.querySelector('.mobile-burger-btn');
-            const mobileContainer = document.querySelector('.mobile-nav-container');
-            const mobileSections = document.querySelectorAll('.mobile-section');
+const mobileSections = document.querySelectorAll('.mobile-section');
 const mobileLinks = document.querySelectorAll('.mobile-menu-items a');
 
+/* Подсветка пунктов при скролле */
 const mobileObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            mobileLinks.forEach(link => link.classList.remove('active'));
+            mobileLinks.forEach(l => l.classList.remove('active'));
+
             const id = entry.target.getAttribute('id');
-            const activeLink = document.querySelector(`.mobile-menu-items a[href="#${id}"]`);
+            const activeLink = document.querySelector(
+                `.mobile-menu-items a[href="#${id}"]`
+            );
+
             if (activeLink) activeLink.classList.add('active');
         }
     });
@@ -473,22 +479,53 @@ const mobileObserver = new IntersectionObserver((entries) => {
 
 mobileSections.forEach(section => mobileObserver.observe(section));
 
+/* Бургер */
+if (mobileBurger && mobileContainer) {
 
-            if (mobileBurger && mobileContainer) {
-                mobileBurger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    mobileContainer.classList.toggle('open');
-    mobileBurger.classList.toggle('active');
-});
+    mobileBurger.addEventListener('click', (e) => {
+        e.stopPropagation();
 
+        mobileContainer.classList.toggle('open');
+        mobileBurger.classList.toggle('active');
 
-                document.addEventListener('click', (e) => {
-                    if (!mobileContainer.contains(e.target)) {
-                        mobileContainer.classList.remove('open');
-                        mobileBurger.classList.remove('active');
-                    }
+        // При открытии меню — ABOUT активен
+        if (mobileContainer.classList.contains('open')) {
+            mobileLinks.forEach(l => l.classList.remove('active'));
+            if (mobileLinks[0]) mobileLinks[0].classList.add('active');
+        }
+    });
+
+    /* Клик по пунктам меню */
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            mobileLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection && mobileScroll) {
+                mobileScroll.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
                 });
             }
+
+            mobileContainer.classList.remove('open');
+            mobileBurger.classList.remove('active');
+        });
+    });
+
+    /* Закрытие кликом вне */
+    document.addEventListener('click', (e) => {
+        if (!mobileContainer.contains(e.target)) {
+            mobileContainer.classList.remove('open');
+            mobileBurger.classList.remove('active');
+        }
+    });
+}
 
         });
 
