@@ -508,13 +508,15 @@ if (mobileBurger && mobileContainer) {
 
             if (targetSection && mobileScroll) {
                 mobileScroll.scrollTo({
-                    top: targetSection.offsetTop,
+                    top: targetSection.offsetTop - mobileScroll.offsetTop,
                     behavior: 'smooth'
                 });
             }
 
-            mobileContainer.classList.remove('open');
-            mobileBurger.classList.remove('active');
+        if (targetId === '#projects') {
+    mobileContainer.classList.remove('open');
+    mobileBurger.classList.remove('active');
+}  
         });
     });
 
