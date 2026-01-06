@@ -472,7 +472,7 @@ mobileLinks.forEach(link => {
         if (!targetSection) return;
 
         mobileScroll.scrollTo({
-            top: Array.from(mobileSections).indexOf(targetSection) * mobileScroll.clientHeight,
+            top: targetSection.getBoundingClientRect().top + mobileScroll.scrollTop
             behavior: 'smooth'
         });
     });
