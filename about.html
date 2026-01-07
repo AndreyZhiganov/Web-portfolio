@@ -698,6 +698,28 @@ if (mobileBurger && mobileContainer) {
         mobileSlides.forEach(slide => observer.observe(slide));
     }
 
+    // --- 4. SWIPE RIGHT → BACK TO INDEX (MOBILE ONLY) ---
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+}, { passive: true });
+
+document.addEventListener('touchend', (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+
+    // свайп вправо, не вертикальный
+    if (dx > 80 && Math.abs(dy) < 50) {
+        window.location.href = "index.html";
+    }
+});
+
     </script>
 
 <div id="custom-confirm" style="
