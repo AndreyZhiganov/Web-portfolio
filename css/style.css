@@ -346,7 +346,7 @@ body {
   right: 0 !important;
   top: 50% !important;
   /* Ставим 10px как в about, и фиксируем translateY(2px) */
-  transform: translate(-25px, calc(-50% + 10px)) !important;
+  transform: translate(-30px, calc(-50% + 7px)) !important;
   transition: all 0.3s ease !important;
   opacity: 0 !important;
   pointer-events: none !important;
@@ -365,7 +365,7 @@ body {
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-  transform: translate(-25px, calc(-50% + 10px)) !important;
+  transform: translate(-30px, calc(-50% + 7px)) !important;
   pointer-events: auto !important;
 }
 
