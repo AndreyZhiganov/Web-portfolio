@@ -345,7 +345,8 @@ body {
   left: auto !important;
   right: 0 !important;
   top: 50% !important;
-  transform: translate(100%, -50%) !important;  /* Initial: 100% скрывает за правой границей, -50% для базовой центровки по Y — не меняй это, чтобы не торчало сразу */
+  transform: translate(20px, calc(-50% + 2px)) !important;
+  transition: all 0.3s ease !important;
   opacity: 0 !important;
   pointer-events: none !important;
   z-index: 20000 !important;
@@ -355,7 +356,7 @@ body {
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-  transform: translate(-50px, calc(-50% + 2px)) !important;  /* calc(-50% + 2px) по Y опустит текст вниз на 2px (увеличь +2px если нужно больше вниз); -10px по X остаётся для горизонтального отступа */
+  transform: translate(0, calc(-50% + 2px)) !important;
   pointer-events: auto !important;
 }
 
@@ -439,20 +440,3 @@ html, body {
   }
 
 }
-
-@media (max-width: 768px) {
-  .menu-zone .text-menu {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-}
-
-@media (max-width: 768px) {
-  .menu-zone .icon-menu {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
-  .menu-zone.active .icon-menu {
-    transform: scale(0.92);
-  }
-}
-
