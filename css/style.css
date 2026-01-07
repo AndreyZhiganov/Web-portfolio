@@ -352,6 +352,9 @@ body {
   z-index: 20000 !important;
   padding: 6px 10px !important;
   font-size: 12px !important; 
+  letter-spacing: 1px !important;     /* ДОБАВИТЬ ЭТО (разрядит буквы) */
+  text-transform: uppercase !important; /* ДОБАВИТЬ ЭТО (сделает капсом, если не было) */
+  font-weight: 400 !important;
 }
 
 .menu-zone.active .text-menu {
