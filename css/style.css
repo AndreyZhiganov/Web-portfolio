@@ -345,20 +345,26 @@ body {
   left: auto !important;
   right: 0 !important;
   top: 50% !important;
-  transform: translate(20px, calc(-50% + 2px)) !important;
+  /* Ставим 10px как в about, и фиксируем translateY(2px) */
+  transform: translate(10px, calc(-50% + 2px)) !important;
   transition: all 0.3s ease !important;
   opacity: 0 !important;
   pointer-events: none !important;
   z-index: 20000 !important;
-  padding: 6px 10px !important;
+  
+  /* ПАРАМЕТРЫ ШРИФТА КАК НА ABOUT */
   font-size: 12px !important; 
-  letter-spacing: 1px !important;     /* ДОБАВИТЬ ЭТО (разрядит буквы) */
-  text-transform: uppercase !important; /* ДОБАВИТЬ ЭТО (сделает капсом, если не было) */
-  font-weight: 400 !important;
+  letter-spacing: 1px !important;      /* Добавили разрядку */
+  text-transform: uppercase !important; /* Убедились, что капс */
+  font-weight: 400 !important;         /* Убрали жирность (было 700 по умолчанию) */
+  color: white !important;
+  
+  /* Убираем лишние отступы, если они мешают центровке */
+  padding: 0 10px !important; 
 }
 
 .menu-zone.active .text-menu {
-  opacity: 1 !important;
+  opacity: 0.4 !important;
   transform: translate(-25px, calc(-50% + 2px)) !important;
   pointer-events: auto !important;
 }
