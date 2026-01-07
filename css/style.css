@@ -356,7 +356,7 @@ body {
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-  transform: translate(-50px, calc(-50% + 2px)) !important;
+  transform: translate(-25px, calc(-50% + 2px)) !important;
   pointer-events: auto !important;
 }
 
