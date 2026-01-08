@@ -449,4 +449,12 @@ html, body {
     position: relative;
   }
 
+ .menu-zone .text-menu a {
+      margin-right: 25px !important; /* Увеличивай это число, чтобы раздвинуть ABOUT и PROJECTS */
+  }
+
+  /* Чтобы у последней ссылки (PROJECTS) не было лишнего отступа справа */
+  .menu-zone .text-menu a:last-child {
+      margin-right: 0 !important;
+  }
 }
