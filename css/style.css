@@ -341,15 +341,15 @@ body {
 }
 
 .menu-zone .text-menu {
-  display: flex;
-            gap: 15px;
-            margin-right: 15px;
-            opacity: 0;
-            transform: translateX(10px) translateY(2px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            align-items: center; 
-            padding-top: 2px;
+  position: absolute !important;
+  left: auto !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translate(-30px, calc(-50% + 7px)) !important;
+  transition: all 0.3s ease !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: 20000 !important;
   
   /* ПАРАМЕТРЫ ШРИФТА КАК НА ABOUT */
       text-decoration: none;
