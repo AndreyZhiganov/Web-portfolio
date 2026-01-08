@@ -345,7 +345,7 @@ body {
   left: auto !important;
   right: 33px !important;
   top: 50% !important;
-  transform: translateY(calc(-50% + 27px)) translateX(10px) !important;
+  transform: translateY(calc(-50% + 17px)) translateX(10px) !important;
   transition: all 0.3s ease !important;
   opacity: 0 !important;
   pointer-events: none !important;
@@ -367,7 +367,7 @@ body {
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-transform: translateY(calc(-50% + 7px)) translateX(0) !important;
+transform: translateY(calc(-50% + 17px)) translateX(0) !important;
   pointer-events: auto !important;
 }
 
