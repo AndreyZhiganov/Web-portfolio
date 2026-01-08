@@ -353,10 +353,10 @@ body {
   z-index: 20000 !important;
   
   /* ПАРАМЕТРЫ ШРИФТА КАК НА ABOUT */
-  font-size: 12px !important; 
-  letter-spacing: 1px !important;      /* Добавили разрядку */
+  font-size: 13px !important;
+  letter-spacing: 0.08em !important;
   text-transform: uppercase !important; /* Убедились, что капс */
-  font-weight: 400 !important;         /* Убрали жирность (было 700 по умолчанию) */
+  font-weight: 700 !important;
   color: white !important;
   
   /* Убираем лишние отступы, если они мешают центровке */
