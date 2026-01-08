@@ -353,6 +353,7 @@ body {
   
   /* ПАРАМЕТРЫ ШРИФТА КАК НА ABOUT */
       text-decoration: none;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
   font-size: 12px !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important; /* Убедились, что капс */
@@ -361,7 +362,7 @@ body {
     transition: opacity 0.25s ease;
   
   /* ЭТА СТРОЧКА ОТВЕЧАЕТ ЗА РАССТОЯНИЕ ТЕКСТА ОТ ИКОНКИ - ЕСЛИ ХОЧУ СДВИНУТЬ ВПРАВО - ДЕЛАЮ МЕНЬШЕ */
-  padding: 0 12px !important; 
+  padding: 0 13px !important; 
 }
 
 .menu-zone.active .text-menu {
@@ -450,7 +451,7 @@ html, body {
   }
 
  .menu-zone .text-menu a {
-      margin-right: 10px !important; /* Увеличивай это число, чтобы раздвинуть ABOUT и PROJECTS */
+      margin-right: 9px !important; /* Увеличивай это число, чтобы раздвинуть ABOUT и PROJECTS */
   }
 
   /* Чтобы у последней ссылки (PROJECTS) не было лишнего отступа справа 
