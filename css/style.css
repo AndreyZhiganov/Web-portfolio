@@ -361,12 +361,12 @@ body {
     transition: opacity 0.25s ease;
   
   /* ЭТА СТРОЧКА ОТВЕЧАЕТ ЗА РАССТОЯНИЕ ТЕКСТА ОТ ИКОНКИ - ЕСЛИ ХОЧУ СДВИНУТЬ ВПРАВО - ДЕЛАЮ МЕНЬШЕ */
-  padding: 0 10px !important; 
+  padding: 0 12px !important; 
 }
 
 .menu-zone.active .text-menu {
   opacity: 1 !important;
-  transform: translate(-30px, calc(-50% + 7px)) !important;
+   transform: translateX(0) translateY(2px); 
   pointer-events: auto !important;
 }
 
