@@ -353,11 +353,13 @@ body {
   z-index: 20000 !important;
   
   /* ПАРАМЕТРЫ ШРИФТА КАК НА ABOUT */
-  font-size: 13px !important;
-  letter-spacing: 0.08em !important;
+      text-decoration: none;
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
   text-transform: uppercase !important; /* Убедились, что капс */
-  font-weight: 700 !important;
   color: white !important;
+  opacity: 0.4;
+    transition: opacity 0.25s ease;
   
   /* Убираем лишние отступы, если они мешают центровке */
   padding: 0 10px !important; 
