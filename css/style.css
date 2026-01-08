@@ -343,7 +343,7 @@ body {
 .menu-zone .text-menu {
   position: absolute !important;
   left: auto !important;
-  right: 25px !important;
+  right: 30px !important;
   top: 50% !important;
   transform: translateY(calc(-50% + 2px)) translateX(10px) !important;
   transition: all 0.3s ease !important;
