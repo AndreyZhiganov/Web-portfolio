@@ -360,8 +360,8 @@ body {
   opacity: 0.4;
     transition: opacity 0.25s ease;
   
-  /* Убираем лишние отступы, если они мешают центровке */
-  padding: 0 1px !important; 
+  /* ЭТА СТРОЧКА ОТВЕЧАЕТ ЗА РАССТОЯНИЕ ТЕКСТА ОТ ИКОНКИ - ЕСЛИ ХОЧУ СДВИНУТЬ ВПРАВО - ДЕЛАЮ МЕНЬШЕ */
+  padding: 0 10px !important; 
 }
 
 .menu-zone.active .text-menu {
