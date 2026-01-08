@@ -361,7 +361,7 @@ body {
     transition: opacity 0.25s ease;
   
   /* Убираем лишние отступы, если они мешают центровке */
-  padding: 0 5px !important; 
+  padding: 0 1px !important; 
 }
 
 .menu-zone.active .text-menu {
