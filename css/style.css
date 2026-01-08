@@ -450,7 +450,7 @@ html, body {
   }
 
  .menu-zone .text-menu a {
-      margin-right: 12px !important; /* Увеличивай это число, чтобы раздвинуть ABOUT и PROJECTS */
+      margin-right: 10px !important; /* Увеличивай это число, чтобы раздвинуть ABOUT и PROJECTS */
   }
 
   /* Чтобы у последней ссылки (PROJECTS) не было лишнего отступа справа 
