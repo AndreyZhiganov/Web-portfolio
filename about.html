@@ -297,24 +297,24 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Этот код сработает только на мобильных устройствах
+    // Этот код сработает только на мобильных устройствах (ширина до 1000px)
     if (window.innerWidth <= 1000) {
 
         // Проверяем, был ли переход по ссылке с якорем #projects
         if (window.location.hash === '#projects') {
-            const mobileContainer = document.querySelector('.mobile-only');
             const projectsSection = document.getElementById('projects');
 
-            // Небольшая задержка для более плавного визуального эффекта
+            // Даем странице мгновение на "осознание" после загрузки
             setTimeout(() => {
-                if (mobileContainer && projectsSection) {
-                    // Выполняем плавную прокрутку внутри мобильного контейнера
-                    mobileContainer.scrollTo({
-                        top: projectsSection.offsetTop,
-                        behavior: 'smooth'
+                if (projectsSection) {
+                    // Это более надежная команда для прокрутки.
+                    // Она сама найдет нужный контейнер и плавно прокрутит к элементу.
+                    projectsSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
-            }, 150); // Задержку можно изменить
+            }, 100); // Небольшая задержка для стабильности
         }
     }
 });
