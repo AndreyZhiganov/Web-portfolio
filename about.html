@@ -761,5 +761,32 @@ if (mobileBurger && mobileContainer) {
     </div>
 </div>
 
+ <script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Проверяем, что это мобильная версия И что в URL есть нужный нам якорь
+    if (window.innerWidth <= 1000 && window.location.hash === '#projects') {
+        
+        // 1. Отменяем стандартное поведение браузера (мгновенный прыжок)
+        event.preventDefault();
+
+        const mobileContainer = document.querySelector('.mobile-only');
+        const projectsSection = document.getElementById('projects');
+
+        // Убеждаемся, что оба элемента существуют
+        if (mobileContainer && projectsSection) {
+            
+            // Небольшая задержка для стабильной отрисовки
+            setTimeout(() => {
+                // 2. Выполняем нашу собственную плавную прокрутку внутри контейнера
+                mobileContainer.scrollTo({
+                    top: projectsSection.offsetTop,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    }
+});
+</script>
+
 </body>
 </html>
