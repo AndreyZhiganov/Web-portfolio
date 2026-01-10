@@ -597,20 +597,19 @@ mobileLinks.forEach(link => {
         e.preventDefault();
 
         const targetId = link.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
 
-        if (targetId === '#about') {
-            mobileScroll.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
+        if (!targetSection) return;
 
-        if (targetId === '#projects') {
-            mobileScroll.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
-        }
+        const y = targetSection.offsetTop;
+
+        mobileScroll.scrollTo({
+            top: y,
+            behavior: 'smooth'
+        });
+
+        // обновляем адрес, чтобы якорь реально существовал
+        history.pushState(null, '', targetId);
     });
 });
 
