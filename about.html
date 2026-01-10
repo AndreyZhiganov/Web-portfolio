@@ -290,8 +290,36 @@
     }
         }
 
+        
+
     </style>
 </head>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Этот код сработает только на мобильных устройствах
+    if (window.innerWidth <= 1000) {
+
+        // Проверяем, был ли переход по ссылке с якорем #projects
+        if (window.location.hash === '#projects') {
+            const mobileContainer = document.querySelector('.mobile-only');
+            const projectsSection = document.getElementById('projects');
+
+            // Небольшая задержка для более плавного визуального эффекта
+            setTimeout(() => {
+                if (mobileContainer && projectsSection) {
+                    // Выполняем плавную прокрутку внутри мобильного контейнера
+                    mobileContainer.scrollTo({
+                        top: projectsSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 150); // Задержку можно изменить
+        }
+    }
+});
+</script>
+
 <body>
 
     <div class="desktop-only">
