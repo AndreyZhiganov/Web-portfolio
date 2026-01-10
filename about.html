@@ -762,28 +762,12 @@ if (mobileBurger && mobileContainer) {
 </div>
 
 <script>
-    // Этот скрипт сработает сразу после загрузки страницы
     document.addEventListener('DOMContentLoaded', () => {
-
-        // 1. Проверяем два условия: это мобильная версия И нас попросили перейти к 'projects'?
         if (window.innerWidth <= 1000 && window.location.hash === '#projects') {
-            
-            // Нашли нужный сценарий. Берем управление на себя.
-
-            // 2. Находим контейнер, который прокручивается на мобилке
             const mobileContainer = document.querySelector('.mobile-only');
-
-            // 3. Находим секцию, до которой нужно доехать
             const projectsSection = document.getElementById('projects');
-
-            // 4. Убеждаемся, что оба элемента существуют, чтобы не было ошибок
             if (mobileContainer && projectsSection) {
-                
-                // 5. Даем браузеру микро-паузу (100мс), чтобы он все отрисовал.
-                // Это делает скролл более надежным.
                 setTimeout(() => {
-                    // 6. ГЛАВНАЯ КОМАНДА:
-                    // Плавно прокручиваем КОНТЕЙНЕР (не всю страницу) до верха нужной секции.
                     mobileContainer.scrollTo({
                         top: projectsSection.offsetTop,
                         behavior: 'smooth'
@@ -791,7 +775,6 @@ if (mobileBurger && mobileContainer) {
                 }, 100);
             }
         }
-        
     });
 </script>
 

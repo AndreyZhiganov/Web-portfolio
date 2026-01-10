@@ -29,6 +29,7 @@
 </head>
 
 <body>
+    
     <section class="gallery-screen">
         <div class="gallery">
             <div class="slide">
@@ -170,6 +171,28 @@ window.addEventListener("scroll", () => {
 });
 </script>
 
+<script>
+    // Этот код сработает только на мобильных устройствах
+    if (window.innerWidth <= 768) {
+
+        // Находим ссылку 'PROJECTS'
+        const projectsLink = document.querySelector('a[href="about.html#projects"]');
+
+        // Если такая ссылка существует
+        if (projectsLink) {
+            
+            // Мы вешаем на нее "прослушку" клика
+            projectsLink.addEventListener('click', function(event) {
+                
+                // 1. ОТМЕНЯЕМ стандартное, сломанное поведение ссылки
+                event.preventDefault();
+
+                // 2. ПРИНУДИТЕЛЬНО отправляем пользователя по правильному адресу
+                window.location.href = 'about.html#projects';
+            });
+        }
+    }
+</script>
 
 </body>
 </html>
