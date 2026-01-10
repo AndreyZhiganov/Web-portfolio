@@ -761,31 +761,38 @@ if (mobileBurger && mobileContainer) {
     </div>
 </div>
 
- <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Проверяем, что это мобильная версия И что в URL есть нужный нам якорь
-    if (window.innerWidth <= 1000 && window.location.hash === '#projects') {
-        
-        // 1. Отменяем стандартное поведение браузера (мгновенный прыжок)
-        event.preventDefault();
+<script>
+    // Этот скрипт сработает сразу после загрузки страницы
+    document.addEventListener('DOMContentLoaded', () => {
 
-        const mobileContainer = document.querySelector('.mobile-only');
-        const projectsSection = document.getElementById('projects');
-
-        // Убеждаемся, что оба элемента существуют
-        if (mobileContainer && projectsSection) {
+        // 1. Проверяем два условия: это мобильная версия И нас попросили перейти к 'projects'?
+        if (window.innerWidth <= 1000 && window.location.hash === '#projects') {
             
-            // Небольшая задержка для стабильной отрисовки
-            setTimeout(() => {
-                // 2. Выполняем нашу собственную плавную прокрутку внутри контейнера
-                mobileContainer.scrollTo({
-                    top: projectsSection.offsetTop,
-                    behavior: 'smooth'
-                });
-            }, 100);
+            // Нашли нужный сценарий. Берем управление на себя.
+
+            // 2. Находим контейнер, который прокручивается на мобилке
+            const mobileContainer = document.querySelector('.mobile-only');
+
+            // 3. Находим секцию, до которой нужно доехать
+            const projectsSection = document.getElementById('projects');
+
+            // 4. Убеждаемся, что оба элемента существуют, чтобы не было ошибок
+            if (mobileContainer && projectsSection) {
+                
+                // 5. Даем браузеру микро-паузу (100мс), чтобы он все отрисовал.
+                // Это делает скролл более надежным.
+                setTimeout(() => {
+                    // 6. ГЛАВНАЯ КОМАНДА:
+                    // Плавно прокручиваем КОНТЕЙНЕР (не всю страницу) до верха нужной секции.
+                    mobileContainer.scrollTo({
+                        top: projectsSection.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
         }
-    }
-});
+        
+    });
 </script>
 
 </body>
