@@ -297,24 +297,20 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Этот код сработает только на мобильных устройствах (ширина до 1000px)
     if (window.innerWidth <= 1000) {
 
-        // Проверяем, был ли переход по ссылке с якорем #projects
         if (window.location.hash === '#projects') {
             const projectsSection = document.getElementById('projects');
+            const mobileScroll = document.querySelector('.mobile-only');
 
-            // Даем странице мгновение на "осознание" после загрузки
             setTimeout(() => {
-                if (projectsSection) {
-                    // Это более надежная команда для прокрутки.
-                    // Она сама найдет нужный контейнер и плавно прокрутит к элементу.
-                    projectsSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                if (projectsSection && mobileScroll) {
+                    mobileScroll.scrollTo({
+                        top: projectsSection.offsetTop,
+                        behavior: 'smooth'
                     });
                 }
-            }, 100); // Небольшая задержка для стабильности
+            }, 100);
         }
     }
 });
@@ -760,23 +756,6 @@ if (mobileBurger && mobileContainer) {
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        if (window.innerWidth <= 1000 && window.location.hash === '#projects') {
-            const mobileContainer = document.querySelector('.mobile-only');
-            const projectsSection = document.getElementById('projects');
-            if (mobileContainer && projectsSection) {
-                setTimeout(() => {
-                    mobileContainer.scrollTo({
-                        top: projectsSection.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }, 100);
-            }
-        }
-    });
-</script>
 
 </body>
 </html>
