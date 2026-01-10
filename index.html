@@ -86,6 +86,11 @@
     <script>
     const gallery = document.querySelector('.gallery');
     const slides = document.querySelectorAll('.slide');
+
+    slides.forEach(slide => {
+  slide.addEventListener('click', () => window.location.href = 'about.html');
+});
+
     let currentIndex = 0;
 
     function showSlide(index) {
@@ -169,29 +174,6 @@ window.addEventListener("scroll", () => {
     document.body.classList.remove("scrolling");
   }
 });
-</script>
-
-<script>
-    // Этот код сработает только на мобильных устройствах
-    if (window.innerWidth <= 768) {
-
-        // Находим ссылку 'PROJECTS'
-        const projectsLink = document.querySelector('a[href="about.html#projects"]');
-
-        // Если такая ссылка существует
-        if (projectsLink) {
-            
-            // Мы вешаем на нее "прослушку" клика
-            projectsLink.addEventListener('click', function(event) {
-                
-                // 1. ОТМЕНЯЕМ стандартное, сломанное поведение ссылки
-                event.preventDefault();
-
-                // 2. ПРИНУДИТЕЛЬНО отправляем пользователя по правильному адресу
-                window.location.href = 'about.html#projects';
-            });
-        }
-    }
 </script>
 
 </body>
