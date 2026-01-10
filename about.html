@@ -231,33 +231,6 @@
         font-weight: 700;
     }
 
-    .mobile-gallery-arrows {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 18px;
-  box-sizing: border-box;
-  transform: translateY(-50%);
-  pointer-events: none;
-  opacity: 0.35;
-  transition: opacity 0.4s ease;
-}
-
-.mobile-gallery-arrows.hidden {
-  opacity: 0;
-}
-
-.mobile-gallery-arrows .arrow {
-  font-size: 32px;
-  font-weight: 300;
-  color: #fff;
-  pointer-events: none;
-  user-select: none;
-}
-
-
         /* === ДЕСКТОП СТИЛИ (ТВОИ БЕЗ ИЗМЕНЕНИЙ) === */
         html { scroll-behavior: smooth; }
         body { background: #000; margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #fff; overflow: hidden; }
@@ -484,12 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="img/10.webp" style="object-position: center 65%;">
                         </div>
                     </div>
-
-                    <div class="mobile-gallery-arrows" id="mobileGalleryArrows">
-  <div class="arrow left">‹</div>
-  <div class="arrow right">›</div>
-</div>
-
 
                     <div id="mobile-gallery-caption">
                         <div class="caption-title">
@@ -763,23 +730,6 @@ if (mobileBurger && mobileContainer) {
 
         mobileSlides.forEach(slide => observer.observe(slide));
     }
-
-    const arrows = document.getElementById('mobileGalleryArrows');
-let arrowsTimer;
-
-function hideArrows() {
-  if (!arrows) return;
-  arrows.classList.add('hidden');
-  clearTimeout(arrowsTimer);
-  arrowsTimer = setTimeout(() => {
-    arrows.classList.remove('hidden');
-  }, 3000);
-}
-
-// любые действия пользователя
-['touchstart','scroll','click'].forEach(evt => {
-  document.addEventListener(evt, hideArrows, { passive: true });
-});
 
     </script>
 
