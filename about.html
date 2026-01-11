@@ -290,32 +290,8 @@
     }
         }
 
-        
-
     </style>
 </head>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth <= 1000) {
-
-        if (window.location.hash === '#projects') {
-            const projectsSection = document.getElementById('projects');
-            const mobileScroll = document.querySelector('.mobile-only');
-
-            setTimeout(() => {
-                if (projectsSection && mobileScroll) {
-                    mobileScroll.scrollTo({
-                        top: projectsSection.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            }, 100);
-        }
-    }
-});
-</script>
-
 <body>
 
     <div class="desktop-only">
@@ -485,9 +461,9 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <div class="mobile-bottom-right">
-    <a href="https://docs.google.com/document/d/1EBpCACpMoqrkS_jH9UiAWl6xlHlr5axpIDBB55LrCW8/edit?usp=sharing" target="_blank" class="confirm-link" data-msg="open CV in Google Docs?">CV</a>
+    <a href="https://docs.google.com/document/..." target="_blank" class="confirm-link" data-msg="open CV in Google Docs?">CV</a>
     
-    <a href="https://docs.google.com/presentation/d/1sJwcvn4T2BOXxGILo2sfAGNHl3cIqDbeKMxHkju2gdY/edit?usp=sharing" target="_blank" class="confirm-link" data-msg="open Portfolio in Google Slides?">Portfolio</a>
+    <a href="https://docs.google.com/presentation/..." target="_blank" class="confirm-link" data-msg="open Portfolio in Google Slides?">Portfolio</a>
 </div>
 
     </div>
@@ -597,19 +573,20 @@ mobileLinks.forEach(link => {
         e.preventDefault();
 
         const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
 
-        if (!targetSection) return;
+        if (targetId === '#about') {
+            mobileScroll.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
-        const y = targetSection.offsetTop;
-
-        mobileScroll.scrollTo({
-            top: y,
-            behavior: 'smooth'
-        });
-
-        // обновляем адрес, чтобы якорь реально существовал
-        history.pushState(null, '', targetId);
+        if (targetId === '#projects') {
+            mobileScroll.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
