@@ -571,20 +571,26 @@ const mobileLinks = document.querySelectorAll('.mobile-menu-items a');
 // СКРОЛЛ ПО КЛИКУ НА ПУНКТ МЕНЮ
 mobileLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        const targetId = link.getAttribute('href');
+        // Мы НЕ отменяем стандартное поведение e.preventDefault(), 
+        // чтобы браузер сам понимал, что мы идем по якорю.
+        
+        const targetId = link.getAttribute('href'); // Получаем "#projects" или "#about"
         const targetSection = document.querySelector(targetId);
 
-        if (!targetSection) return;
+        if (targetSection && window.innerWidth <= 1000) {
+            e.preventDefault(); // А вот теперь отменяем, чтобы сделать плавно вручную
+            
+            // Вместо того чтобы крутить mobileScroll, мы просто говорим 
+            // секции "покажись в центре экрана"
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
 
-        const y = targetSection.offsetTop;
-
-        mobileScroll.scrollTo({
-            top: y,
-            behavior: 'smooth'
-        });
-
+            // Закрываем меню после клика
+            mobileContainer.classList.remove('open');
+            mobileBurger.classList.remove('active');
+        }
     });
 });
 
@@ -631,7 +637,7 @@ if (mobileBurger && mobileContainer) {
     });
 }
         });
-        
+
        document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('custom-confirm');
     const textElem = document.getElementById('confirm-text');
