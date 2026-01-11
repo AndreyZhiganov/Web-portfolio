@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -290,6 +291,8 @@
     }
         }
 
+        
+
     </style>
 </head>
 
@@ -462,9 +465,9 @@
 </div>
 
 <div class="mobile-bottom-right">
-    <a href="https://docs.google.com/document/d/1EBpCACpMoqrkS_jH9UiAWl6xlHlr5axpIDBB55LrCW8/edit?usp=sharing" target="_blank" class="confirm-link" data-msg="open CV in Google Docs?">CV</a>
+    <a href="https://docs.google.com/document/..." target="_blank" class="confirm-link" data-msg="open CV in Google Docs?">CV</a>
     
-    <a href="https://docs.google.com/presentation/d/1sJwcvn4T2BOXxGILo2sfAGNHl3cIqDbeKMxHkju2gdY/edit?usp=sharing" target="_blank" class="confirm-link" data-msg="open Portfolio in Google Slides?">Portfolio</a>
+    <a href="https://docs.google.com/presentation/..." target="_blank" class="confirm-link" data-msg="open Portfolio in Google Slides?">Portfolio</a>
 </div>
 
     </div>
@@ -571,25 +574,22 @@ const mobileLinks = document.querySelectorAll('.mobile-menu-items a');
 // СКРОЛЛ ПО КЛИКУ НА ПУНКТ МЕНЮ
 mobileLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-        // Мы НЕ отменяем стандартное поведение e.preventDefault(), 
-        // чтобы браузер сам понимал, что мы идем по якорю.
-        
-        const targetId = link.getAttribute('href'); // Получаем "#projects" или "#about"
-        const targetSection = document.querySelector(targetId);
+        e.preventDefault();
 
-        if (targetSection && window.innerWidth <= 1000) {
-            e.preventDefault(); // А вот теперь отменяем, чтобы сделать плавно вручную
-            
-            // Вместо того чтобы крутить mobileScroll, мы просто говорим 
-            // секции "покажись в центре экрана"
-            targetSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+        const targetId = link.getAttribute('href');
+
+        if (targetId === '#about') {
+            mobileScroll.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        }
 
-            // Закрываем меню после клика
-            mobileContainer.classList.remove('open');
-            mobileBurger.classList.remove('active');
+        if (targetId === '#projects') {
+            mobileScroll.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
         }
     });
 });
@@ -636,6 +636,7 @@ if (mobileBurger && mobileContainer) {
         }
     });
 }
+
         });
 
        document.addEventListener('DOMContentLoaded', function() {
