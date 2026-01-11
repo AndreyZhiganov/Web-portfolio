@@ -290,8 +290,6 @@
     }
         }
 
-        
-
     </style>
 </head>
 
@@ -587,8 +585,6 @@ mobileLinks.forEach(link => {
             behavior: 'smooth'
         });
 
-        // обновляем адрес, чтобы якорь реально существовал
-        history.pushState(null, '', targetId);
     });
 });
 
@@ -634,9 +630,8 @@ if (mobileBurger && mobileContainer) {
         }
     });
 }
-
         });
-
+        
        document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('custom-confirm');
     const textElem = document.getElementById('confirm-text');
